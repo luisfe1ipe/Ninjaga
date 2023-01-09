@@ -4,12 +4,10 @@
 @endsection
 @section('content')
 
-  <h1>Artista - {{ $artist->name }}</h1>
+  <h1>Estúdio - {{ $studio->name }}</h1>
 
-  <x-form action="{{ route('artist.destroy', ['id' => $artist->id]) }}" method="DELETE" >
-
+  <x-form action="{{ route('studio.destroy', ['id' => $studio->id]) }}" method="DELETE" >
     <button type="submit" class="btn-p">Excluir</button>  
   </x-form>
     
-  <x-toast.message/>
 @endsection

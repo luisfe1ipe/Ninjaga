@@ -37,9 +37,10 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        Author::create($request->all());
+        $author = Author::create($request->all());
+        $nameAuthor = $author->name;
 
-        return redirect()->route('author.index');
+        return redirect()->route('author.index')->with('success', "Autor: $nameAuthor cadastrado com sucesso");;
     }
 
     /**
@@ -51,7 +52,7 @@ class AuthorController extends Controller
     public function show($id)
     {
         if(!$author = Author::find($id)){
-            return redirect()->back()->with('message', 'Autor não encontrado');
+            return redirect()->back()->with('notFound', 'Autor não encontrado');
         }
         return view('admin.author.show', compact('author'));
     }
@@ -65,7 +66,7 @@ class AuthorController extends Controller
     public function edit($id)
     {
         if(!$author = Author::find($id)){
-            return redirect()->back()->with('message', 'Autor não encontrado');
+            return redirect()->back()->with('notFound', 'Autor não encontrado');
         }
         return view('admin.author.edit', compact('author'));
     }
@@ -80,11 +81,11 @@ class AuthorController extends Controller
     public function update(Request $request, $id)
     {
         if(!$author = Author::find($id)){
-            return redirect()->back()->with('message', 'Autor não encontrado');
+            return redirect()->back()->with('notFound', 'Autor não encontrado');
         }
 
         $author->update($request->all());
-        return redirect()->route('author.show', ['id' => $author->id])->with('message', 'Autor editado com sucesso');
+        return redirect()->route('author.show', ['id' => $author->id])->with('success', 'Autor editado com sucesso');
     }
 
     /**
@@ -96,12 +97,12 @@ class AuthorController extends Controller
     public function destroy($id)
     {
         if (!$author = Author::find($id)) {
-            return redirect()->back()->with('message', 'Autor não encontrado');
+            return redirect()->back()->with('notFound', 'Autor não encontrado');
         }
 
         $nameAuthor = $author->name;
         $author->delete();
 
-        return redirect()->route('author.index')->with('message', "Autor $nameAuthor, excluído com sucesso");
+        return redirect()->route('author.index')->with('success', "Autor $nameAuthor, excluído com sucesso");
     }
 }

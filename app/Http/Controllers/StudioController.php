@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Artist;
+use App\Models\Studio;
 use Illuminate\Http\Request;
 
-class ArtistController extends Controller
+class StudioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        $artists = Artist::orderBy('name')->get();
+        $studios = Studio::orderBy('name')->get();
 
-        return view('admin.artist.index', compact('artists'));
+        return view('admin.studios.index', compact('studios'));
     }
 
     /**
@@ -26,7 +26,7 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        return view('admin.artist.create');
+        return view('admin.studio.create');
     }
 
     /**
@@ -37,10 +37,10 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        $artist = Artist::create($request->all());
-        $nameArtist = $artist->name;
+        $studio = Studio::create($request->all());
+        $nameStudio = $studio->name;
 
-        return redirect()->route('artist.index')->with('success', "Artista: $nameArtist cadastrado com sucesso");
+        return redirect()->route('studio.index')->with('success', "Estúdio: $nameStudio criado com sucesso");
     }
 
     /**
@@ -51,10 +51,10 @@ class ArtistController extends Controller
      */
     public function show($id)
     {
-        if (!$artist = Artist::find($id)) {
-            return redirect()->back()->with('error', 'Artista não encontrado');
+        if (!$studio = Studio::find($id)) {
+            return redirect()->back()->with('notFound', 'Estúdio não encontrado');
         }
-        return view('admin.artist.show', compact('artist'));
+        return view('admin.studio.show', compact('studio'));
     }
 
     /**
@@ -65,10 +65,10 @@ class ArtistController extends Controller
      */
     public function edit($id)
     {
-        if (!$artist = Artist::find($id)) {
-            return redirect()->back()->with('error', 'Artista não encontrado');
+        if (!$studio = Studio::find($id)) {
+            return redirect()->back()->with('notFound', 'Estúdio não encontrado');
         }
-        return view('admin.artist.edit', compact('artist'));
+        return view('admin.studio.edit', compact('studio'));
     }
 
     /**
@@ -80,13 +80,12 @@ class ArtistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!$artist = Artist::find($id)) {
-            return redirect()->back()->with('error', 'Artist não encontrado');
+        if (!$studio = Studio::find($id)) {
+            return redirect()->back()->with('notFound', 'Estúdio não encontrado');
         }
-        
-        $artist->update($request->all());
 
-        return redirect()->route('artist.show', ['id' => $artist->id])->with('success', 'Artista editado com sucesso');
+        $studio->update($request->all());
+        return redirect()->route('studio.show', ['id' => $studio->id])->with('success', 'Estúdio editado com sucesso');
     }
 
     /**
@@ -97,13 +96,13 @@ class ArtistController extends Controller
      */
     public function destroy($id)
     {
-        if (!$artist = Artist::find($id)) {
-            return redirect()->back()->with('notFound', 'Artist não encontrado');
+        if (!$studio = Studio::find($id)) {
+            return redirect()->back()->with('notFound', 'Estúdio não encontrado');
         }
 
-        $nameArtist = $artist->name;
-        $artist->delete();
+        $nameStudio = $studio->name;
+        $studio->delete();
 
-        return redirect()->route('artist.index')->with('success', "Autor $nameArtist, excluído com sucesso");
+        return redirect()->route('studio.index')->with('success', "Estúdio $nameStudio, excluído com sucesso");
     }
 }

@@ -4,11 +4,10 @@
 @endsection
 @section('content')
 
-<x-toast.message />
     <ul>
-      @foreach ($artists as $artist)
+      @foreach ($studios as $studio)
         <li>
-          {{ $artist->name }}
+          {{ $studio->name }}
         </li>
       @endforeach
     </ul>
