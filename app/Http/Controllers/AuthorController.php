@@ -103,6 +103,6 @@ class AuthorController extends Controller
         $nameAuthor = $author->name;
         $author->delete();
 
-        return redirect()->route('author.index')->with('success', "Autor $nameAuthor, excluído com sucesso");
+        return redirect()->route('author.index')->with('deleted', "Autor $nameAuthor, excluído com sucesso");
     }
 }

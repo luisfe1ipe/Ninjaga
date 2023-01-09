@@ -103,6 +103,6 @@ class StudioController extends Controller
         $nameStudio = $studio->name;
         $studio->delete();
 
-        return redirect()->route('studio.index')->with('success', "Estúdio $nameStudio, excluído com sucesso");
+        return redirect()->route('studio.index')->with('deleted', "Estúdio $nameStudio, excluído com sucesso");
     }
 }

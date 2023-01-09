@@ -18,7 +18,7 @@
 
         <div class="search-profile">
             <div class="search">
-                <x-input.search />
+                <x-input.search/>
             </div>
             <div class="profile">
                 <p>Olá, luisfe1ipe</p>
