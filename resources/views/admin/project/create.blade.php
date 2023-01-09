@@ -12,7 +12,7 @@
                         <label for="imageProject">
                             Escolha uma imagem
                             <div class="content">
-                                <div class="icon" id="robson">
+                                <div class="icon" id="icon">
                                     <svg aria-hidden="true" class="w-10 h-10 mb-3 " fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -181,18 +181,22 @@
     <x-modal.default id="author-modal" title="Adicionar Ator">
         <x-form action="{{ route('author.store') }}">
             <label for="name">Nome</label>
-            <input type="text" name="name" id="name" class="focus:ring-[#C4C4CC]">
-            <button type="reset" class="btn-s">Cancelar</button>
-            <button type="submit" class="btn-p">Cadastrar</button>
+            <input type="text" name="name" id="name" class="focus:ring-[#C4C4CC] mb-5">
+            <div class="flex  space-x-6">
+                <button data-modal-hide="author-modal" type="reset" class="btn-s">Cancelar</button>
+                <button data-modal-hide="author-modal" type="submit" class="btn-p">Cadastrar</button>
+            </div>
         </x-form>
 
     </x-modal.default>
     <x-modal.default id="studio-modal" title="Adicionar Estúdio">
         <x-form action="{{ route('author.store') }}">
             <label for="name">Nome</label>
-            <input type="text" name="name" id="name" class="focus:ring-[#C4C4CC]">
-            <button type="reset" class="btn-s">Cancelar</button>
-            <button type="submit" class="btn-p">Cadastrar</button>
+            <input type="text" name="name" id="name" class="focus:ring-[#C4C4CC] mb-5">
+            <div class="flex  space-x-6">
+                <button data-modal-hide="studio-modal" type="button" class="btn-s">Cancelar</button>
+                <button data-modal-hide="studio-modal" type="submit" class="btn-p">Cadastrar</button>
+            </div>
         </x-form>
     </x-modal.default>
 @endsection

@@ -1,7 +1,7 @@
 
 let photo = document.getElementById('photo')
 let file = document.getElementById('imageProject')
-let icon = document.getElementById('robson')
+let icon = document.getElementById('icon')
 
 photo.addEventListener('click', ()=>{
   file.click()
