@@ -5,9 +5,9 @@
 @section('content')
 
     <ul>
-      @foreach ($authors as $author)
+      @foreach ($artists as $artist)
         <li>
-          {{ $author->name }}
+          {{ $artist->name }}
         </li>
       @endforeach
     </ul>

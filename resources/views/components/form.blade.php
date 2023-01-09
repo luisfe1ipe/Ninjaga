@@ -6,9 +6,9 @@
     }    
 @endphp
 
-<form action="{{ $action }}" method="{{ $method === 'POST' ? 'POST' : 'GET'}}">
+<form action="{{ $action }}" method="{{ $method === 'GET' ? 'GET' : 'POST'}}">
     @csrf
-    @if ($method != 'POST')
+    @if ($method != 'POST' || $method != 'GET')
         @method($method)
     @endif
 

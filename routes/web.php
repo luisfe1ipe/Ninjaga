@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,13 @@ Route::get('/author/create', [AuthorController::class, 'create'])->name('author.
 Route::post('/author/create', [AuthorController::class, 'store'])->name('author.store');
 Route::get('/author/edit', [AuthorController::class, 'edit'])->name('author.edit');
 Route::put('/author/edit/{id}', [AuthorController::class, 'update'])->name('author.update');
+Route::get('/author/{id}', [AuthorController::class, 'show'])->name('author.show');
+Route::delete('/author/{id}', [AuthorController::class, 'destroy'])->name('author.destroy');
+
+Route::get('/artists', [ArtistController::class, 'index'])->name('artist.index');
+Route::get('/artist/create', [ArtistController::class, 'create'])->name('artist.create');
+Route::post('/artist/create', [ArtistController::class, 'store'])->name('artist.store');
+Route::get('/artist/edit/{id}', [ArtistController::class, 'edit'])->name('artist.edit');
+Route::put('/artist/edit/{id}', [ArtistController::class, 'update'])->name('artist.update');
+Route::get('/artist/{id}', [ArtistController::class, 'show'])->name('artist.show');
+Route::delete('/artist/{id}', [ArtistController::class, 'destroy'])->name('artist.destroy');
