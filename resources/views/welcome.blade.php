@@ -33,7 +33,7 @@
                 </div>
 
                 <a href="">
-                    <img src="{{ asset('img/Survival-Story-of-a-Sword-King-e1653008962771.jpg') }}" alt="">
+                    <img class="photo-manga" src="{{ asset('img/Survival-Story-of-a-Sword-King-e1653008962771.jpg') }}" alt="">
                 </a>
             </div>
             <div class="title">
@@ -78,7 +78,9 @@
         </div>
     </div>
 
+    <div class="sidebar">
 
+    </div>
 
 
     <script src="https://unpkg.com/flowbite@1.6.0/dist/flowbite.min.js"></script>
