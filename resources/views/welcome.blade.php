@@ -33,7 +33,7 @@
                 </div>
 
                 <a href="">
-                    <img class="photo-manga" src="{{ asset('img/Survival-Story-of-a-Sword-King-e1653008962771.jpg') }}" alt="">
+                    <img class="photo-mangaw" src="{{ asset('img/Survival-Story-of-a-Sword-King-e1653008962771.jpg') }}" alt="">
                 </a>
             </div>
             <div class="title">
