@@ -9,19 +9,22 @@
             <x-form action="{{ route('project.create') }}">
                 <div class="form">
                     <div class="image-container">
-                        <label for="image">
+                        <label for="imageProject">
                             Escolha uma imagem
                             <div class="content">
-                                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-[#7C7C8A]" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <div class="icon" id="robson">
+                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 " fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                                    </path>
-                                </svg>
-                                <p>Clique para fazer upload</p>
+                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                </path>
+                            </svg>
+                            <p>Clique para fazer upload</p>
+                        </div>
+                        <img id="photo" src="{{ asset('') }}" alt="">
                             </div>
                         </label>
-                        <input type="file" name="image" id="image" class="hidden">
+                        <input type="file" name="image" id="imageProject" class="hidden">
 
                     </div>
                     <div class="right">
@@ -176,20 +179,20 @@
     </section>
 
     <x-modal.default id="author-modal" title="Adicionar Ator">
-        <x-form>
-            
-            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-
-                <button type="reset" data-modal-hide="{{ $id }}" class="btn-s">Cancelar</button>
-                <button type="submit" data-modal-hide="{{ $id }}" class="btn-p">Confirmar</button>
-                
-            </div>
+        <x-form action="{{ route('author.store') }}">
+            <label for="name">Nome</label>
+            <input type="text" name="name" id="name" class="focus:ring-[#C4C4CC]">
+            <button type="reset" class="btn-s">Cancelar</button>
+            <button type="submit" class="btn-p">Cadastrar</button>
         </x-form>
-    
+
     </x-modal.default>
     <x-modal.default id="studio-modal" title="Adicionar Estúdio">
-
+        <x-form action="{{ route('author.store') }}">
+            <label for="name">Nome</label>
+            <input type="text" name="name" id="name" class="focus:ring-[#C4C4CC]">
+            <button type="reset" class="btn-s">Cancelar</button>
+            <button type="submit" class="btn-p">Cadastrar</button>
+        </x-form>
     </x-modal.default>
-
-    
 @endsection

@@ -35,6 +35,14 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         
+        $data = $request->all();
+        
+        if ($request->file('banner')) {
+            $bannerName =  $data['title'] .  '.' . $request->banner->extension();
+            $request->banner->move(public_path('projects/banner'), $bannerName);
+            $data['foto'] = $bannerName;
+        }
+
     }
 
     /**

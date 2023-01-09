@@ -11,22 +11,38 @@
           justify-content: space-between;
     
           .image-container {
-            width: 18.125rem;
-            height: 30.9375rem;
-            overflow: hidden;
-    
+            width: 290px;
+            height: 495px;
+            
             label {
+              #photo{
+                position: absolute;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+                filter: brightness(45%) !important;
+              }
               .content {
                 margin-top: 0.75rem;
+                position: relative;
                 background-color: #202024;
                 width: 100%;
-                height: 100%;
+                height: 92%;
                 border-radius: 0.3125rem;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 color: #7C7C8A;
+                overflow: hidden;
+                .icon{
+                  z-index: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                }
+
               }
             }
     
