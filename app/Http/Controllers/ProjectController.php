@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
+use App\Models\Project;
+use App\Models\Studio;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -23,7 +26,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.project.create');
+        $authors = Author::orderBy('name')->get();
+        $studios = Studio::orderBy('name')->get();
+
+        return view('admin.project.create', compact('authors', 'studios'));
     }
 
     /**
@@ -36,12 +42,20 @@ class ProjectController extends Controller
     {
         
         $data = $request->all();
-        
+
+
+        $title = str_replace(" ", "-", $data['title']);
+
+
         if ($request->file('banner')) {
-            $bannerName =  $data['title'] .  '.' . $request->banner->extension();
-            $request->banner->move(public_path('projects/banner'), $bannerName);
-            $data['foto'] = $bannerName;
+            $bannerName =  $title . '.' . $request->banner->extension();
+            $request->banner->move(public_path("projects/$title/banner"), $bannerName);
+            $data['banner'] = $bannerName;
+            dd($data['banner']);
         }
+
+
+        Project::create($data);
 
     }
 

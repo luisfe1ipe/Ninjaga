@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('synopsis');
-            $table->number('released');
+            $table->integer('released');
             $table->longText('banner');
             $table->string('status');
             $table->string('type');

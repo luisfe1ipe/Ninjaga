@@ -6,27 +6,9 @@
     <section class="s-create">
         <div class="container-p">
             <h1>Cadastrar Obra</h1>
-            <x-form action="{{ route('project.create') }}">
+            <x-form action="{{ route('project.create') }}" >
                 <div class="form">
-                    <div class="image-container">
-                        <label for="imageProject">
-                            Escolha uma imagem
-                            <div class="content">
-                                <div class="icon" id="icon">
-                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 " fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                                </path>
-                            </svg>
-                            <p>Clique para fazer upload</p>
-                        </div>
-                        <img id="photo" src="{{ asset('') }}" alt="">
-                            </div>
-                        </label>
-                        <input type="file" name="image" id="imageProject" class="hidden">
-
-                    </div>
+                    <x-preview.banner name="banner"/>
                     <div class="right">
                         <div class="title">
                             <label for="title">Titulo</label>
@@ -83,9 +65,9 @@
                                     <select id="author"
                                         class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                                         <option selected></option>
-                                        <option value="">Manga</option>
-                                        <option value="">Manwha</option>
-                                        <option value="">Novel</option>
+                                        @foreach ($authors as $author)
+                                            <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <button data-modal-target="author-modal" data-modal-toggle="author-modal" class=""
@@ -99,9 +81,9 @@
                                     <select id="studio"
                                         class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                                         <option selected></option>
-                                        <option value="">Manga</option>
-                                        <option value="">Manwha</option>
-                                        <option value="">Novel</option>
+                                         @foreach ($studios as $studio)
+                                            <option value="{{ $studio->id }}">{{ $studio->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="more">
@@ -119,53 +101,9 @@
                 <div class="form-imgs">
                     <h1>Fotos para perfil de usuários</h1>
                     <div class="images">
-                        <div class="image">
-                            <label for="image-1">
-                                <div class="content">
-                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-[#7C7C8A]" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                                        </path>
-                                    </svg>
-                                    <p>Clique para fazer upload</p>
-                                </div>
-                                1° Foto
-                            </label>
-                            <input type="file" name="image-1" id="image-1" class="hidden">
-                        </div>
-
-                        <div class="image">
-                            <label for="image-2">
-                                <div class="content">
-                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-[#7C7C8A]" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                                        </path>
-                                    </svg>
-                                    <p>Clique para fazer upload</p>
-                                </div>
-                                2° Foto
-                            </label>
-                            <input type="file" name="image-2" id="image-2" class="hidden">
-                        </div>
-
-                        <div class="image">
-                            <label for="image-3">
-                                <div class="content">
-                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-[#7C7C8A]" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                                        </path>
-                                    </svg>
-                                    <p>Clique para fazer upload</p>
-                                </div>
-                                3° Foto
-                            </label>
-                            <input type="file" name="image-3" id="image-3" class="hidden">
-                        </div>
+                        <x-preview.perfil-user name="image_1" id="usr_img_1" title="1° Foto"/>
+                        <x-preview.perfil-user name="image_2" id="usr_img_2" title="2° Foto"/>
+                        <x-preview.perfil-user name="image_3" id="usr_img_3" title="3° Foto"/>
                     </div>
 
                 </div>

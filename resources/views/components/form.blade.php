@@ -6,7 +6,7 @@
     }    
 @endphp
 
-<form action="{{ $action }}" method="{{ $method === 'GET' ? 'GET' : 'POST'}}">
+<form action="{{ $action }}" method="{{ $method === 'GET' ? 'GET' : 'POST'}}" enctype="multipart/form-data">
     @csrf
     @if ($method != 'POST' || $method != 'GET')
         @method($method)

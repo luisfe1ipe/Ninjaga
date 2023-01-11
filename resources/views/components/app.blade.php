@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -27,6 +28,11 @@
     <script src="https://unpkg.com/flowbite@1.6.0/dist/flowbite.min.js"></script>
 
     <script src="{{ asset('js/photo-preview.js') }}"></script>
+
+    @yield('scriptBanner')
+    @yield('scriptUser')
+
+
 </body>
 
 </html>
