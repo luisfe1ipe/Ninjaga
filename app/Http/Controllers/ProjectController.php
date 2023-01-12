@@ -44,11 +44,13 @@ class ProjectController extends Controller
     {
         $data = $request->all();
 
+        
+        
         $title = str_replace(" ", "-", $data['title']);
-
+        
         $genres = $data['genres'];
-
-
+        
+        
         if ($request->file('banner')) {
             $bannerName =  $title . '.' . $request->banner->extension();
             $request->banner->move(public_path("projects/$title/banner"), $bannerName);
@@ -60,14 +62,20 @@ class ProjectController extends Controller
         foreach($genres as $genre){
             $project->genres()->attach($genre);
         }
+        
+        
+        // $author = Author::find($data['author_id']);
+        // $studio = Studio::find($data['studio_id']);
+        
+        // $project->author()->create([
+        //     'author_id' => $author->id,
+        //     'name' => $author->name
+        // ]);
 
-        $project->author()->create([
-            'name' => $data['author_id']
-        ]);
-
-        $project->studio()->create([
-            'name' => $data['studio_id']
-        ]);
+        // $project->studio()->create([
+        //     'studio_id' => $studio->id,
+        //     'name' => $studio->name
+        // ]);
 
     }
 
@@ -80,9 +88,9 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::find($id);
-
+        $genres = $project->genres;
         $title = str_replace(" ", "-", $project->title);
-        return view('admin.project.show', compact('project', 'title'));
+        return view('admin.project.show', compact('project', 'title', 'genres'));
     }
 
     /**

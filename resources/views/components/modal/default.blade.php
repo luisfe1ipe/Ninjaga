@@ -6,7 +6,7 @@ class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overf
     <div class="relative bg-[#121212] rounded-lg shadow ">
         <!-- Modal header -->
         <div class="flex items-start justify-between p-4 border-b rounded-t border-[#202024]">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            <h3 class="text-xl font-semibold text-[#f2f2f2]">
                 {{ $title }}
             </h3>
             <button type="button"

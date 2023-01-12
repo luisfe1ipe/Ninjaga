@@ -165,7 +165,7 @@
               overflow: hidden;
               position: relative;
 
-              .user{
+              .user {
                 position: absolute;
                 object-fit: cover;
                 filter: brightness(45%) !important;
@@ -186,6 +186,181 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+
+// View project
+
+.bg-image {
+  background-image: url('img/Heavenly-Inquisition-Sword.jpg');
+  background-size: 700px;
+  filter: blur(10px) brightness(50%);
+  -webkit-filter: blur(10px) brightness(50%);
+  min-height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.s-hero {
+  position: relative;
+  overflow: hidden;
+
+  .container {
+    width: 69.75rem;
+    margin: 0 auto;
+
+    .container-content {
+      position: absolute;
+      z-index: 1;
+      top: 30px;
+      display: flex;
+
+      .image {
+        width: 100%;
+        max-width: 290px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.3125rem;
+        }
+      }
+
+      .content {
+        width: 100%;
+        margin-left: 1.875rem;
+
+        .header-content {
+          display: flex;
+
+          .config {
+            width: 100%;
+            max-width: 3.625rem;
+            height: 2.8125rem;
+            background-color: #A93F3F;
+            border-radius: 0.3125rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #7C2F2F;
+            }
+          }
+
+          .title {
+            h1 {
+              font-weight: 700;
+              font-size: 1.75rem;
+              line-height: 34px;
+              margin-bottom: 8px;
+              font-family: 'Inter' !important;
+            }
+
+            p {
+              font-weight: 500;
+              font-size: 1rem;
+              line-height: 1.1875rem;
+            }
+          }
+        }
+
+        .body-content {
+
+          .synopsis {
+            width: 100%;
+            max-width: 790px;
+            font-weight: 400;
+            font-size: 0.875rem !important;
+            line-height: 17px;
+            margin-top: 1.125rem;
+            height: 11.75rem;
+
+          }
+
+          .categories {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 45px;
+            flex-wrap: wrap;
+            max-width: 790px;
+
+            button {
+              font-weight: 600;
+              font-size: 14px;
+              line-height: 17px;
+            }
+          }
+
+          .info {
+            display: flex;
+            align-items: center;
+            gap: 38px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            margin-top: 22px;
+
+            .info-text {
+              display: flex;
+              align-items: flex-end;
+              gap: 8px;
+
+              .icon-heart {
+                width: 20px;
+                height: 20px;
+              }
+
+              span {
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:hover {
+                  color: #A93F3F;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+}
+
+.modal-body {
+  display: flex;
+  font-size: 0.875rem;
+  color: #F2F2F2;
+
+  .items {
+    p {
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+  }
+
+  .items-description {
+    margin-left: 24px;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+      color: #ccc;
+      font-weight: 500;
+
+      &:hover {
+        color: #A93F3F;
       }
     }
   }
