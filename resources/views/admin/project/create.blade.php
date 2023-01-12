@@ -23,34 +23,34 @@
                         <div class="selects">
                             <div class="select">
                                 <label for="type" class="">Tipo</label>
-                                <select id="type"
+                                <select id="type" name="type"
                                     class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                                     <option disable selected hidden>Escolha aqui</option>
-                                    <option value="">Manga</option>
-                                    <option value="">Manwha</option>
-                                    <option value="">Novel</option>
+                                    <option value="Manga">Manga</option>
+                                    <option value="Manwha">Manwha</option>
+                                    <option value="Novel">Novel</option>
                                 </select>
                             </div>
                             <div class="select">
                                 <label for="status" class="">Status</label>
-                                <select id="status"
+                                <select id="status" name="status"
                                     class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                                     <option disable selected hidden>Escolha aqui</option>
-                                    <option value="">Lançamento</option>
-                                    <option value="">Completo</option>
-                                    <option value="">Hiato</option>
+                                    <option value="Lançamento">Lançamento</option>
+                                    <option value="Completo">Completo</option>
+                                    <option value="Hiato">Hiato</option>
                                 </select>
                             </div>
                             <div class="select">
-                                <label for="generous" class="">
+                                <label for="genres" class="">
                                     Gêneros
                                 </label>
-                                <select id="generous"
+                                <select id="genres" name="genres[]" multiple
                                     class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                                     <option disable selected hidden>Escolha aqui</option>
-                                    <option value="">Ação</option>
-                                    <option value="">Aventura</option>
-                                    <option value="">Shounen</option>
+                                    @foreach ($genres as $genre)
+                                        <option value="{{$genre->id}}">{{ $genre->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="select">
@@ -64,7 +64,7 @@
                             <div class="author">
                                 <div>
                                     <label for="author" class="">Autor</label>
-                                    <select id="author"
+                                    <select id="author" name="author_id"
                                         class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                                         <option selected></option>
                                         @foreach ($authors as $author)
@@ -80,7 +80,7 @@
                             <div class="studio">
                                 <div>
                                     <label for="studio" class="">Estudio</label>
-                                    <select id="studio"
+                                    <select id="studio" name="studio_id"
                                         class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                                         <option selected></option>
                                         @foreach ($studios as $studio)

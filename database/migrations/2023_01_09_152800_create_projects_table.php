@@ -21,6 +21,8 @@ return new class extends Migration
             $table->longText('banner');
             $table->string('status');
             $table->string('type');
+            $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
+            $table->foreignId('studio_id')->constrained('studios')->onDelete('cascade');
             $table->timestamps();
         });
     }

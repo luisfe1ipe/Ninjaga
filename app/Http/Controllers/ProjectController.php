@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Genre;
 use App\Models\Project;
 use App\Models\Studio;
 use Illuminate\Http\Request;
@@ -26,10 +27,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $genres = Genre::orderBy('name')->get();
         $authors = Author::orderBy('name')->get();
         $studios = Studio::orderBy('name')->get();
 
-        return view('admin.project.create', compact('authors', 'studios'));
+        return view('admin.project.create', compact('authors', 'studios', 'genres'));
     }
 
     /**
@@ -40,22 +42,32 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        
         $data = $request->all();
 
-
         $title = str_replace(" ", "-", $data['title']);
+
+        $genres = $data['genres'];
 
 
         if ($request->file('banner')) {
             $bannerName =  $title . '.' . $request->banner->extension();
             $request->banner->move(public_path("projects/$title/banner"), $bannerName);
             $data['banner'] = $bannerName;
-            dd($data['banner']);
         }
 
+        $project = Project::create($data);
 
-        Project::create($data);
+        foreach($genres as $genre){
+            $project->genres()->attach($genre);
+        }
+
+        $project->author()->create([
+            'name' => $data['author_id']
+        ]);
+
+        $project->studio()->create([
+            'name' => $data['studio_id']
+        ]);
 
     }
 
@@ -67,7 +79,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        
+        $project = Project::find($id);
+
+        $title = str_replace(" ", "-", $project->title);
+        return view('admin.project.show', compact('project', 'title'));
     }
 
     /**

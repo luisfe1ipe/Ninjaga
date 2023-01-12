@@ -13,4 +13,7 @@ class Author extends Model
         'name'
     ];
     
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
 }

@@ -16,6 +16,20 @@ class Project extends Model
         'banner',
         'status',
         'type',
+        'author_id',
+        'studio_id'
     ];
-    
+
+    public function genres(){
+        return $this->belongsToMany(Genre::class, 'genre_project');
+    }
+
+    public function author(){
+        return $this->belongsTo(Author::class);
+    }
+
+    public function studio()
+    {
+        return $this->belongsTo(Studio::class);
+    }
 }
