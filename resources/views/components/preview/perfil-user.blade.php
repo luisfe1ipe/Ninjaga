@@ -3,7 +3,7 @@
         let imgs = document.querySelectorAll('.user');
         imgs.forEach((c) => {
             let fileUser = document.getElementById(`image_${c.id.split('usr_img_')[1]}`);
-            let iconUser = document.getElementById(`icon`);
+            let iconUser = document.getElementById(`iconUsr`);
 
             c.addEventListener('click', () => {
                 fileUser.click()
@@ -27,7 +27,8 @@
 <div class="image">
     <label for="{{ $name }}">
         <div class="content">
-            <div class="icon" id="icon">
+            <img class="user" id="{{ $id }}" src="{{ asset('') }}" alt="">
+            <div class="icon" id="iconUsr">
                 <svg aria-hidden="true" class="w-10 h-10 mb-3 " fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -36,7 +37,6 @@
                 </svg>
                 <p>Clique para fazer upload</p>
             </div>
-            <img class="user" id="{{ $id }}" src="{{ asset('') }}" alt="">
         </div>
         {{$title}}
     </label>

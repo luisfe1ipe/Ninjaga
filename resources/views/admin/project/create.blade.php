@@ -6,9 +6,9 @@
     <section class="s-create">
         <div class="container-p">
             <h1>Cadastrar Obra</h1>
-            <x-form action="{{ route('project.create') }}" >
+            <x-form action="{{ route('project.create') }}">
                 <div class="form">
-                    <x-preview.banner name="banner"/>
+                    <x-preview.banner name="banner" />
                     <div class="right">
                         <div class="title">
                             <label for="title">Titulo</label>
@@ -42,7 +42,9 @@
                                 </select>
                             </div>
                             <div class="select">
-                                <label for="generous" class="">Gêneros</label>
+                                <label for="generous" class="">
+                                    Gêneros
+                                </label>
                                 <select id="generous"
                                     class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                                     <option disable selected hidden>Escolha aqui</option>
@@ -81,7 +83,7 @@
                                     <select id="studio"
                                         class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                                         <option selected></option>
-                                         @foreach ($studios as $studio)
+                                        @foreach ($studios as $studio)
                                             <option value="{{ $studio->id }}">{{ $studio->name }}</option>
                                         @endforeach
                                     </select>
@@ -101,9 +103,9 @@
                 <div class="form-imgs">
                     <h1>Fotos para perfil de usuários</h1>
                     <div class="images">
-                        <x-preview.perfil-user name="image_1" id="usr_img_1" title="1° Foto"/>
-                        <x-preview.perfil-user name="image_2" id="usr_img_2" title="2° Foto"/>
-                        <x-preview.perfil-user name="image_3" id="usr_img_3" title="3° Foto"/>
+                        <x-preview.perfil-user name="image_1" id="usr_img_1" title="1° Foto" />
+                        <x-preview.perfil-user name="image_2" id="usr_img_2" title="2° Foto" />
+                        <x-preview.perfil-user name="image_3" id="usr_img_3" title="3° Foto" />
                     </div>
 
                 </div>
@@ -137,4 +139,5 @@
             </div>
         </x-form>
     </x-modal.default>
+
 @endsection
