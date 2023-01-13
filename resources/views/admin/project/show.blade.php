@@ -5,7 +5,6 @@
     <x-navbar view="" />
 @endsection
 
-@dd($project->author->name)
 @section('item-view')
 
     <section class="s-hero">
@@ -102,14 +101,4 @@
             </div>
         </div>
     </x-modal.default>
-
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings:
-                'FILL'1,
-                'wght'400,
-                'GRAD'0,
-                'opsz'48
-        }
-    </style>
 @endsection

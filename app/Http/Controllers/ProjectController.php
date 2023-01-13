@@ -17,7 +17,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-       
+        $projects = Project::orderBy('created_at', 'asc')->where('type', 'Manwha')->get();
+        return view('admin.project.index', compact('projects'));
     }
 
     /**
@@ -44,12 +45,9 @@ class ProjectController extends Controller
     {
         $data = $request->all();
 
-        
-        
         $title = str_replace(" ", "-", $data['title']);
         
         $genres = $data['genres'];
-        
         
         if ($request->file('banner')) {
             $bannerName =  $title . '.' . $request->banner->extension();
@@ -62,21 +60,6 @@ class ProjectController extends Controller
         foreach($genres as $genre){
             $project->genres()->attach($genre);
         }
-        
-        
-        // $author = Author::find($data['author_id']);
-        // $studio = Studio::find($data['studio_id']);
-        
-        // $project->author()->create([
-        //     'author_id' => $author->id,
-        //     'name' => $author->name
-        // ]);
-
-        // $project->studio()->create([
-        //     'studio_id' => $studio->id,
-        //     'name' => $studio->name
-        // ]);
-
     }
 
     /**

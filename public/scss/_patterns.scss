@@ -56,6 +56,7 @@ nav {
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        font-size: 0.875rem;
       }
     }
   }
@@ -196,6 +197,7 @@ nav {
     h2 {
       font-size: 1.75rem;
       font-weight: 700;
+      font-family: 'Montserrat' !important;
     }
   }
 
@@ -208,7 +210,7 @@ nav {
       li {
         a {
           text-decoration: underline;
-          font-weight: 700;
+          font-weight: 600;
           font-size: 0.875rem;
 
           &:hover {
