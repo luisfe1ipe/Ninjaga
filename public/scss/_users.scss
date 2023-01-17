@@ -1,0 +1,65 @@
+.container-form {
+  width: 100%;
+  max-width: 69.75rem;
+  margin: 3.125rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 25rem;
+
+    .logo {
+      width: 7.1875rem;
+      height: 13.75rem;
+    }
+
+    p {
+      width: 18.75rem;
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      line-height: 1.6875rem;
+      text-align: center;
+      color: #7C7C8A;
+    }
+  }
+
+  form {
+    margin-top: 1.75rem;
+    width: 100%;
+    max-width: 25rem;
+
+    input {
+      margin-bottom: 1.125rem;
+    }
+
+    button {
+      width: 100%;
+      height: 2.5rem;
+      background-color: #A93F3F;
+      border-radius: 5px;
+      margin-top: 0.625rem;
+      font-weight: 700;
+
+      &:hover {
+        background-color: #7C2F2F;
+      }
+    }
+  }
+
+  a {
+    font-size: 0.875rem;
+    line-height: 1.0625rem;
+    text-align: center;
+    text-decoration-line: underline;
+    margin-top: 1.875rem;
+    &:hover{
+      color: #A93F3F;
+    }
+  }
+}

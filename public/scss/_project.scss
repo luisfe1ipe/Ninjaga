@@ -1,192 +1,192 @@
 //create/edit project
 .s-create {
   margin-top: 3.75rem;
+
   .container-p {
-    .header{
+    .header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 2rem;
+    }
+  }
+
+  form {
+    .form {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .image-container {
+        width: 290px;
+        height: 495px;
+
+        label {
+          #photo {
+            position: absolute;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+            filter: brightness(45%) !important;
+          }
+
+          .content {
+            margin-top: 0.75rem;
+            position: relative;
+            background-color: #202024;
+            width: 100%;
+            height: 92%;
+            border-radius: 0.3125rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #7C7C8A;
+            overflow: hidden;
+
+            .icon {
+              z-index: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+            }
+
+          }
+        }
+
+
+
+      }
+
+      .right {
+        width: 100%;
+        max-width: 49.375rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .selects {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .select {
+            display: flex;
+            flex-direction: column;
+
+            select {
+              margin-top: 0.75rem;
+              width: 8.125rem;
+            }
+
+            input {
+              width: 8.125rem;
+            }
+          }
+
+
+
+        }
+
+        .author-studio {
+          display: flex;
+          justify-content: space-between;
+
+          button {
+            width: 2.5625rem;
+            height: 2.5625rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #A93F3F;
+            border-radius: 0.3125rem;
+
+            &:hover {
+              background-color: #8A2D2D !important;
+            }
+          }
+
+          select {
+            width: 18.75rem;
+          }
+
+          .author {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.75rem;
+          }
+
+          .studio {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.75rem;
+
+          }
+        }
       }
     }
 
-    form {
-      .form {
+    .btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 3.75rem;
+    }
+
+    .form-imgs {
+      margin-top: 3.75rem;
+
+      .images {
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        .image-container {
-          width: 290px;
-          height: 495px;
+        .image {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
 
           label {
-            #photo {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #C4C4CC;
+            text-align: center;
+          }
+
+          .content {
+            width: 9.375rem;
+            height: 9.375rem;
+            background-color: #202024;
+            border-radius: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #7C7C8A;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+            position: relative;
+
+            .user {
               position: absolute;
-              height: 100%;
               object-fit: cover;
-              border-radius: 5px;
               filter: brightness(45%) !important;
             }
 
-            .content {
-              margin-top: 0.75rem;
-              position: relative;
-              background-color: #202024;
-              width: 100%;
-              height: 92%;
-              border-radius: 0.3125rem;
+            #iconUsr {
+              z-index: 1;
               display: flex;
               flex-direction: column;
               align-items: center;
               justify-content: center;
-              color: #7C7C8A;
-              overflow: hidden;
-
-              .icon {
-                z-index: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              }
 
             }
-          }
 
-
-
-        }
-
-        .right {
-          width: 100%;
-          max-width: 49.375rem;
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-
-          .selects {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .select {
-              display: flex;
-              flex-direction: column;
-
-              select {
-                margin-top: 0.75rem;
-                width: 8.125rem;
-              }
-
-              input {
-                width: 8.125rem;
-              }
-            }
-
-
-
-          }
-
-          .author-studio {
-            display: flex;
-            justify-content: space-between;
-
-            button {
-              width: 2.5625rem;
-              height: 2.5625rem;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              background-color: #A93F3F;
-              border-radius: 0.3125rem;
-
-              &:hover {
-                background-color: #8A2D2D !important;
-              }
-            }
-
-            select {
-              width: 18.75rem;
-            }
-
-            .author {
-              display: flex;
-              align-items: flex-end;
-              gap: 0.75rem;
-            }
-
-            .studio {
-              display: flex;
-              align-items: flex-end;
-              gap: 0.75rem;
-
-            }
-          }
-        }
-      }
-
-      .btns {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4rem;
-        margin-top: 3.75rem;
-      }
-
-      .form-imgs {
-        margin-top: 3.75rem;
-
-        .images {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-
-          .image {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            label {
-              font-weight: 600;
-              font-size: 0.875rem;
-              color: #C4C4CC;
+            p {
               text-align: center;
-            }
-
-            .content {
-              width: 9.375rem;
-              height: 9.375rem;
-              background-color: #202024;
-              border-radius: 100%;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              color: #7C7C8A;
-              margin-bottom: 0.75rem;
-              overflow: hidden;
-              position: relative;
-
-              .user {
-                position: absolute;
-                object-fit: cover;
-                filter: brightness(45%) !important;
-              }
-
-              #iconUsr {
-                z-index: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-
-              }
-
-              p {
-                text-align: center;
-              }
             }
           }
         }
@@ -200,8 +200,8 @@
 
 // Show project
 
-.adminConfig{
-  margin-top: 0.75rem ;
+.adminConfig {
+  margin-top: 0.75rem;
   padding-top: 0.75rem;
   border-top: 1px solid #4b5563;
 }

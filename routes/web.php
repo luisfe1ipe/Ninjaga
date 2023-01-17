@@ -20,6 +20,13 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/register', function(){
+    return view('users.register');
+});
+
+Route::get('/login', function () {
+    return view('users.login');
+});
 
 Route::get('/authors', [AuthorController::class, 'index'])->name('author.index');
 Route::get('/author/create', [AuthorController::class, 'create'])->name('author.create');
