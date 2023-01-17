@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 
@@ -44,3 +44,4 @@ Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('proj
 Route::put('/project/edit/{id}', [ProjectController::class, 'update'])->name('project.update');
 Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show');
 Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
+

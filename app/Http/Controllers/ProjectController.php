@@ -60,6 +60,8 @@ class ProjectController extends Controller
         foreach ($genres as $genre) {
             $project->genres()->attach($genre);
         }
+
+        return redirect()->route('project.index')->with('success', 'Projeto criado com sucesso.');
     }
 
     /**
@@ -71,7 +73,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         if (!$project = Project::find($id)) {
-            return redirect()->back()->with('error', 'Projeto não encontrado');
+            return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
         $genres = $project->genres;
         $title = str_replace(" ", "-", $project->title);
@@ -87,7 +89,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         if (!$project = Project::find($id)) {
-            return redirect()->back()->with('error', 'Projeto não encontrado');
+            return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
         $genres = $project->genres;
@@ -107,7 +109,7 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         if (!$project = Project::find($id)) {
-            return redirect()->back()->with('error', 'Projeto não encontrado');
+            return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
         $data = $request->all();
@@ -117,8 +119,9 @@ class ProjectController extends Controller
         $oldTitle = $data['oldTitle'];
 
 
+
         //Edita a foto e o titulo da obra
-        if ($data['banner'] && $data['title']) {
+        if (isset($data['banner']) && $data['title']) {
             if ($data['title'] === $oldTitle) {
                 if (file_exists(public_path("projects/$title/banner/$project->banner"))) {
                     unlink(public_path("projects/$title/banner/$project->banner"));
@@ -127,7 +130,7 @@ class ProjectController extends Controller
                 $request->banner->move(public_path("projects/$title/banner"), $bannerName);
                 $data['banner'] = $bannerName;
             } else {
-                $formatedOldTitle = str_replace(" ", "-", $oldTitle); 
+                $formatedOldTitle = str_replace(" ", "-", $oldTitle);
                 if (file_exists(public_path("projects/$formatedOldTitle"))) {
                     rename(public_path("projects/$formatedOldTitle"), public_path("projects/$title"));
                 }
@@ -135,17 +138,11 @@ class ProjectController extends Controller
                 $request->banner->move(public_path("projects/$title/banner"), $bannerName);
                 $data['banner'] = $bannerName;
             }
-        }elseif($data['banner']){
-            if (file_exists(public_path("projects/$title/banner" . $project->banner))) {
-                unlink(public_path("projects/$title/banner" . $project->banner));
-                $bannerName =  $title . '.' . $request->banner->extension();
-                $request->banner->move(public_path("projects/$title/banner"), $bannerName);
-                $data['banner'] = $bannerName;
-            }
-        }elseif($data['title']){
+        } elseif ($data['title']) {
             $formatedOldTitle = str_replace(" ", "-", $oldTitle);
             if (file_exists(public_path("projects/$formatedOldTitle"))) {
                 rename(public_path("projects/$formatedOldTitle"), public_path("projects/$title"));
+                dd('Apenas o titulo');
             }
             $bannerName =  $title . '.' . $request->banner->extension();
             $request->banner->move(public_path("projects/$title/banner"), $bannerName);
@@ -154,12 +151,15 @@ class ProjectController extends Controller
 
         $project->genres()->detach();
 
-        foreach($genres as $genre){
+        foreach ($genres as $genre) {
             $project->genres()->attach($genre);
         }
 
         $project->author()->update($data['author']);
         $project->studio()->update($data['studio']);
+        $project->update($data);
+
+        return redirect()->route('project.show', ['id' => $project->id ]);
     }
 
     /**
@@ -170,6 +170,25 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+        if (!$project = Project::find($id)) {
+            return redirect()->back()->with('notFound', 'Projeto não encontrado');
+        }
 
+
+        $title = str_replace(" ", "-", $project->title);
+
+        if($project->banner){
+            if (file_exists(public_path("projects/$title/banner/$project->banner"))) {
+                unlink(public_path("projects/$title/banner/$project->banner"));
+                rmdir(public_path("projects/$title/banner"));
+                rmdir(public_path("projects/$title"));
+            }
+        }
+
+        $project->genres()->detach(); //N:M
+        $project->delete();
+
+        return redirect()->route('project.index')->with('deleted', 'Projeto deletado com sucesso.');
     }
+
 }

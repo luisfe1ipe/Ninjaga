@@ -40,7 +40,7 @@
                 " alt="">
                 </div>
 
-                <a href="">
+                <a href="{{ route('project.show', ['id' => $project->id]) }}">
                     <img class="photo-manga" src="{{ asset("projects/$title/banner/$project->banner") }}" alt="">
                 </a>
             </div>

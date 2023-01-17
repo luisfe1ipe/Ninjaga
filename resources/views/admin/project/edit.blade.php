@@ -16,7 +16,17 @@
 
     <section class="s-create">
         <div class="container-p">
-            <h1>Editar - {{ $project->title }}</h1>
+            <div class="header">
+                <h1>Editar - {{ $project->title }}</h1>
+                <form action="{{ route('project.destroy', ['id' => $project->id]) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="bg-[#A93F3F] hover:bg-[#7C2F2F] text-white py-2 px-4 rounded flex items-center gap-1.5">
+                        <span class="material-symbols-outlined">delete</span>
+                        Deletar
+                    </button>
+                </form>
+            </div>
             <x-form action="{{ route('project.edit', ['id' => $project->id]) }}" method="PUT">
                 <div class="form">
                     <input type="hidden" name="oldTitle" value="{{ $project->title }}">
@@ -33,7 +43,8 @@
                                     </svg>
                                     <p>Clique para fazer upload</p>
                                 </div>
-                                <img id="photo" src="{{ asset("projects/$title/banner/$project->banner") }}" alt="">
+                                <img id="photo" src="{{ asset("projects/$title/banner/$project->banner") }}"
+                                    alt="">
                             </div>
                         </label>
                         <input type="file" name="banner" id="banner" class="hidden">

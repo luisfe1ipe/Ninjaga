@@ -44,6 +44,7 @@
     </style>
     @yield('navbar')
     <div class="container-p">
+        <x-toast.message/>
         @yield('content')
     </div>
     @yield('item-view')

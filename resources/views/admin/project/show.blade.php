@@ -77,11 +77,34 @@
     <div id="dropdownRight"
         class="hidden z-10 h-auto w-96 bg-[#121212] rounded divide-y divide-gray-100 shadow dropdown-container">
         <ul class="py-1 text-gray-700  dropdown-menu" aria-labelledby="dropdownRightButton">
-            <x-dropdown.li route="" icon="favorite" class="hover:text-red-500">Favoritos</x-dropdown.li>
-            <x-dropdown.li route="" icon="check" class="hover:text-green-500">Lidos</x-dropdown.li>
-            <x-dropdown.li route="" icon="bookmark" class="hover:text-yellow-500">Lerei</x-dropdown.li>
-            <x-dropdown.li route="" icon="block" class="hover:text-gray-500">Parei</x-dropdown.li>
+            <x-dropdown.li route="" icon="favorite" class="hover:text-red-500">
+                <form action="">
+                    <button type="submit" name="favorites" value="favorites">Favoritos</button>
+                </form>
+            </x-dropdown.li>
+            <x-dropdown.li route="" icon="check" class="hover:text-green-500">
+                <form action="">
+                    <button type="submit" name="completed" value="completed">Lidos</button>
+                </form>
+            </x-dropdown.li>
+            <x-dropdown.li route="" icon="bookmark" class="hover:text-yellow-500">
+                <form action="">
+                    <button type="submit" name="read" value="read">Lerei</button>
+                </form>
+            </x-dropdown.li>
+            <x-dropdown.li route="" icon="block" class="hover:text-gray-500">
+                <form action="">
+                    <button type="submit" name="stop" value="stop">Parei</button>
+                </form>
+            </x-dropdown.li>
+
+            <div class="adminConfig text-sm">
+                <x-dropdown.li route="{{ route('project.update', ['id' => $project->id]) }}" gIcon="edit" class="">
+                    Editar
+                </x-dropdown.li>
+            </div>
         </ul>
+
     </div>
 
     <x-modal.default id="more-info" title="Mais informações">

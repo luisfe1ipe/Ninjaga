@@ -3,6 +3,7 @@
     <x-navbar view="" />
 @endsection
 @section('content')
+
     <section class="s-create">
         <div class="container-p">
             <h1>Cadastrar Obra</h1>

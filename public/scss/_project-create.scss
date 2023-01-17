@@ -1,8 +1,13 @@
+//create/edit project
 .s-create {
   margin-top: 3.75rem;
   .container-p {
-    h1 {
+    .header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 2rem;
+      }
     }
 
     form {
@@ -191,7 +196,15 @@
 }
 
 
+
+
 // Show project
+
+.adminConfig{
+  margin-top: 0.75rem ;
+  padding-top: 0.75rem;
+  border-top: 1px solid #4b5563;
+}
 
 .bg-image {
   background-image: url('img/Heavenly-Inquisition-Sword.jpg');
