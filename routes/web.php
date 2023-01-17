@@ -28,6 +28,10 @@ Route::get('/login', function () {
     return view('users.login');
 });
 
+Route::get('/profile', function () {
+    return view('users.profile');
+});
+
 Route::get('/authors', [AuthorController::class, 'index'])->name('author.index');
 Route::get('/author/create', [AuthorController::class, 'create'])->name('author.create');
 Route::post('/author/create', [AuthorController::class, 'store'])->name('author.store');
