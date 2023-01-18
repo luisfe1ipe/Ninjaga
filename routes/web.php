@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,17 +23,13 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/register', function(){
-    return view('users.register');
-});
 
-Route::get('/login', function () {
-    return view('users.login');
-});
+Route::get('/login', [LoginController::class, 'login'])->name('user.login');
+Route::post('/login', [LoginController::class, 'auth'])->name('user.auth');
+Route::get('/register', [RegisterController::class, 'create'])->name('user.create');
+Route::post('/register', [RegisterController::class, 'register'])->name('user.register');
 
-Route::get('/profile', function () {
-    return view('users.profile');
-});
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('user.show');
 
 Route::get('/authors', [AuthorController::class, 'index'])->name('author.index');
 Route::get('/author/create', [AuthorController::class, 'create'])->name('author.create');

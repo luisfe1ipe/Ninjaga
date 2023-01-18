@@ -6,7 +6,8 @@
         <img class="logo" src="{{ asset('img/logo-2.svg') }}" alt="">
         <p>Crie uma conta para ter acesso a todas as funcionalidade do site</p>
     </div>
-    <form action="">
+    <form action="{{ route('user.register') }}" method="POST">
+        @csrf
         <label for="user">
             Digite um nome de usuário
             <input type="text" name="user" id="user" placeholder="Nome de usuário">

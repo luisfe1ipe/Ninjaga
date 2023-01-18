@@ -1,4 +1,4 @@
-<img id="avatarButton" type="button" src="{{ asset('img/guts.png') }}" alt="User dropdown"
+<img id="avatarButton" type="button" src="{{ asset('img/default.png') }}" alt="User dropdown"
 data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
 class="w-10 h-10 rounded-full cursor-pointer">
 

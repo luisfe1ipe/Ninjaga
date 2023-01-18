@@ -7,37 +7,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index(){
-
-    }
-
-    public function create(){
-        return view('users.register');
-    }
-
-    public function store(Request $request){
-        $data = $request->all();
-
-        User::create($data);
-    }
-
-    public function edit(){
+    public function show($id){
+        $user = User::find($id);
         
-    }
-
-    public function update(){
-
-    }
-
-    public function login(){
-
-    }
-
-    public function logout(){
-
-    }
-
-    public function destroy(){
-
+        return view('users.profile', compact('user'));
     }
 }

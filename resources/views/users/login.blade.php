@@ -6,10 +6,11 @@
         <img class="logo" src="{{ asset('img/logo-2.svg') }}" alt="">
         <p>Faça login e acesse sua conta para ver suas séries favoritas.</p>
     </div>
-    <form action="">
-        <label for="user">
-            E-mail ou nome do usuário
-            <input type="text" name="user" id="user" placeholder="Nome de usuário">
+    <form action="{{ route('user.auth') }}" method="POST">
+        @csrf
+        <label for="email">
+            E-mail
+            <input type="text" name="email" id="email" placeholder="Digite aqui">
         </label>
 
         <label for="password">
@@ -19,5 +20,5 @@
 
         <button type="submit">Entrar</button>
     </form>
-    <a href="">Não tem uma conta ? clique aqui !</a>
+    <a href="{{ route('user.create') }}">Não tem uma conta ? clique aqui !</a>
 </div>
