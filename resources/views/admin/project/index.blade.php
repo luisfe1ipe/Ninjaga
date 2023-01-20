@@ -8,7 +8,7 @@
             <i class="material-symbols-outlined text-[#A93F3F]">
                 library_books
             </i>
-            <h2>{{ $projects->count() }} Manwhas</h2>
+            <h2>{{ $projects->count() }} Obras</h2>
         </div>
         <div class="order-by">
             <ul>
@@ -19,17 +19,11 @@
         </div>
     </div>
 
-    @foreach ($projects as $project)
+    <div class="container-manga">
+        @foreach ($projects as $project)
         <div class="hidden">{{$title = str_replace(" ", "-", $project->title)}}</div>
         <div class="card-manga">
             <div class="img">
-                
-                @auth()
-                    <x-dropdown.menu>
-                        <x-dropdown.li route="">Editar</x-dropdown.li>
-                    </x-dropdown.menu>
-                @endauth
-
                 <div class="type">
                     <img src="
                     @if ($project->type == 'Manwha') {{ asset('img/type-manwha.png') }}
@@ -69,4 +63,5 @@
             </div>
         </div>
     @endforeach
+    </div>
 @endsection

@@ -17,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('created_at', 'asc')->where('type', 'Manwha')->get();
+        $projects = Project::orderBy('updated_at', 'desc')->get();
         return view('admin.project.index', compact('projects'));
     }
 

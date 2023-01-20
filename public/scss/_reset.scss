@@ -20,6 +20,11 @@ textarea {
   border: none !important;
 }
 
+input:-webkit-autofill {
+  -webkit-text-fill-color: #f2f2f2;
+  border: none !important;
+}
+
 form {
   label {
     font-weight: 600 !important;

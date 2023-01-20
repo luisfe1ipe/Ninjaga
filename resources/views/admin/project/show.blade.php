@@ -78,8 +78,11 @@
         class="hidden z-10 h-auto w-96 bg-[#121212] rounded divide-y divide-gray-100 shadow dropdown-container">
         <ul class="py-1 text-gray-700  dropdown-menu" aria-labelledby="dropdownRightButton">
             <x-dropdown.li route="" icon="favorite" class="hover:text-red-500">
-                <form action="">
-                    <button type="submit" name="favorites" value="favorites">Favoritos</button>
+                <form action="{{ route('favorite.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="project_id" value="{{ $project->id }}">
+                    <button type="submit">Favoritos</button>
                 </form>
             </x-dropdown.li>
             <x-dropdown.li route="" icon="check" class="hover:text-green-500">
@@ -102,6 +105,15 @@
                 <x-dropdown.li route="{{ route('project.update', ['id' => $project->id]) }}" gIcon="edit" class="">
                     Editar
                 </x-dropdown.li>
+                
+                <x-dropdown.li route="" gIcon="delete" class="">
+                    <form action="{{ route('project.destroy', ['id' => $project->id]) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit">Excluir</button>
+                    </form>
+                </x-dropdown.li>
+                
             </div>
         </ul>
 

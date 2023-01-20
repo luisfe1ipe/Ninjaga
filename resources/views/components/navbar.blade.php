@@ -21,7 +21,7 @@
                 <x-input.search/>
             </div>
             <div class="profile">
-                <p>Olá, luisfe1ipe</p>
+                <p>Olá, {{ Auth::user()->user }}</p>
                 <x-dropdown.profile>
                     <x-dropdown.li route="" icon="favorite" class="hover:text-red-500" >Favoritos</x-dropdown.li>
                     <x-dropdown.li route="" icon="check" class="hover:text-green-500">Lidos</x-dropdown.li>
