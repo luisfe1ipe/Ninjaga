@@ -58,6 +58,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->all();
 
         $title = str_replace(" ", "-", $data['title']);
@@ -91,13 +92,14 @@ class ProjectController extends Controller
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
+        $countFav = Favorite::where('project_id', $project->id)->count();
         $fav = Favorite::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $completed = Completed::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $read = Read::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $stop = Stop::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $genres = $project->genres;
         $title = str_replace(" ", "-", $project->title);
-        return view('admin.project.show', compact('project', 'title', 'genres', 'fav', 'completed', 'read', 'stop'));
+        return view('admin.project.show', compact('project', 'title', 'genres', 'fav', 'completed', 'read', 'stop', 'countFav'));
     }
 
     /**

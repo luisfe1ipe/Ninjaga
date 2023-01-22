@@ -1,7 +1,7 @@
 @extends('components.app')
 @section('title', 'Início')
 @section('navbar')
-    <x-navbar view="obras"/>
+    <x-navbar view=""/>
 @endsection
 @section('content')
     @isset($projects)

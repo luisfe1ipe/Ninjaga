@@ -3,7 +3,6 @@
     <x-navbar view="" />
 @endsection
 @section('content')
-
     <section class="s-create">
         <div class="container-p">
             <h1>Cadastrar Obra</h1>
@@ -14,7 +13,7 @@
                         <div class="title">
                             <label for="title">Titulo</label>
                             <input type="text" name="title" id="title" placeholder="Digite aqui..."
-                                class="focus:ring-[#C4C4CC]">
+                                class="input focus:ring-[#C4C4CC]">
                         </div>
                         <div class="synopsis">
                             <label for="synopsis">Sinopse</label>
@@ -46,18 +45,41 @@
                                 <label for="genres" class="">
                                     Gêneros
                                 </label>
-                                <select id="genres" name="genres[]" multiple
-                                    class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
-                                    <option disable selected hidden>Escolha aqui</option>
-                                    @foreach ($genres as $genre)
-                                        <option value="{{$genre->id}}">{{ $genre->name }}</option>
-                                    @endforeach
-                                </select>
+                                <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch"
+                                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-[#C4C4CC] rounded-lg focus:ring-1 focus:outline-none focus:ring-[#C4C4CC]"
+                                    type="button">
+                                    Escolha aqui
+                                    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                    <div id="dropdownSearch"
+                                        class="z-50 hidden divide-y divide-gray-600 rounded shadow w-48 bg-[#28282E]">
+                                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                                            aria-labelledby="dropdownSearchButton">
+                                            @foreach ($genres as $genre)
+                                                <li class="">
+                                                    <div class="flex items-center mt-2 p-2 rounded hover:bg-[#000000]">
+                                                        <input id="checkbox={{ $genre->id }}" type="checkbox" name="genres[]"
+                                                            value="{{ $genre->id }}"
+                                                            class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                        <label for="checkbox={{ $genre->id }}"
+                                                            class="cursor-pointer ml-2 text-sm font-medium">{{$genre->name}}</label>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+
+                                </button>
+
+
                             </div>
                             <div class="select">
                                 <label for="released" class="">Lançado em</label>
                                 <input type="number" name="released" id="released" placeholder="Digite aqui..."
-                                    class="focus:ring-[#C4C4CC]">
+                                    class="input focus:ring-[#C4C4CC]">
                             </div>
                         </div>
 
@@ -122,7 +144,7 @@
     <x-modal.default id="author-modal" title="Adicionar Ator">
         <x-form action="{{ route('author.store') }}">
             <label for="name">Nome</label>
-            <input type="text" name="name" id="name" class="focus:ring-[#C4C4CC] mb-5">
+            <input type="text" name="name" id="name" class="input focus:ring-[#C4C4CC] mb-5">
             <div class="flex  space-x-6">
                 <button data-modal-hide="author-modal" type="reset" class="btn-s">Cancelar</button>
                 <button data-modal-hide="author-modal" type="submit" class="btn-p">Cadastrar</button>
@@ -130,10 +152,11 @@
         </x-form>
 
     </x-modal.default>
+
     <x-modal.default id="studio-modal" title="Adicionar Estúdio">
         <x-form action="{{ route('author.store') }}">
             <label for="name">Nome</label>
-            <input type="text" name="name" id="name" class="focus:ring-[#C4C4CC] mb-5">
+            <input type="text" name="name" id="name" class="input focus:ring-[#C4C4CC] mb-5">
             <div class="flex  space-x-6">
                 <button data-modal-hide="studio-modal" type="button" class="btn-s">Cancelar</button>
                 <button data-modal-hide="studio-modal" type="submit" class="btn-p">Cadastrar</button>
@@ -141,4 +164,5 @@
         </x-form>
     </x-modal.default>
 
+    <!-- Dropdown menu -->
 @endsection

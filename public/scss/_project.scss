@@ -3,6 +3,9 @@
   margin-top: 3.75rem;
 
   .container-p {
+    h1{
+      margin-bottom: 1.5rem;
+    }
     .header {
       display: flex;
       align-items: center;
@@ -12,6 +15,12 @@
   }
 
   form {
+    #dropdownSearchButton{
+      background-color: #202024 !important;
+      margin-top:0.75rem;
+      width: 9.375rem;
+      height: 2.5rem;
+    }
     .form {
       display: flex;
       align-items: center;
@@ -77,16 +86,13 @@
 
             select {
               margin-top: 0.75rem;
-              width: 8.125rem;
+              width: 150px;
             }
 
-            input {
+            .input {
               width: 8.125rem;
             }
           }
-
-
-
         }
 
         .author-studio {

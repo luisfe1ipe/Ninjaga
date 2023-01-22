@@ -48,7 +48,7 @@ Route::put('/artist/edit/{id}', [ArtistController::class, 'update'])->name('arti
 Route::get('/artist/{id}', [ArtistController::class, 'show'])->name('artist.show');
 Route::delete('/artist/{id}', [ArtistController::class, 'destroy'])->name('artist.destroy');
 
-Route::get('/projects/{type?}', [ProjectController::class, 'index'])->name('project.index');
+Route::get('/project/list/{type?}', [ProjectController::class, 'index'])->name('project.index');
 Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
 Route::post('/project/create', [ProjectController::class, 'store'])->name('project.store');
 Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show');

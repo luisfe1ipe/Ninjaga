@@ -55,7 +55,7 @@
                                 <i class="material-symbols-outlined text-[#A93F3F]">
                                     favorite
                                 </i>
-                                <p>1.6k favoritos</p>
+                                <p>{{ $countFav }} Favoritos</p>
                             </div>
                             <div class="info-text">
                                 <i class="material-symbols-outlined text-[#A93F3F]">
