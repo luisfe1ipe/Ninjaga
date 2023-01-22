@@ -1,4 +1,4 @@
-@props(['view' => null])
+@props(['view' => null,])
 <nav>
     <div class="nav-container">
         <div class="logo">
@@ -13,7 +13,7 @@
                         class="@if ($view == 'inicio') active @endif">Início</a> </li>
                 <li>
                     <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                        class="flex items-center justify-between font-bold rounded hover:text-[#A93F3F]">Obras
+                        class="@if ($view == 'obras') active @endif flex items-center justify-between font-bold rounded hover:text-[#A93F3F]">Obras
                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"

@@ -48,12 +48,12 @@ Route::put('/artist/edit/{id}', [ArtistController::class, 'update'])->name('arti
 Route::get('/artist/{id}', [ArtistController::class, 'show'])->name('artist.show');
 Route::delete('/artist/{id}', [ArtistController::class, 'destroy'])->name('artist.destroy');
 
-Route::get('/project/{type?}', [ProjectController::class, 'index'])->name('project.index');
+Route::get('/projects/{type?}', [ProjectController::class, 'index'])->name('project.index');
 Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
 Route::post('/project/create', [ProjectController::class, 'store'])->name('project.store');
+Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show');
 Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
 Route::put('/project/edit/{id}', [ProjectController::class, 'update'])->name('project.update');
-Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show');
 Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
 
 Route::post('/save', [SaveController::class, 'store'])->name('save.store');

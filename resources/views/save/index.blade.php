@@ -15,13 +15,6 @@
                 </i>
                 <h2>{{ $favorites->count() }} Favoritos</h2>
             </div>
-            <div class="order-by">
-                <ul>
-                    <li>
-                        <a href="">Nao sei</a>
-                    </li>
-                </ul>
-            </div>
         </div>
         <div class="container-manga">
             @foreach ($favorites as $fav)
@@ -81,13 +74,6 @@
                 </i>
                 <h2>{{ $completeds->count() }} Lidos</h2>
             </div>
-            <div class="order-by">
-                <ul>
-                    <li>
-                        <a href="">Nao sei</a>
-                    </li>
-                </ul>
-            </div>
         </div>
         <div class="container-manga">
             @foreach ($completeds as $completed)
@@ -146,13 +132,6 @@
                 </i>
                 <h2>{{ $reads->count() }} Lerei</h2>
             </div>
-            <div class="order-by">
-                <ul>
-                    <li>
-                        <a href="">Nao sei</a>
-                    </li>
-                </ul>
-            </div>
         </div>
         <div class="container-manga">
             @foreach ($reads as $read)
@@ -210,13 +189,6 @@
                     lock
                 </i>
                 <h2>{{ $stops->count() }} Parei</h2>
-            </div>
-            <div class="order-by">
-                <ul>
-                    <li>
-                        <a href="">Nao sei</a>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="container-manga">
