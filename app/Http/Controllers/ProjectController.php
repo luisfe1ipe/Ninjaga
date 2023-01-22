@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Completed;
+use App\Models\Favorite;
 use App\Models\Genre;
 use App\Models\Project;
+use App\Models\Read;
+use App\Models\Stop;
 use App\Models\Studio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -15,8 +20,18 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type = null)
     {
+        if($type == 'manga'){
+            $mangas = Project::where('type', 'Manga')->orderBy('updated_at', 'desc')->get();
+            return view('admin.project.index', compact('mangas'));
+        }else if($type == 'manwha'){
+            $manwhas = Project::where('type', 'Manwha')->orderBy('updated_at', 'desc')->get();
+            return view('admin.project.index', compact('manwhas'));
+        }else if($type == 'novel'){
+            $novels = Project::where('type', 'Novel')->orderBy('updated_at', 'desc')->get();
+            return view('admin.project.index', compact('novels'));
+        }
         $projects = Project::orderBy('updated_at', 'desc')->get();
         return view('admin.project.index', compact('projects'));
     }
@@ -75,9 +90,14 @@ class ProjectController extends Controller
         if (!$project = Project::find($id)) {
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
+
+        $fav = Favorite::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
+        $completed = Completed::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
+        $read = Read::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
+        $stop = Stop::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $genres = $project->genres;
         $title = str_replace(" ", "-", $project->title);
-        return view('admin.project.show', compact('project', 'title', 'genres'));
+        return view('admin.project.show', compact('project', 'title', 'genres', 'fav', 'completed', 'read', 'stop'));
     }
 
     /**

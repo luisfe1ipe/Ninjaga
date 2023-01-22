@@ -1,16 +1,19 @@
 @extends('components.app')
-@section('title', 'Início')
+@section('title', 'Favoritos')
+
 @section('navbar')
-    <x-navbar view="inicio" />
+    <x-navbar view="" />
 @endsection
+
+
 @section('content')
-    @isset($projects)
+    @isset($favorites)
         <div class="container-title mt-[80px]">
             <div class="title">
-                <span class="material-symbols-outlined text-[#A93F3F]">
-                    update
-                </span>
-                <h2>Atualizados recentemente</h2>
+                <i class="material-symbols-outlined text-red-500">
+                    favorite
+                </i>
+                <h2>{{ $favorites->count() }} Favoritos</h2>
             </div>
             <div class="order-by">
                 <ul>
@@ -20,30 +23,30 @@
                 </ul>
             </div>
         </div>
-
         <div class="container-manga">
-            @foreach ($projects as $project)
-                <div class="hidden">{{ $title = str_replace(' ', '-', $project->title) }}</div>
+            @foreach ($favorites as $fav)
+                {{-- @foreach ($projects as $project) --}}
+                <div class="hidden">{{ $title = str_replace(' ', '-', $fav->project->title) }}</div>
                 <div class="card-manga">
                     <div class="img">
                         <div class="type">
                             <img src="
-                    @if ($project->type == 'Manwha') {{ asset('img/type-manwha.png') }}
-                    @elseif($project->type == 'Novel')
+                    @if ($fav->project->type == 'Manwha') {{ asset('img/type-manwha.png') }}
+                    @elseif($fav->project->type == 'Novel')
                         {{ asset('img/type-novel.png') }}
-                    @elseif($project->type == 'Manga')
+                    @elseif($fav->project->type == 'Manga')
                         {{ asset('img/type-manga.png') }} @endif
                 "
                                 alt="">
                         </div>
 
-                        <a href="{{ route('project.show', ['id' => $project->id]) }}">
-                            <img class="photo-manga" src="{{ asset("projects/$title/banner/$project->banner") }}"
+                        <a href="{{ route('project.show', ['id' => $fav->project->id]) }}">
+                            <img class="photo-manga" src="{{ asset("projects/$title/banner/" . $fav->project->banner) }}"
                                 alt="">
                         </a>
                     </div>
                     <div class="title">
-                        <p>{{ $project->title }}</p>
+                        <p>{{ $fav->project->title }}</p>
                     </div>
                     <div class="caps">
                         <div class="cap-p">
@@ -70,13 +73,13 @@
         </div>
     @endisset
 
-    @isset($mangas)
+    @isset($completeds)
         <div class="container-title mt-[80px]">
             <div class="title">
-                <span class="material-symbols-outlined text-[#F07504]">
-                    library_books
-                </span>
-                <h2>{{ $mangas->count() }} Mangas</h2>
+                <i class="material-symbols-outlined text-green-500">
+                    check_box
+                </i>
+                <h2>{{ $completeds->count() }} Lidos</h2>
             </div>
             <div class="order-by">
                 <ul>
@@ -86,22 +89,29 @@
                 </ul>
             </div>
         </div>
-
         <div class="container-manga">
-            @foreach ($mangas as $manga)
-                <div class="hidden">{{ $title = str_replace(' ', '-', $manga->title) }}</div>
+            @foreach ($completeds as $completed)
+                <div class="hidden">{{ $title = str_replace(' ', '-', $completed->project->title) }}</div>
                 <div class="card-manga">
                     <div class="img">
                         <div class="type">
-                            <img src="{{ asset('img/type-manga.png') }}" alt="">
+                            <img src="
+                    @if ($completed->project->type == 'Manwha') {{ asset('img/type-manwha.png') }}
+                    @elseif($completed->project->type == 'Novel')
+                        {{ asset('img/type-novel.png') }}
+                    @elseif($completed->project->type == 'Manga')
+                        {{ asset('img/type-manga.png') }} @endif
+                "
+                                alt="">
                         </div>
 
-                        <a href="{{ route('project.show', ['id' => $manga->id]) }}">
-                            <img class="photo-manga" src="{{ asset("projects/$title/banner/$manga->banner") }}" alt="">
+                        <a href="{{ route('project.show', ['id' => $completed->project->id]) }}">
+                            <img class="photo-manga" src="{{ asset("projects/$title/banner/" . $completed->project->banner) }}"
+                                alt="">
                         </a>
                     </div>
                     <div class="title">
-                        <p>{{ $manga->title }}</p>
+                        <p>{{ $completed->project->title }}</p>
                     </div>
                     <div class="caps">
                         <div class="cap-p">
@@ -128,13 +138,13 @@
         </div>
     @endisset
 
-    @isset($manwhas)
+    @isset($reads)
         <div class="container-title mt-[80px]">
             <div class="title">
-                <span class="material-symbols-outlined text-[#9B31AC]">
-                    library_books
-                </span>
-                <h2>{{ $manwhas->count() }} Manwhas</h2>
+                <i class="material-symbols-outlined text-orange-500">
+                    bookmark
+                </i>
+                <h2>{{ $reads->count() }} Lerei</h2>
             </div>
             <div class="order-by">
                 <ul>
@@ -144,22 +154,29 @@
                 </ul>
             </div>
         </div>
-
         <div class="container-manga">
-            @foreach ($manwhas as $manwha)
-                <div class="hidden">{{ $title = str_replace(' ', '-', $manwha->title) }}</div>
+            @foreach ($reads as $read)
+                <div class="hidden">{{ $title = str_replace(' ', '-', $read->project->title) }}</div>
                 <div class="card-manga">
                     <div class="img">
                         <div class="type">
-                            <img src="{{ asset('img/type-manwha.png') }}" alt="">
+                            <img src="
+                    @if ($read->project->type == 'Manwha') {{ asset('img/type-manwha.png') }}
+                    @elseif($read->project->type == 'Novel')
+                        {{ asset('img/type-novel.png') }}
+                    @elseif($read->project->type == 'Manga')
+                        {{ asset('img/type-manga.png') }} @endif
+                "
+                                alt="">
                         </div>
 
-                        <a href="{{ route('project.show', ['id' => $manwha->id]) }}">
-                            <img class="photo-manga" src="{{ asset("projects/$title/banner/$manwha->banner") }}" alt="">
+                        <a href="{{ route('project.show', ['id' => $read->project->id]) }}">
+                            <img class="photo-manga" src="{{ asset("projects/$title/banner/" . $read->project->banner) }}"
+                                alt="">
                         </a>
                     </div>
                     <div class="title">
-                        <p>{{ $manwha->title }}</p>
+                        <p>{{ $read->project->title }}</p>
                     </div>
                     <div class="caps">
                         <div class="cap-p">
@@ -186,13 +203,13 @@
         </div>
     @endisset
 
-    @isset($novels)
+    @isset($stops)
         <div class="container-title mt-[80px]">
             <div class="title">
-                <span class="material-symbols-outlined text-[#3187AC]">
-                    library_books
-                </span>
-                <h2>{{ $novels->count() }} Novels</h2>
+                <i class="material-symbols-outlined text-slate-500">
+                    lock
+                </i>
+                <h2>{{ $stops->count() }} Parei</h2>
             </div>
             <div class="order-by">
                 <ul>
@@ -202,22 +219,29 @@
                 </ul>
             </div>
         </div>
-
         <div class="container-manga">
-            @foreach ($novels as $novel)
-                <div class="hidden">{{ $title = str_replace(' ', '-', $novel->title) }}</div>
+            @foreach ($stops as $stop)
+                <div class="hidden">{{ $title = str_replace(' ', '-', $stop->project->title) }}</div>
                 <div class="card-manga">
                     <div class="img">
                         <div class="type">
-                            <img src="{{ asset('img/type-novel.png') }}" alt="">
+                            <img src="
+                    @if ($stop->project->type == 'Manwha') {{ asset('img/type-manwha.png') }}
+                    @elseif($stop->project->type == 'Novel')
+                        {{ asset('img/type-novel.png') }}
+                    @elseif($stop->project->type == 'Manga')
+                        {{ asset('img/type-manga.png') }} @endif
+                "
+                                alt="">
                         </div>
 
-                        <a href="{{ route('project.show', ['id' => $novel->id]) }}">
-                            <img class="photo-manga" src="{{ asset("projects/$title/banner/$novel->banner") }}" alt="">
+                        <a href="{{ route('project.show', ['id' => $stop->project->id]) }}">
+                            <img class="photo-manga" src="{{ asset("projects/$title/banner/" . $stop->project->banner) }}"
+                                alt="">
                         </a>
                     </div>
                     <div class="title">
-                        <p>{{ $novel->title }}</p>
+                        <p>{{ $stop->project->title }}</p>
                     </div>
                     <div class="caps">
                         <div class="cap-p">
@@ -243,4 +267,5 @@
             @endforeach
         </div>
     @endisset
+
 @endsection

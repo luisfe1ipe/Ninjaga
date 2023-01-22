@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('favorites', function (Blueprint $table) {
+        Schema::create('completeds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained('projects');
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('project_id')->constrained('projects');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('completeds');
     }
 };

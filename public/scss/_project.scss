@@ -206,21 +206,22 @@
   border-top: 1px solid #4b5563;
 }
 
-.bg-image {
-  background-image: url('img/Heavenly-Inquisition-Sword.jpg');
-  background-size: 700px;
-  filter: blur(10px) brightness(50%);
-  -webkit-filter: blur(10px) brightness(50%);
-  min-height: 500px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-}
+
 
 .s-hero {
   position: relative;
   overflow: hidden;
+
+  .bg-image {
+    background-size: 700px;
+    filter: blur(10px) brightness(20%);
+    -webkit-filter: blur(10px) brightness(20%);
+    min-height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+  }
 
   .container {
     width: 69.75rem;
@@ -252,8 +253,8 @@
 
           .config {
             width: 100%;
-            max-width: 3.625rem;
-            height: 2.8125rem;
+            max-width: 2.25rem;
+            height: 2.25rem;
             background-color: #A93F3F;
             border-radius: 0.3125rem;
             display: flex;

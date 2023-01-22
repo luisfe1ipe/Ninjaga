@@ -9,6 +9,8 @@
         Ninjaga - @yield('title')
     </title>
 
+    <link rel="icon" href="{{ asset('img/logo-2.svg') }}">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.6.0/dist/flowbite.min.css" />
     <link rel="stylesheet" href="/css/main.min.css">
@@ -34,7 +36,8 @@
                 'FILL'1,
                 'wght'400,
                 'GRAD'0,
-                'opsz'48
+                'opsz'48,
+                
         }
     </style>
     @yield('navbar')

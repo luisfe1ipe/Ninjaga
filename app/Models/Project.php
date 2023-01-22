@@ -32,4 +32,20 @@ class Project extends Model
     {
         return $this->belongsTo(Studio::class);
     }
+
+    public function favorite(){
+        return $this->hasOne(Favorite::class);
+    }
+
+    public function completed(){
+        return $this->hasOne(Completed::class);
+    }
+
+    public function read(){
+        return $this->hasOne(Read::class);
+    }
+
+    public function stop(){
+        return $this->hasOne(Stop::class);
+    }
 }

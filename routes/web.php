@@ -4,6 +4,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\Project\SaveController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +48,7 @@ Route::put('/artist/edit/{id}', [ArtistController::class, 'update'])->name('arti
 Route::get('/artist/{id}', [ArtistController::class, 'show'])->name('artist.show');
 Route::delete('/artist/{id}', [ArtistController::class, 'destroy'])->name('artist.destroy');
 
-Route::get('/project', [ProjectController::class, 'index'])->name('project.index');
+Route::get('/project/{type?}', [ProjectController::class, 'index'])->name('project.index');
 Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
 Route::post('/project/create', [ProjectController::class, 'store'])->name('project.store');
 Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
@@ -55,3 +56,5 @@ Route::put('/project/edit/{id}', [ProjectController::class, 'update'])->name('pr
 Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show');
 Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
 
+Route::post('/save', [SaveController::class, 'store'])->name('save.store');
+Route::get('/projects/save/{type}', [SaveController::class, 'index'])->name('save.index');

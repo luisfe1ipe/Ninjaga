@@ -6,7 +6,6 @@
 @endsection
 
 @section('item-view')
-
     <section class="s-hero">
         <div class="bg-image bg-[url('{{ asset("projects/$title/banner/$project->banner") }}')]"></div>
         <div class="container">
@@ -16,12 +15,10 @@
                 </div>
                 <div class="content">
                     <div class="header-content">
-                        <div class="config">
-                            <button id="dropdownRightButton" data-dropdown-toggle="dropdownRight"
-                                data-dropdown-placement="right" class="" type="button">
-                                <i class="material-icons text-3xl">settings</i>
-                            </button>
-                        </div>
+                        <button id="dropdownRightButton" data-dropdown-toggle="dropdownRight"
+                            data-dropdown-placement="right" class="config" type="button">
+                            <i class="material-icons text-3xl">settings</i>
+                        </button>
                         <div class="title">
                             <h1>{{ $project->title }}</h1>
                             <p>{{ $project->author->name }}</p>
@@ -75,31 +72,88 @@
 
     <!-- Dropdown menu -->
     <div id="dropdownRight"
-        class="hidden z-10 h-auto w-96 bg-[#121212] rounded divide-y divide-gray-100 shadow dropdown-container">
+        class="hidden z-10 h-auto w-40 bg-[#121212] rounded divide-y divide-gray-100 shadow dropdown-container">
         <ul class="py-1 text-gray-700  dropdown-menu" aria-labelledby="dropdownRightButton">
-            <x-dropdown.li route="" icon="favorite" class="hover:text-red-500">
-                <form action="{{ route('favorite.store') }}" method="POST">
+            <li class="">
+                <form action="{{ route('save.store') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="save" value="favorite">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="project_id" value="{{ $project->id }}">
-                    <button type="submit">Favoritos</button>
+                    <div class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-red-500 text-white gap-1.5
+                        @if ($fav == true)
+                            text-red-500
+                        @endif
+                    ">
+                        <button type="submit" class="flex items-center gap-1.5">
+                            <i class="material-icons text-lg">
+                                favorite
+                            </i>
+                            Favoritos
+                        </button>
+                    </div>
                 </form>
-            </x-dropdown.li>
-            <x-dropdown.li route="" icon="check" class="hover:text-green-500">
-                <form action="">
-                    <button type="submit" name="completed" value="completed">Lidos</button>
+            </li>
+            <li>
+                <form action="{{ route('save.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="save" value="completed">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="project_id" value="{{ $project->id }}">
+                    <div class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-green-500 text-white flex items-center gap-1.5
+                        @if ($completed == true)
+                            text-green-500
+                        @endif
+                    ">
+                        <button type="submit" class="flex items-center gap-1.5">
+                            <i class="material-icons text-lg">
+                                check
+                            </i>
+                            Lido
+                        </button>
+                    </div>
                 </form>
-            </x-dropdown.li>
-            <x-dropdown.li route="" icon="bookmark" class="hover:text-yellow-500">
-                <form action="">
-                    <button type="submit" name="read" value="read">Lerei</button>
+            </li>
+            <li route="" icon="bookmark" class="hover:text-yellow-500">
+                <form action="{{ route('save.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="save" value="read">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="project_id" value="{{ $project->id }}">
+                    <div class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-orange-500 text-white flex items-center gap-1.5
+                        @if ($read == true)
+                            text-orange-500
+                        @endif
+                    ">
+                        <button type="submit" class="flex items-center gap-1.5">
+                            <i class="material-icons text-lg">
+                                bookmark
+                            </i>
+                            Lerei
+                        </button>
+                    </div>
                 </form>
-            </x-dropdown.li>
-            <x-dropdown.li route="" icon="block" class="hover:text-gray-500">
-                <form action="">
-                    <button type="submit" name="stop" value="stop">Parei</button>
+            </li>
+            <li route="" icon="block" class="hover:text-gray-500">
+                <form action="{{ route('save.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="save" value="stop">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="project_id" value="{{ $project->id }}">
+                    <div class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-slate-500 text-white flex items-center gap-1.5
+                    @if ($stop == true)
+                    text-slate-500
+                    @endif
+                ">
+                    <button type="submit" class="flex items-center gap-1.5">
+                        <i class="material-icons text-lg">
+                            lock
+                        </i>
+                        Parei
+                    </button>
+                </div>
                 </form>
-            </x-dropdown.li>
+            </li>
 
             <div class="adminConfig text-sm">
                 <x-dropdown.li route="{{ route('project.update', ['id' => $project->id]) }}" gIcon="edit" class="">
