@@ -224,3 +224,15 @@ h1 {
   font-family: 'Montserrat' !important;
   font-size: 28px !important;
 }
+
+.rollback{
+  position: fixed;
+  right: 30;
+  bottom: 30;
+  background-color: #A93F3F;
+  padding: 6px;
+  border-radius: 5px;
+  &:hover{
+    background-color: #8A2D2D;
+  }
+}

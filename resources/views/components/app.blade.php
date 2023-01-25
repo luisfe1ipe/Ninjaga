@@ -27,20 +27,9 @@
         rel="stylesheet">
 
 
-
 </head>
 
 <body>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings:
-                'FILL'1,
-                'wght'400,
-                'GRAD'0,
-                'opsz'48,
-
-        }
-    </style>
     @yield('navbar')
     <div class="container-p">
         <x-toast.message />
@@ -54,8 +43,6 @@
     @yield('scriptBanner')
     @yield('scriptUser')
     @yield('scriptChapterCreate')
-    
-
 </body>
 
 </html>

@@ -22,7 +22,7 @@
                         </svg></button>
                     <!-- Dropdown menu -->
                     <div id="dropdownNavbar"
-                        class="z-10 border-2 border-[#121212] hidden font-normal bg-[#000000] divide-y divide-gray-100 rounded-lg  w-32">
+                        class="z-10 border-2 border-[#121212] hidden font-normal bg-[#000000] divide-y divide-gray-100 rounded-lg  ">
                         <ul class="pt-2 flex-col text-center" aria-labelledby="dropdownLargeButton">
                             <li class="w-full pb-2">
                                 <a href="{{ route('project.index', ['type' => 'manga']) }}"
@@ -35,6 +35,10 @@
                             <li class="w-full pb-2">
                                 <a href="{{ route('project.index', ['type' => 'novel']) }}"
                                     class="block px-4 py-2">Novel</a>
+                            </li>
+                            <li class="w-full pb-2" style="border-top: 1px solid rgb(107 114 128)">
+                                <a href="{{ route('project.create') }}"
+                                    class="block px-4 py-2">Adicionar obra</a>
                             </li>
                         </ul>
                     </div>
@@ -104,9 +108,6 @@
 
                     </div>
                 </div>
-                {{-- <div class="bg-red-700 rounded-full h-12 w-12">
-
-                </div> --}}
             </div>
         </div>
     </div>

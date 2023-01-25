@@ -72,17 +72,48 @@
     </section>
 
     <section class="s-chapters">
-        <a class="mb-5" href="{{ route('chapter.create', ['id' => $project->id]) }}">Criar capitulo</a>
-        <br>
+
+        <div class="header">
+            <div class="title">
+                <i class="material-symbols-outlined">
+                    view_list
+                </i>
+                <h1>Capítulos</h1>
+            </div>
+            <div class="search">
+                <a href="{{ route('chapter.create', ['id' => $project->id]) }}" data-tooltip-target="create-chapter">
+                    <span class="material-symbols-outlined">
+                        add
+                    </span>
+                    <div id="create-chapter" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-[#28282e] rounded-lg shadow-sm opacity-0 tooltip">
+                        Adicionar capítulo
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </a>
+                <x-input.search />
+            </div>
+        </div>
+        <div class="container-btns">
+            <div class="btns">
+                <a href="">
+                    Ler o primeiro
+                </a>
+                <a href="" style="width: 105px;">
+                    Ler o ultimo
+                </a>
+            </div>
+        </div>
         <div class="container-chapters">
-            @foreach ($project->chapters as $chapters)
+            @foreach ($project->chapters->sortByDesc('created_at') as $chapters)
                 <span class="hidden">{{ $titleChapterFormated = str_replace(' ', '-', $chapters->title) }}</span>
                 <div class="card-chapter">
                     <div class="img">
                         <img src="{{ asset("projects/$title/chapters/$titleChapterFormated/image-chapter/$chapters->image_chapter") }}"
                             alt="">
                     </div>
-                    <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}" class="content">
+                    <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}" onclick="check()"
+                        class="content">
                         <div class="content">
                             <p>{{ $chapters->title }}</p>
                             <span>

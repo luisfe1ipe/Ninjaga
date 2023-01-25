@@ -357,58 +357,84 @@
   }
 
 
+
 }
 
-.modal-body {
-  display: flex;
-  font-size: 0.875rem;
-  color: #F2F2F2;
-
-  .items {
-    p {
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-  }
-
-  .items-description {
-    margin-left: 24px;
-
-    a {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 12px;
-      color: #ccc;
-      font-weight: 500;
-
-      &:hover {
-        color: #A93F3F;
-      }
-    }
-  }
-}
-
-
-// Index project
-
-.container-manga {
-  display: flex;
-  // align-items: center;
-  flex-wrap: wrap;
-  gap: 71px;
-}
-
-
-//chapters
 .s-chapters {
   width: 100%;
   max-width: 69.75rem;
-  margin: 6.25rem auto;
+  margin: 3.125rem auto;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      i {
+        color: #A93F3F;
+        font-size: 32px;
+      }
+    }
+
+    .search{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      a{
+        color: #6b7280;
+        span{
+          font-size: 32px;
+        }
+
+        &:hover{
+          color: #A93F3F;
+        }
+      }
+    }
+
+    
+
+  }
+
+    .container-btns {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      margin-bottom: 2.8125rem;
+      width: 100%;
+      .btns {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        a {
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+          background-color: #A93F3F;
+          padding: 6px;
+          width: 120px;
+          text-align: center;
+          border-radius: 5px;
+  
+          &:hover {
+            background-color: #8A2D2D;
+          }
+        }
+      }
+  
+    }
 
   .container-chapters {
     display: flex;
     flex-wrap: wrap;
-    gap: 2.625rem;
+    gap: 2rem;
+
     .card-chapter {
       width: 100%;
       max-width: 21.5625rem;
@@ -465,4 +491,143 @@
       }
     }
   }
+}
+
+
+.modal-body {
+  display: flex;
+  font-size: 0.875rem;
+  color: #F2F2F2;
+
+  .items {
+    p {
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+  }
+
+  .items-description {
+    margin-left: 24px;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+      color: #ccc;
+      font-weight: 500;
+
+      &:hover {
+        color: #A93F3F;
+      }
+    }
+  }
+}
+
+
+// Index project
+
+.container-manga {
+  display: flex;
+  // align-items: center;
+  flex-wrap: wrap;
+  gap: 71px;
+}
+
+
+//chapters
+
+.s-view-chapter {
+  margin-top: 4.375rem;
+
+  .header {
+    margin-bottom: 48px;
+
+    .title {
+      display: flex;
+      font-size: 1.75rem;
+      justify-content: center;
+      gap: 0.5rem;
+
+      a{
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .sub {
+      margin-top: 1.5rem;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+
+      .nav {
+        max-width: 50%;
+      }
+
+      .container-btns {
+        .btns {
+          display: flex;
+          gap: 1.5rem;
+
+          a {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            background-color: #A93F3F;
+            width: 110px;
+            padding: 6px;
+            border-radius: 5px;
+
+            &:hover {
+              background-color: #8A2D2D;
+            }
+
+            .next {
+              transform: rotate(-180deg)
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .chapter-imgs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bottom{
+    margin: 3rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .btns {
+        display: flex;
+        gap: 1.5rem;
+
+        a {
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+          background-color: #A93F3F;
+          width: 110px;
+          padding: 6px;
+          border-radius: 5px;
+
+          &:hover {
+            background-color: #8A2D2D;
+          }
+
+          .next {
+            transform: rotate(-180deg)
+          }
+        }
+      }
+  }
+
+
 }

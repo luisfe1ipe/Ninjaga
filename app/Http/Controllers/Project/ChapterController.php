@@ -52,7 +52,7 @@ class ChapterController extends Controller
             $imgChapter->move(public_path("projects/$projectTitle/chapters/$titleChapter/image-chapter"), $imageChapterName);
             $data['image_chapter'] = $imageChapterName;
         }
-
+    
         if($request->file('img')){
             for ($i=0; $i < count($images); $i++) { 
                 $imageName = $i . '.' . $images[$i]->extension();
@@ -60,8 +60,9 @@ class ChapterController extends Controller
                 $data['img'][$i] = $imageName;
             }
         }
-
+        
         Chapter::create($data);
+        
     }
 
     /**
@@ -72,7 +73,16 @@ class ChapterController extends Controller
      */
     public function show($id, $chapter_id)
     {
-        
+        if(!$chapter = Chapter::find($chapter_id)){
+            return back()->with('notFound', 'Capítulo não encontrado.');
+        }
+        $chapterTitleFormated = str_replace(" ", "-", $chapter->title);
+
+
+        $project = Project::find($id);
+        $projectTitleFormated = str_replace(" ", "-", $project->title);
+
+        return view('admin.project.chapter.show', compact('chapter', 'project', 'projectTitleFormated', 'chapterTitleFormated'));
     }
 
     /**
@@ -83,7 +93,7 @@ class ChapterController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
