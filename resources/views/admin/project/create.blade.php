@@ -61,15 +61,22 @@
                                             @foreach ($genres as $genre)
                                                 <li class="">
                                                     <div class="flex items-center mt-2 p-2 rounded hover:bg-[#000000]">
-                                                        <input id="checkbox={{ $genre->id }}" type="checkbox" name="genres[]"
-                                                            value="{{ $genre->id }}"
+                                                        <input id="checkbox={{ $genre->id }}" type="checkbox"
+                                                            name="genres[]" value="{{ $genre->id }}"
                                                             class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                         <label for="checkbox={{ $genre->id }}"
-                                                            class="cursor-pointer ml-2 text-sm font-medium">{{$genre->name}}</label>
+                                                            class="cursor-pointer ml-2 text-sm font-medium">{{ $genre->name }}</label>
                                                     </div>
                                                 </li>
                                             @endforeach
                                         </ul>
+                                        <a href="#" data-modal-target="genre-modal" data-modal-toggle="genre-modal"
+                                            class="flex items-center p-3 text-sm font-medium border-t border-gray-200 rounded-b-lg bg-[#28282E] gap-1 hover:text-[#A93F3F]">
+                                            <i class="material-symbols-outlined">
+                                                add
+                                            </i>
+                                            Novo genêro
+                                        </a>
                                     </div>
 
                                 </button>
@@ -112,8 +119,8 @@
                                     </select>
                                 </div>
                                 <div class="more">
-                                    <button data-modal-target="studio-modal" data-modal-toggle="studio-modal" class=""
-                                        type="button">
+                                    <button data-modal-target="studio-modal" data-modal-toggle="studio-modal"
+                                        class="" type="button">
                                         <img src="/img/svg/plus.svg" alt="">
                                     </button>
 
@@ -160,6 +167,17 @@
             <div class="flex  space-x-6">
                 <button data-modal-hide="studio-modal" type="button" class="btn-s">Cancelar</button>
                 <button data-modal-hide="studio-modal" type="submit" class="btn-p">Cadastrar</button>
+            </div>
+        </x-form>
+    </x-modal.default>
+
+    <x-modal.default id="genre-modal" title="Adicionar Genêro">
+        <x-form action="">
+            <label for="name">Nome</label>
+            <input type="text" name="name" id="name" class="input focus:ring-[#C4C4CC] mb-5">
+            <div class="flex  space-x-6">
+                <button data-modal-hide="genre-modal" type="button" class="btn-s">Cancelar</button>
+                <button data-modal-hide="genre-modal" type="submit" class="btn-p">Cadastrar</button>
             </div>
         </x-form>
     </x-modal.default>

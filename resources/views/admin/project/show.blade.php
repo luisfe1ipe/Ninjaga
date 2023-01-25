@@ -6,6 +6,7 @@
 @endsection
 
 @section('item-view')
+
     <section class="s-hero">
         <div class="bg-image bg-[url('{{ asset("projects/$title/banner/$project->banner") }}')]"></div>
         <div class="container">
@@ -15,8 +16,8 @@
                 </div>
                 <div class="content">
                     <div class="header-content">
-                        <button id="dropdownRightButton" data-dropdown-toggle="dropdownRight"
-                            data-dropdown-placement="right" class="config" type="button">
+                        <button id="dropdownRightButton" data-dropdown-toggle="dropdownRight" data-dropdown-placement="right"
+                            class="config" type="button">
                             <i class="material-icons text-3xl">settings</i>
                         </button>
                         <div class="title">
@@ -55,7 +56,7 @@
                                 <i class="material-symbols-outlined text-[#A93F3F]">
                                     favorite
                                 </i>
-                                <p>{{ $countFav }} Favoritos</p>
+                                <p>{{ $project->favorite()->count() }} Favoritos</p>
                             </div>
                             <div class="info-text">
                                 <i class="material-symbols-outlined text-[#A93F3F]">
@@ -70,6 +71,30 @@
         </div>
     </section>
 
+    <section class="s-chapters">
+        <a class="mb-5" href="{{ route('chapter.create', ['id' => $project->id]) }}">Criar capitulo</a>
+        <br>
+        <div class="container-chapters">
+            @foreach ($project->chapters as $chapters)
+                <span class="hidden">{{ $titleChapterFormated = str_replace(' ', '-', $chapters->title) }}</span>
+                <div class="card-chapter">
+                    <div class="img">
+                        <img src="{{ asset("projects/$title/chapters/$titleChapterFormated/image-chapter/$chapters->image_chapter") }}"
+                            alt="">
+                    </div>
+                    <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}" class="content">
+                        <div class="content">
+                            <p>{{ $chapters->title }}</p>
+                            <span>
+                                {{ date('d/m/y', strtotime($chapters->created_at)) === date('d/m/y') ? 'Hoje' : date('d/m/Y', strtotime($chapters->created_at)) }}
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </section>
+
     <!-- Dropdown menu -->
     <div id="dropdownRight"
         class="hidden z-10 h-auto w-40 bg-[#121212] rounded divide-y divide-gray-100 shadow dropdown-container">
@@ -80,10 +105,9 @@
                     <input type="hidden" name="save" value="favorite">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="project_id" value="{{ $project->id }}">
-                    <div class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-red-500 text-white gap-1.5
-                        @if ($fav == true)
-                            text-red-500
-                        @endif
+                    <div
+                        class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-red-500 text-white gap-1.5
+                        @if ($fav == true) text-red-500 @endif
                     ">
                         <button type="submit" class="flex items-center gap-1.5">
                             <i class="material-icons text-lg">
@@ -100,10 +124,9 @@
                     <input type="hidden" name="save" value="completed">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="project_id" value="{{ $project->id }}">
-                    <div class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-green-500 text-white flex items-center gap-1.5
-                        @if ($completed == true)
-                            text-green-500
-                        @endif
+                    <div
+                        class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-green-500 text-white flex items-center gap-1.5
+                        @if ($completed == true) text-green-500 @endif
                     ">
                         <button type="submit" class="flex items-center gap-1.5">
                             <i class="material-icons text-lg">
@@ -120,10 +143,9 @@
                     <input type="hidden" name="save" value="read">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="project_id" value="{{ $project->id }}">
-                    <div class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-orange-500 text-white flex items-center gap-1.5
-                        @if ($read == true)
-                            text-orange-500
-                        @endif
+                    <div
+                        class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-orange-500 text-white flex items-center gap-1.5
+                        @if ($read == true) text-orange-500 @endif
                     ">
                         <button type="submit" class="flex items-center gap-1.5">
                             <i class="material-icons text-lg">
@@ -140,26 +162,26 @@
                     <input type="hidden" name="save" value="stop">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="project_id" value="{{ $project->id }}">
-                    <div class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-slate-500 text-white flex items-center gap-1.5
-                    @if ($stop == true)
-                    text-slate-500
-                    @endif
+                    <div
+                        class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-slate-500 text-white flex items-center gap-1.5
+                    @if ($stop == true) text-slate-500 @endif
                 ">
-                    <button type="submit" class="flex items-center gap-1.5">
-                        <i class="material-icons text-lg">
-                            lock
-                        </i>
-                        Parei
-                    </button>
-                </div>
+                        <button type="submit" class="flex items-center gap-1.5">
+                            <i class="material-icons text-lg">
+                                lock
+                            </i>
+                            Parei
+                        </button>
+                    </div>
                 </form>
             </li>
 
             <div class="adminConfig text-sm">
-                <x-dropdown.li route="{{ route('project.update', ['id' => $project->id]) }}" gIcon="edit" class="">
+                <x-dropdown.li route="{{ route('project.update', ['id' => $project->id]) }}" gIcon="edit"
+                    class="">
                     Editar
                 </x-dropdown.li>
-                
+
                 <x-dropdown.li route="" gIcon="delete" class="">
                     <form action="{{ route('project.destroy', ['id' => $project->id]) }}" method="POST">
                         @csrf
@@ -167,7 +189,7 @@
                         <button type="submit">Excluir</button>
                     </form>
                 </x-dropdown.li>
-                
+
             </div>
         </ul>
 

@@ -20,11 +20,18 @@ class Project extends Model
         'studio_id'
     ];
 
-    public function genres(){
+    public function genres()
+    {
         return $this->belongsToMany(Genre::class, 'genre_project');
     }
 
-    public function author(){
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class);
+    }
+
+    public function author()
+    {
         return $this->belongsTo(Author::class);
     }
 
@@ -33,19 +40,23 @@ class Project extends Model
         return $this->belongsTo(Studio::class);
     }
 
-    public function favorite(){
+    public function favorite()
+    {
         return $this->hasOne(Favorite::class);
     }
 
-    public function completed(){
+    public function completed()
+    {
         return $this->hasOne(Completed::class);
     }
 
-    public function read(){
+    public function read()
+    {
         return $this->hasOne(Read::class);
     }
 
-    public function stop(){
+    public function stop()
+    {
         return $this->hasOne(Stop::class);
     }
 }

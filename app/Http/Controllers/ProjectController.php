@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Chapter;
 use App\Models\Completed;
 use App\Models\Favorite;
 use App\Models\Genre;
@@ -91,15 +92,15 @@ class ProjectController extends Controller
         if (!$project = Project::find($id)) {
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
-
-        $countFav = Favorite::where('project_id', $project->id)->count();
+        $chapters = Chapter::first('project_id', $project->id);
         $fav = Favorite::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $completed = Completed::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $read = Read::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $stop = Stop::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $genres = $project->genres;
         $title = str_replace(" ", "-", $project->title);
-        return view('admin.project.show', compact('project', 'title', 'genres', 'fav', 'completed', 'read', 'stop', 'countFav'));
+
+        return view('admin.project.show', compact('project', 'title', 'genres', 'fav', 'completed', 'read', 'stop', 'chapters'));
     }
 
     /**
@@ -208,6 +209,18 @@ class ProjectController extends Controller
         }
 
         $project->genres()->detach(); //N:M
+        if($project->favorite){
+            $project->favorite()->delete();
+        }
+        if($project->completed){
+            $project->completed()->delete();
+        }
+        if($project->read){
+            $project->read()->delete();
+        }
+        if($project->stop){
+            $project->stop()->delete();
+        }
         $project->delete();
 
         return redirect()->route('project.index')->with('deleted', 'Projeto deletado com sucesso.');

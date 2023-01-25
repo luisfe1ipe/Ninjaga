@@ -13,6 +13,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.6.0/dist/flowbite.min.css" />
+    
     <link rel="stylesheet" href="/css/main.min.css">
 
     <link rel="stylesheet"
@@ -26,7 +27,7 @@
         rel="stylesheet">
 
 
-   
+
 </head>
 
 <body>
@@ -37,12 +38,12 @@
                 'wght'400,
                 'GRAD'0,
                 'opsz'48,
-                
+
         }
     </style>
     @yield('navbar')
     <div class="container-p">
-        <x-toast.message/>
+        <x-toast.message />
         @yield('content')
     </div>
     @yield('item-view')
@@ -52,7 +53,8 @@
 
     @yield('scriptBanner')
     @yield('scriptUser')
-
+    @yield('scriptChapterCreate')
+    
 
 </body>
 

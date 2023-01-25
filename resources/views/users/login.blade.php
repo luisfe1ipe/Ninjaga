@@ -10,12 +10,12 @@
         @csrf
         <label for="email">
             E-mail
-            <input type="text" name="email" id="email" placeholder="Digite aqui">
+            <input class="input" type="text" name="email" id="email" placeholder="Digite aqui">
         </label>
 
         <label for="password">
             Senha
-            <input type="password" name="password" id="password" placeholder="•••••••••••••">
+            <input class="input" type="password" name="password" id="password" placeholder="•••••••••••••">
         </label>
 
         <button type="submit">Entrar</button>

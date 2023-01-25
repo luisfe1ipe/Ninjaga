@@ -52,7 +52,7 @@
                     <div class="right">
                         <div class="title">
                             <label for="title">Titulo</label>
-                            <input type="text" name="title" id="title" placeholder="Digite aqui..."
+                            <input class="input" type="text" name="title" id="title" placeholder="Digite aqui..."
                                 class="focus:ring-[#C4C4CC]" value="{{ $project->title }}">
                         </div>
                         <div class="synopsis">
@@ -97,7 +97,7 @@
                             </div>
                             <div class="select">
                                 <label for="released" class="">Lançado em</label>
-                                <input type="number" name="released" id="released" placeholder="Digite aqui..."
+                                <input  class="input" type="number" name="released" id="released" placeholder="Digite aqui..."
                                     class="focus:ring-[#C4C4CC]">
                             </div>
                         </div>

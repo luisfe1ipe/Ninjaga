@@ -4,6 +4,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\Project\ChapterController;
 use App\Http\Controllers\Project\SaveController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
@@ -58,3 +59,7 @@ Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('pro
 
 Route::post('/save', [SaveController::class, 'store'])->name('save.store');
 Route::get('/projects/save/{type}', [SaveController::class, 'index'])->name('save.index');
+
+Route::get('project/{id}/create-chapter', [ChapterController::class, 'create'])->name('chapter.create');
+Route::post('project/{id}/create-chapter', [ChapterController::class, 'store'])->name('chapter.store');
+Route::get('project/{id}/chapters/{chapter_id}', [ChapterController::class, 'show'])->name('chapter.show');
