@@ -1,9 +1,11 @@
 @extends('components.app')
 @section('title', 'Início')
 @section('navbar')
-    <x-navbar view=""/>
+    <x-navbar view="" />
 @endsection
 @section('content')
+
+
     @isset($projects)
         <div class="container-title mt-[80px]">
             <div class="title">
@@ -46,24 +48,31 @@
                         <p>{{ $project->title }}</p>
                     </div>
                     <div class="caps">
-                        <div class="cap-p">
-                            <div class="link">
-                                <x-buttom.cap route="">Cap. 232</x-buttom.cap>
-                            </div>
-                            <div class="new">
-                                <img src="{{ asset('img/new-1.png') }}" alt="">
-                            </div>
-                        </div>
-                        <div class="cap-p">
-                            <div class="link">
-                                <x-buttom.cap route="">Cap. 232</x-buttom.cap>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    1h atrás
-                                </span>
-                            </div>
-                        </div>
+
+                        @php
+                            $chapters = $project->chapters->sortByDesc('created_at');
+                        @endphp
+                        @for ($i = count($chapters) ; $i >= -1 ; $i--)
+                            @isset ($chapters[$i])
+                                <div class="cap-p">
+                                    <div class="link">
+                                        <x-buttom.cap
+                                            route="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters[$i]->id]) }}">
+                                            {{ substr($chapters[$i]->title, 0, 3) . '. ' . filter_var($chapters[$i]->title, FILTER_SANITIZE_NUMBER_INT) }}
+                                        </x-buttom.cap>
+                                    </div>
+                                    @if (date('d/m/y', strtotime($chapters[$i]->created_at)) == date('d/m/y'))
+                                        <div class="new">
+                                            <img src="{{ asset('img/new-1.png') }}" alt="">
+                                        </div>
+                                    @else
+                                        <div class="new">
+                                            <span>{{ date('d/m/Y', strtotime($chapters[$i]->created_at)) }}</span>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endisset
+                        @endfor
                     </div>
                 </div>
             @endforeach
@@ -155,7 +164,8 @@
                         </div>
 
                         <a href="{{ route('project.show', ['id' => $manwha->id]) }}">
-                            <img class="photo-manga" src="{{ asset("projects/$title/banner/$manwha->banner") }}" alt="">
+                            <img class="photo-manga" src="{{ asset("projects/$title/banner/$manwha->banner") }}"
+                                alt="">
                         </a>
                     </div>
                     <div class="title">

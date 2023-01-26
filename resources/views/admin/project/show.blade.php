@@ -95,11 +95,12 @@
             </div>
         </div>
         <div class="container-btns">
+            {{-- @dd($project->chapters->last()->id) --}}
             <div class="btns">
-                <a href="">
+                <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $project->chapters->first()->id]) }}">
                     Ler o primeiro
                 </a>
-                <a href="" style="width: 105px;">
+                <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $project->chapters->last()->id]) }}" style="width: 105px;">
                     Ler o ultimo
                 </a>
             </div>

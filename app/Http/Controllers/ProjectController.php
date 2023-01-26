@@ -33,7 +33,7 @@ class ProjectController extends Controller
             $novels = Project::where('type', 'Novel')->orderBy('updated_at', 'asc')->get();
             return view('admin.project.index', compact('novels'));
         }
-        $projects = Project::orderBy('updated_at', 'asc')->get();
+        $projects = Project::orderBy('updated_at', 'desc')->get();
         return view('admin.project.index', compact('projects'));
     }
 
