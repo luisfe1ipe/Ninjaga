@@ -94,51 +94,54 @@
                 <x-input.search />
             </div>
         </div>
-        <div class="container-btns">
-            {{-- @dd($project->chapters->last()->id) --}}
-            <div class="btns">
-                <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $project->chapters->first()->id]) }}">
-                    Ler o primeiro
-                </a>
-                <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $project->chapters->last()->id]) }}" style="width: 105px;">
-                    Ler o ultimo
-                </a>
-            </div>
-        </div>
-        <div class="container-chapters">
-            @foreach ($project->chapters->sortByDesc('created_at') as $chapters)
-                <span class="hidden">{{ $titleChapterFormated = str_replace(' ', '-', $chapters->title) }}</span>
-                <div class="card-chapter">
-                    <div class="img">
-                        <img src="{{ asset("projects/$title/chapters/$titleChapterFormated/image-chapter/$chapters->image_chapter") }}"
-                            alt="">
-                    </div>
-                    <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}"
-                        onclick="check()" class="content">
-                        <div class="content">
-                            <p>{{ $chapters->title }}</p>
-                            <span>
-                                {{ date('d/m/y', strtotime($chapters->created_at)) === date('d/m/y') ? 'Hoje' : date('d/m/Y', strtotime($chapters->created_at)) }}
-                            </span>
-                        </div>
+        @empty($project->chapters)
+            <div class="container-btns">
+                <div class="btns">
+                    <a
+                        href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $project->chapters->first()->id]) }}">
+                        Ler o primeiro
                     </a>
-
-                    <div class="delete">
-                        <form
-                            action="{{ route('chapter.destroy', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}"
-                            method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button>
-                                <i class="material-symbols-outlined">
-                                    delete
-                                </i>
-                            </button>
-                        </form>
-                    </div>
+                    <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $project->chapters->last()->id]) }}"
+                        style="width: 105px;">
+                        Ler o ultimo
+                    </a>
                 </div>
-            @endforeach
-        </div>
+            </div>
+            <div class="container-chapters">
+                @foreach ($project->chapters->sortByDesc('created_at') as $chapters)
+                    <span class="hidden">{{ $titleChapterFormated = str_replace(' ', '-', $chapters->title) }}</span>
+                    <div class="card-chapter">
+                        <div class="img">
+                            <img src="{{ asset("projects/$title/chapters/$titleChapterFormated/image-chapter/$chapters->image_chapter") }}"
+                                alt="">
+                        </div>
+                        <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}"
+                            onclick="check()" class="content">
+                            <div class="content">
+                                <p>{{ $chapters->title }}</p>
+                                <span>
+                                    {{ date('d/m/y', strtotime($chapters->created_at)) === date('d/m/y') ? 'Hoje' : date('d/m/Y', strtotime($chapters->created_at)) }}
+                                </span>
+                            </div>
+                        </a>
+
+                        <div class="delete">
+                            <form
+                                action="{{ route('chapter.destroy', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button>
+                                    <i class="material-symbols-outlined">
+                                        delete
+                                    </i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endempty
     </section>
 
     <!-- Dropdown menu -->
