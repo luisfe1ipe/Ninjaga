@@ -112,8 +112,8 @@
                         <img src="{{ asset("projects/$title/chapters/$titleChapterFormated/image-chapter/$chapters->image_chapter") }}"
                             alt="">
                     </div>
-                    <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}" onclick="check()"
-                        class="content">
+                    <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}"
+                        onclick="check()" class="content">
                         <div class="content">
                             <p>{{ $chapters->title }}</p>
                             <span>
@@ -121,6 +121,20 @@
                             </span>
                         </div>
                     </a>
+
+                    <div class="delete">
+                        <form
+                            action="{{ route('chapter.destroy', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}"
+                            method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button>
+                                <i class="material-symbols-outlined">
+                                    delete
+                                </i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
         </div>

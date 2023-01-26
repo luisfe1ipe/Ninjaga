@@ -63,3 +63,4 @@ Route::get('/projects/save/{type}', [SaveController::class, 'index'])->name('sav
 Route::get('project/{id}/create-chapter', [ChapterController::class, 'create'])->name('chapter.create');
 Route::post('project/{id}/create-chapter', [ChapterController::class, 'store'])->name('chapter.store');
 Route::get('project/{id}/chapters/{chapter_id}', [ChapterController::class, 'show'])->name('chapter.show');
+Route::delete('project/{id}/chapters/{chapter_id}', [ChapterController::class, 'destroy'])->name('chapter.destroy');

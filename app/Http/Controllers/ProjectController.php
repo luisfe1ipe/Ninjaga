@@ -24,16 +24,16 @@ class ProjectController extends Controller
     public function index($type = null)
     {
         if($type == 'manga'){
-            $mangas = Project::where('type', 'Manga')->orderBy('updated_at', 'desc')->get();
+            $mangas = Project::where('type', 'Manga')->orderBy('updated_at', 'asc')->get();
             return view('admin.project.index', compact('mangas'));
         }else if($type == 'manwha'){
-            $manwhas = Project::where('type', 'Manwha')->orderBy('updated_at', 'desc')->get();
+            $manwhas = Project::where('type', 'Manwha')->orderBy('updated_at', 'asc')->get();
             return view('admin.project.index', compact('manwhas'));
         }else if($type == 'novel'){
-            $novels = Project::where('type', 'Novel')->orderBy('updated_at', 'desc')->get();
+            $novels = Project::where('type', 'Novel')->orderBy('updated_at', 'asc')->get();
             return view('admin.project.index', compact('novels'));
         }
-        $projects = Project::orderBy('updated_at', 'desc')->get();
+        $projects = Project::orderBy('updated_at', 'asc')->get();
         return view('admin.project.index', compact('projects'));
     }
 

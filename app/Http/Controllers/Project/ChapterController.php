@@ -62,7 +62,9 @@ class ChapterController extends Controller
         }
         
         Chapter::create($data);
-        
+
+        $chapterTitle = $data['title'];
+        return redirect()->route('project.show', ['id' => $project->id])->with('success', "$chapterTitle adicionado com sucesso.");
     }
 
     /**
@@ -93,7 +95,10 @@ class ChapterController extends Controller
      */
     public function edit($id)
     {
-        
+        if(!$chapter = Chapter::find($id)){
+            return back()->with('notFound', 'Capítulo não encontrado.');
+        }
+        return view('admin.project.chapter.edit', compact($chapter));
     }
 
     /**
@@ -105,7 +110,7 @@ class ChapterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -114,8 +119,29 @@ class ChapterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $chapter_id)
     {
-        //
+        if(!$chapter = Chapter::find($chapter_id)){
+            return back()->with('notFound', 'Capítulo não encontrado.');
+        }
+
+        $chapterTitleFormated = str_replace(' ', '-', $chapter->title);
+        $projectTitleFormated = str_replace(' ', '-', $chapter->project->title);
+  
+        if ($chapter->img) {
+            if (file_exists(public_path("projects/$projectTitleFormated/chapters/$chapterTitleFormated"))) {
+                for ($i=0; $i < count($chapter->img); $i++) {
+                    unlink(public_path("projects/$projectTitleFormated/chapters/$chapterTitleFormated/". $chapter->img[$i]));
+                }
+                if(file_exists(public_path("projects/$projectTitleFormated/chapters/$chapterTitleFormated/image-chapter"))){
+                    unlink(public_path("projects/$projectTitleFormated/chapters/$chapterTitleFormated/image-chapter/" . $chapter->image_chapter));
+                    rmdir(public_path("projects/$projectTitleFormated/chapters/$chapterTitleFormated/image-chapter"));
+                }
+                rmdir(public_path("projects/$projectTitleFormated/chapters/$chapterTitleFormated"));
+            }
+        }
+
+        $chapter->delete();
+        return redirect()->route('project.show', ['id' => $chapter->project->id])->with('deleted', "$chapter->title excluído com sucesso.");
     }
 }

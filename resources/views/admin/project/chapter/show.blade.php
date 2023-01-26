@@ -25,6 +25,7 @@
     </style>
 
     <section class="s-view-chapter" id="start">
+        
         <div class="header">
             <div class="title">
                 <h1><a href="{{ route('project.show', ['id' => $project->id]) }}">{{ $project->title }}</a> - </h1>
