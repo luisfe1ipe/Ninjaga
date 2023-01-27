@@ -12,6 +12,7 @@
         <div class="title">
             <label for="title">Titulo</label>
             <input type="text" name="title" id="title" placeholder="Digite aqui..." class="input focus:ring-[#C4C4CC]">
+            <input type="hidden" name="formated_title">
         </div>
 
         <div class="images">

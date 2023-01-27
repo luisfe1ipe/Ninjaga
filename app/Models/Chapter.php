@@ -11,6 +11,7 @@ class Chapter extends Model
 
     protected $fillable = [
         'title',
+        'formated_title',
         'image_chapter',
         'img',
         'project_id'

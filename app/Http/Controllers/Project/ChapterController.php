@@ -39,30 +39,30 @@ class ChapterController extends Controller
     public function store($id, Request $request)
     {
         $project = Project::find($id);
-        $projectTitle = str_replace(" ", "-", $project->title);
+        $projectTitle = $project->formated_title;
 
         $data = $request->all();
-        $titleChapter = str_replace(" ", "-", $data['title']);
+        $data['formated_title'] = str_replace(" ", "-", $data['title']);
         $images = $data['img'];
         $data['project_id'] = $project->id;
 
         if($request->file('image_chapter')){
             $imgChapter = $data['image_chapter'];
             $imageChapterName = 'image-chapter' . '.' . $imgChapter->extension();
-            $imgChapter->move(public_path("projects/$projectTitle/chapters/$titleChapter/image-chapter"), $imageChapterName);
+            $imgChapter->move(public_path("projects/$projectTitle/chapters/". $data['formated_title'] . "/image-chapter"), $imageChapterName);
             $data['image_chapter'] = $imageChapterName;
         }
     
         if($request->file('img')){
             for ($i=0; $i < count($images); $i++) { 
                 $imageName = $i . '.' . $images[$i]->extension();
-                $request->img[$i]->move(public_path("projects/$projectTitle/chapters/$titleChapter"), $imageName);
+                $request->img[$i]->move(public_path("projects/$projectTitle/chapters/". $data['formated_title']), $imageName);
                 $data['img'][$i] = $imageName;
             }
         }
         
         Chapter::create($data);
-
+        
         $chapterTitle = $data['title'];
         return redirect()->route('project.show', ['id' => $project->id])->with('success', "$chapterTitle adicionado com sucesso.");
     }
@@ -75,16 +75,11 @@ class ChapterController extends Controller
      */
     public function show($id, $chapter_id)
     {
-        if(!$chapter = Chapter::find($chapter_id)){
+        if(!$chapter = Chapter::where('project_id', $id)->where('id', $chapter_id)->with('project')->first()){
             return back()->with('notFound', 'Capítulo não encontrado.');
         }
-        $chapterTitleFormated = str_replace(" ", "-", $chapter->title);
 
-
-        $project = Project::find($id);
-        $projectTitleFormated = str_replace(" ", "-", $project->title);
-
-        return view('admin.project.chapter.show', compact('chapter', 'project', 'projectTitleFormated', 'chapterTitleFormated'));
+        return view('admin.project.chapter.show', compact('chapter'));
     }
 
     /**
@@ -121,12 +116,13 @@ class ChapterController extends Controller
      */
     public function destroy($id, $chapter_id)
     {
-        if(!$chapter = Chapter::find($chapter_id)){
+        if(!$chapter = Chapter::where('project_id', $id)->where('id', $chapter_id)->with('project')->first()){
             return back()->with('notFound', 'Capítulo não encontrado.');
         }
 
-        $chapterTitleFormated = str_replace(' ', '-', $chapter->title);
-        $projectTitleFormated = str_replace(' ', '-', $chapter->project->title);
+
+        $chapterTitleFormated = $chapter->formated_title;
+        $projectTitleFormated = $chapter->project->formated_title;
   
         if ($chapter->img) {
             if (file_exists(public_path("projects/$projectTitleFormated/chapters/$chapterTitleFormated"))) {

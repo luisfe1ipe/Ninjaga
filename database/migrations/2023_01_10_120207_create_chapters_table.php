@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('formated_title')->nullable();
             $table->longText('image_chapter');
             $table->json('img');
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');

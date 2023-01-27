@@ -6,13 +6,12 @@
 @endsection
 
 @section('item-view')
-
     <section class="s-hero">
-        <div class="bg-image bg-[url('{{ asset("projects/$title/banner/$project->banner") }}')]"></div>
+        <div class="bg-image bg-[url('{{ asset("projects/$project->formated_title/banner/$project->banner") }}')]"></div>
         <div class="container">
             <div class="container-content">
                 <div class="image">
-                    <img src="{{ asset("projects/$title/banner/$project->banner") }}" alt="">
+                    <img src="{{ asset("projects/$project->formated_title/banner/$project->banner") }}" alt="">
                 </div>
                 <div class="content">
                     <div class="header-content">
@@ -30,7 +29,7 @@
                             {{ $project->synopsis }}
                         </div>
                         <div class="categories">
-                            @foreach ($genres as $genre)
+                            @foreach ($project->genres as $genre)
                                 <a href="">
                                     <button
                                         class="bg-[#A93F3F] hover:bg-[#7C2F2F] text-white font-bold py-2 px-4 rounded shadow-md">{{ $genre->name }}</button>
@@ -72,13 +71,12 @@
     </section>
 
     <section class="s-chapters">
-
         <div class="header">
             <div class="title">
                 <i class="material-symbols-outlined">
                     view_list
                 </i>
-                <h1>Capítulos</h1>
+                <h1>Capítulos - {{$project->chapters->count()}}</h1>
             </div>
             <div class="search">
                 <a href="{{ route('chapter.create', ['id' => $project->id]) }}" data-tooltip-target="create-chapter">
@@ -94,9 +92,10 @@
                 <x-input.search />
             </div>
         </div>
-        @empty($project->chapters)
-            <div class="container-btns">
-                <div class="btns">
+
+        <div class="container-btns">
+            <div class="btns">
+                @if (count($project->chapters) > 0)
                     <a
                         href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $project->chapters->first()->id]) }}">
                         Ler o primeiro
@@ -105,43 +104,43 @@
                         style="width: 105px;">
                         Ler o ultimo
                     </a>
-                </div>
-            </div>
-            <div class="container-chapters">
-                @foreach ($project->chapters->sortByDesc('created_at') as $chapters)
-                    <span class="hidden">{{ $titleChapterFormated = str_replace(' ', '-', $chapters->title) }}</span>
-                    <div class="card-chapter">
-                        <div class="img">
-                            <img src="{{ asset("projects/$title/chapters/$titleChapterFormated/image-chapter/$chapters->image_chapter") }}"
-                                alt="">
-                        </div>
-                        <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}"
-                            onclick="check()" class="content">
-                            <div class="content">
-                                <p>{{ $chapters->title }}</p>
-                                <span>
-                                    {{ date('d/m/y', strtotime($chapters->created_at)) === date('d/m/y') ? 'Hoje' : date('d/m/Y', strtotime($chapters->created_at)) }}
-                                </span>
-                            </div>
-                        </a>
+                @endif
 
-                        <div class="delete">
-                            <form
-                                action="{{ route('chapter.destroy', ['id' => $project->id, 'chapter_id' => $chapters->id]) }}"
-                                method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button>
-                                    <i class="material-symbols-outlined">
-                                        delete
-                                    </i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                @endforeach
             </div>
-        @endempty
+        </div>
+        <div class="container-chapters">
+            @foreach ($project->chapters->sortByDesc('created_at') as $chapter)
+                <div class="card-chapter">
+                    <div class="img">
+                        <img src="{{ asset("projects/$project->formated_title/chapters/$chapter->formated_title/image-chapter/$chapter->image_chapter") }}"
+                            alt="">
+                    </div>
+                    <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapter->id]) }}"
+                        onclick="check()" class="content">
+                        <div class="content">
+                            <p>{{ $chapter->title }}</p>
+                            <span>
+                                {{ date('d/m/y', strtotime($chapter->created_at)) === date('d/m/y') ? 'Hoje' : date('d/m/Y', strtotime($chapters->created_at)) }}
+                            </span>
+                        </div>
+                    </a>
+
+                    <div class="delete">
+                        <form
+                            action="{{ route('chapter.destroy', ['id' => $project->id, 'chapter_id' => $chapter->id]) }}"
+                            method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button>
+                                <i class="material-symbols-outlined">
+                                    delete
+                                </i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </section>
 
     <!-- Dropdown menu -->

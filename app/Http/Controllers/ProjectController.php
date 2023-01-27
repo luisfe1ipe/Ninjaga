@@ -13,6 +13,7 @@ use App\Models\Stop;
 use App\Models\Studio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -62,13 +63,13 @@ class ProjectController extends Controller
 
         $data = $request->all();
 
-        $title = str_replace(" ", "-", $data['title']);
+        $data['formated_title'] = str_replace(" ", "-", $data['title']);
 
         $genres = $data['genres'];
 
         if ($request->file('banner')) {
-            $bannerName =  $title . '.' . $request->banner->extension();
-            $request->banner->move(public_path("projects/$title/banner"), $bannerName);
+            $bannerName =  $data['formated_title'] . '.' . $request->banner->extension();
+            $request->banner->move(public_path("projects/" . $data['formated_title'] . "/banner"), $bannerName);
             $data['banner'] = $bannerName;
         }
 
@@ -89,18 +90,17 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        if (!$project = Project::find($id)) {
+        DB::enableQueryLog();
+        if (!$project = Project::where('id', $id)->with(['chapters'])->first()) {
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
-        $chapters = Chapter::first('project_id', $project->id);
+
         $fav = Favorite::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $completed = Completed::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $read = Read::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
         $stop = Stop::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
-        $genres = $project->genres;
-        $title = str_replace(" ", "-", $project->title);
 
-        return view('admin.project.show', compact('project', 'title', 'genres', 'fav', 'completed', 'read', 'stop', 'chapters'));
+        return view('admin.project.show', compact('project','fav', 'completed', 'read', 'stop'));
     }
 
     /**
@@ -138,7 +138,7 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $genres = $data['genres'];
-        $title = str_replace(" ", "-", $data['title']);
+        $data['formated_title'] = str_replace(" ", "-", $data['title']);
         $oldTitle = $data['oldTitle'];
 
 
@@ -146,29 +146,29 @@ class ProjectController extends Controller
         //Edita a foto e o titulo da obra
         if (isset($data['banner']) && $data['title']) {
             if ($data['title'] === $oldTitle) {
-                if (file_exists(public_path("projects/$title/banner/$project->banner"))) {
-                    unlink(public_path("projects/$title/banner/$project->banner"));
+                if (file_exists(public_path("projects/". $data['formated_title'] ."/banner/$project->banner"))) {
+                    unlink(public_path("projects/". $data['formated_title'] ."/banner/$project->banner"));
                 }
-                $bannerName =  $title . '.' . $request->banner->extension();
-                $request->banner->move(public_path("projects/$title/banner"), $bannerName);
+                $bannerName =  $data['formated_title'] . '.' . $request->banner->extension();
+                $request->banner->move(public_path("projects/" . $data['formated_title'] . "/banner"), $bannerName);
                 $data['banner'] = $bannerName;
             } else {
                 $formatedOldTitle = str_replace(" ", "-", $oldTitle);
                 if (file_exists(public_path("projects/$formatedOldTitle"))) {
-                    rename(public_path("projects/$formatedOldTitle"), public_path("projects/$title"));
+                    rename(public_path("projects/$formatedOldTitle"), public_path("projects/" . $data['formated_title']));
                 }
-                $bannerName =  $title . '.' . $request->banner->extension();
-                $request->banner->move(public_path("projects/$title/banner"), $bannerName);
+                $bannerName =  $data['formated_title'] . '.' . $request->banner->extension();
+                $request->banner->move(public_path("projects/".  $data['formated_title'] . "/banner"), $bannerName);
                 $data['banner'] = $bannerName;
             }
         } elseif ($data['title']) {
             $formatedOldTitle = str_replace(" ", "-", $oldTitle);
             if (file_exists(public_path("projects/$formatedOldTitle"))) {
-                rename(public_path("projects/$formatedOldTitle"), public_path("projects/$title"));
+                rename(public_path("projects/$formatedOldTitle"), public_path("projects/". $data['formated_title']));
                 dd('Apenas o titulo');
             }
-            $bannerName =  $title . '.' . $request->banner->extension();
-            $request->banner->move(public_path("projects/$title/banner"), $bannerName);
+            $bannerName =  $data['formated_title'] . '.' . $request->banner->extension();
+            $request->banner->move(public_path("projects/" . $data['formated_title'] . "/banner"), $bannerName);
             $data['banner'] = $bannerName;
         }
 
@@ -197,14 +197,11 @@ class ProjectController extends Controller
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
-
-        $title = str_replace(" ", "-", $project->title);
-
         if($project->banner){
-            if (file_exists(public_path("projects/$title/banner/$project->banner"))) {
-                unlink(public_path("projects/$title/banner/$project->banner"));
-                rmdir(public_path("projects/$title/banner"));
-                rmdir(public_path("projects/$title"));
+            if (file_exists(public_path("projects/" . $project->title_formated . "/banner/$project->banner"))) {
+                unlink(public_path("projects/" . $$project->title_formated . "/banner/$project->banner"));
+                rmdir(public_path("projects/". $project->title_formated . "/banner"));
+                rmdir(public_path("projects/". $project->title_formated));
             }
         }
 

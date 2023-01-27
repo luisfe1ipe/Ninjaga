@@ -25,10 +25,9 @@
     </style>
 
     <section class="s-view-chapter" id="start">
-        
         <div class="header">
             <div class="title">
-                <h1><a href="{{ route('project.show', ['id' => $project->id]) }}">{{ $project->title }}</a> - </h1>
+                <h1><a href="{{ route('project.show', ['id' => $chapter->project->id]) }}">{{ $chapter->project->title }}</a> - </h1>
                 <p> {{ $chapter->title }} </p>
             </div>
             <div class="sub">
@@ -54,8 +53,8 @@
                                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <a href="{{ route('project.show', ['id' => $project->id]) }}"
-                                    class="ml-1 text-sm font-medium hover:text-[#A93F3F]">{{ $project->title }}
+                                <a href="{{ route('project.show', ['id' => $chapter->project->id]) }}"
+                                    class="ml-1 text-sm font-medium hover:text-[#A93F3F]">{{ $chapter->project->title }}
                                 </a>
                             </div>
                         </li>
@@ -90,9 +89,9 @@
                         <select onchange='location.href=this.value' name="" id=""
                             class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                             <option disable selected hidden>{{ $chapter->title }}</option>
-                            @foreach ($project->chapters as $chap)
+                            @foreach ($chapter->project->chapters as $chap)
                                 <option
-                                    value="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chap->id]) }}">
+                                    value="{{ route('chapter.show', ['id' => $chapter->project->id, 'chapter_id' => $chap->id]) }}">
                                     {{ $chap->title }}</option>
                             @endforeach
                         </select>
@@ -114,10 +113,10 @@
         <div class="chapter-imgs">
             @for ($i = 0; $i < count($chapter->img); $i++)
                 <img class="
-                    @if ($project->type == 'Manwha') scale-manwha @endif
-                    @if ($project->type == 'Manga') scale-manga @endif
+                    @if ($chapter->project->type == 'Manwha') scale-manwha @endif
+                    @if ($chapter->project->type == 'Manga') scale-manga @endif
                 "
-                    src="{{ asset("projects/$projectTitleFormated/chapters/$chapterTitleFormated/" . $chapter->img[$i]) }}"
+                    src="{{ asset("projects/" . $chapter->project->formated_title . "/chapters/$chapter->formated_title/" . $chapter->img[$i]) }}"
                     alt="">
             @endfor
         </div>
@@ -136,8 +135,8 @@
                 <select onchange='location.href=this.value' name="" id=""
                     class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
                     <option disable selected hidden>{{ $chapter->title }}</option>
-                    @foreach ($project->chapters as $chap)
-                        <option value="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chap->id]) }}">
+                    @foreach ($chapter->project->chapters as $chap)
+                        <option value="{{ route('chapter.show', ['id' => $chapter->project->id, 'chapter_id' => $chap->id]) }}">
                             {{ $chap->title }}
                         </option>
                     @endforeach

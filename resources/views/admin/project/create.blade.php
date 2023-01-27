@@ -14,6 +14,7 @@
                             <label for="title">Titulo</label>
                             <input type="text" name="title" id="title" placeholder="Digite aqui..."
                                 class="input focus:ring-[#C4C4CC]">
+                            <input type="hidden" name="formated_title">
                         </div>
                         <div class="synopsis">
                             <label for="synopsis">Sinopse</label>
@@ -56,8 +57,8 @@
                                     </svg>
                                     <div id="dropdownSearch"
                                         class="z-50 hidden divide-y divide-gray-600 rounded shadow w-48 bg-[#28282E]">
-                                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownSearchButton">
+                                        <ul class="teste h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                                            aria-labelledby="dropdownSearchButton"> 
                                             @foreach ($genres as $genre)
                                                 <li class="">
                                                     <div class="flex items-center mt-2 p-2 rounded hover:bg-[#000000]">

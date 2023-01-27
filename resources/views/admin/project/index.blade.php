@@ -52,7 +52,7 @@
                         @php
                             $chapters = $project->chapters->sortByDesc('created_at');
                         @endphp
-                        @for ($i = count($chapters) ; $i >= -1 ; $i--)
+                        @for ($i = count($chapters); $i >= count($chapters)-2 ; $i--)
                             @isset ($chapters[$i])
                                 <div class="cap-p">
                                     <div class="link">
