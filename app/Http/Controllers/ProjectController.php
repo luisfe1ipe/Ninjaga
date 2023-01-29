@@ -223,4 +223,11 @@ class ProjectController extends Controller
         return redirect()->route('project.index')->with('deleted', 'Projeto deletado com sucesso.');
     }
 
+    public function indexByGenre($genre){
+        if(!$genre = Genre::where('id', $genre)->with('projects')->first()){
+            return redirect()->back()->with('notFound', "Projeto não encontrado.");
+        }
+
+        return view('admin.project.indexByGenre', compact('genre'));
+    }
 }

@@ -30,7 +30,7 @@
                         </div>
                         <div class="categories">
                             @foreach ($project->genres as $genre)
-                                <a href="">
+                                <a href="{{ route('project.indexByGenre', ['genre' => $genre->id]) }}">
                                     <button
                                         class="bg-[#A93F3F] hover:bg-[#7C2F2F] text-white font-bold py-2 px-4 rounded shadow-md">{{ $genre->name }}</button>
                                 </a>
