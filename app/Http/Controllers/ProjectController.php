@@ -90,7 +90,6 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        DB::enableQueryLog();
         if (!$project = Project::where('id', $id)->with(['chapters'])->first()) {
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }

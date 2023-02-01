@@ -17,7 +17,7 @@
             <div class="order-by">
                 <ul>
                     <li>
-                        <a href="">Nao sei</a>
+                        {{-- <a href="">Nao sei</a> --}}
                     </li>
                 </ul>
             </div>

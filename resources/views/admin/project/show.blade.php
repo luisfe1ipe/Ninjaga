@@ -49,7 +49,7 @@
                                 <i class="material-symbols-outlined text-[#A93F3F]">
                                     menu_book
                                 </i>
-                                <p>29 Capitulos</p>
+                                <p>{{$project->chapters->count()}} Capítulos</p>
                             </div>
                             <div class="info-text">
                                 <i class="material-symbols-outlined text-[#A93F3F]">
@@ -120,7 +120,7 @@
                         <div class="content">
                             <p>{{ $chapter->title }}</p>
                             <span>
-                                {{ date('d/m/y', strtotime($chapter->created_at)) === date('d/m/y') ? 'Hoje' : date('d/m/Y', strtotime($chapters->created_at)) }}
+                                {{ date('d/m/y', strtotime($chapter->created_at)) === date('d/m/y') ? 'Hoje' : date('d/m/Y', strtotime($chapter->created_at)) }}
                             </span>
                         </div>
                     </a>

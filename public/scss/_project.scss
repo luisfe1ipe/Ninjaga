@@ -497,7 +497,7 @@
         right: 6px;
         color: #A93F3F;
 
-        &:hover{
+        &:hover {
           color: #8A2D2D;
         }
       }
@@ -543,9 +543,12 @@
 
 .container-manga {
   display: flex;
-  // align-items: center;
   flex-wrap: wrap;
-  gap: 71px;
+  gap: 4.4375rem;
+
+  @media (max-width: 560px) {
+    gap: 32px;
+  }
 }
 
 

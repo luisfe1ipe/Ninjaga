@@ -10,7 +10,7 @@
                 <div class="form">
                     <x-preview.banner name="banner" />
                     <div class="right">
-                        <div class="title">
+                        <div class="titleProject">
                             <label for="title">Titulo</label>
                             <input type="text" name="title" id="title" placeholder="Digite aqui..."
                                 class="input focus:ring-[#C4C4CC]">
