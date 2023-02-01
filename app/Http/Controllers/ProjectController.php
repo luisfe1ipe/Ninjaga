@@ -114,7 +114,7 @@ class ProjectController extends Controller
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
-        $genres = $project->genres;
+        $genres = Genre::orderBy('name')->get();
         $title = str_replace(" ", "-", $project->title);
         $authors = Author::orderBy('name')->get();
         $studios = Studio::orderBy('name')->get();

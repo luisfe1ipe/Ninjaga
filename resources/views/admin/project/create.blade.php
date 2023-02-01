@@ -8,7 +8,7 @@
             <h1>Cadastrar Obra</h1>
             <x-form action="{{ route('project.create') }}">
                 <div class="form">
-                    <x-preview.banner name="banner" />
+                    <x-preview.banner name="banner"/>
                     <div class="right">
                         <div class="titleProject">
                             <label for="title">Titulo</label>

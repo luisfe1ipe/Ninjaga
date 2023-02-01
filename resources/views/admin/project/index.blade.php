@@ -52,8 +52,8 @@
                         @php
                             $chapters = $project->chapters->sortByDesc('created_at');
                         @endphp
-                        @for ($i = count($chapters); $i >= count($chapters)-2 ; $i--)
-                            @isset ($chapters[$i])
+                        @for ($i = count($chapters); $i >= count($chapters) - 2; $i--)
+                            @isset($chapters[$i])
                                 <div class="cap-p">
                                     <div class="link">
                                         <x-buttom.cap
@@ -113,24 +113,30 @@
                         <p>{{ $manga->title }}</p>
                     </div>
                     <div class="caps">
-                        <div class="cap-p">
-                            <div class="link">
-                                <x-buttom.cap route="">Cap. 232</x-buttom.cap>
-                            </div>
-                            <div class="new">
-                                <img src="{{ asset('img/new-1.png') }}" alt="">
-                            </div>
-                        </div>
-                        <div class="cap-p">
-                            <div class="link">
-                                <x-buttom.cap route="">Cap. 232</x-buttom.cap>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    1h atrás
-                                </span>
-                            </div>
-                        </div>
+                        @php
+                            $chapters = $manga->chapters->sortByDesc('created_at');
+                        @endphp
+                        @for ($i = count($chapters); $i >= count($chapters) - 2; $i--)
+                            @isset($chapters[$i])
+                                <div class="cap-p">
+                                    <div class="link">
+                                        <x-buttom.cap
+                                            route="{{ route('chapter.show', ['id' => $manga->id, 'chapter_id' => $chapters[$i]->id]) }}">
+                                            {{ substr($chapters[$i]->title, 0, 3) . '. ' . filter_var($chapters[$i]->title, FILTER_SANITIZE_NUMBER_INT) }}
+                                        </x-buttom.cap>
+                                    </div>
+                                    @if (date('d/m/y', strtotime($chapters[$i]->created_at)) == date('d/m/y'))
+                                        <div class="new">
+                                            <img src="{{ asset('img/new-1.png') }}" alt="">
+                                        </div>
+                                    @else
+                                        <div class="new">
+                                            <span>{{ date('d/m/Y', strtotime($chapters[$i]->created_at)) }}</span>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endisset
+                        @endfor
                     </div>
                 </div>
             @endforeach
@@ -172,24 +178,31 @@
                         <p>{{ $manwha->title }}</p>
                     </div>
                     <div class="caps">
-                        <div class="cap-p">
-                            <div class="link">
-                                <x-buttom.cap route="">Cap. 232</x-buttom.cap>
-                            </div>
-                            <div class="new">
-                                <img src="{{ asset('img/new-1.png') }}" alt="">
-                            </div>
-                        </div>
-                        <div class="cap-p">
-                            <div class="link">
-                                <x-buttom.cap route="">Cap. 232</x-buttom.cap>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    1h atrás
-                                </span>
-                            </div>
-                        </div>
+
+                        @php
+                            $chapters = $manwha->chapters->sortByDesc('created_at');
+                        @endphp
+                        @for ($i = count($chapters); $i >= count($chapters) - 2; $i--)
+                            @isset($chapters[$i])
+                                <div class="cap-p">
+                                    <div class="link">
+                                        <x-buttom.cap
+                                            route="{{ route('chapter.show', ['id' => $manwha->id, 'chapter_id' => $chapters[$i]->id]) }}">
+                                            {{ substr($chapters[$i]->title, 0, 3) . '. ' . filter_var($chapters[$i]->title, FILTER_SANITIZE_NUMBER_INT) }}
+                                        </x-buttom.cap>
+                                    </div>
+                                    @if (date('d/m/y', strtotime($chapters[$i]->created_at)) == date('d/m/y'))
+                                        <div class="new">
+                                            <img src="{{ asset('img/new-1.png') }}" alt="">
+                                        </div>
+                                    @else
+                                        <div class="new">
+                                            <span>{{ date('d/m/Y', strtotime($chapters[$i]->created_at)) }}</span>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endisset
+                        @endfor
                     </div>
                 </div>
             @endforeach
@@ -230,24 +243,31 @@
                         <p>{{ $novel->title }}</p>
                     </div>
                     <div class="caps">
-                        <div class="cap-p">
-                            <div class="link">
-                                <x-buttom.cap route="">Cap. 232</x-buttom.cap>
-                            </div>
-                            <div class="new">
-                                <img src="{{ asset('img/new-1.png') }}" alt="">
-                            </div>
-                        </div>
-                        <div class="cap-p">
-                            <div class="link">
-                                <x-buttom.cap route="">Cap. 232</x-buttom.cap>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    1h atrás
-                                </span>
-                            </div>
-                        </div>
+
+                        @php
+                            $chapters = $novel->chapters->sortByDesc('created_at');
+                        @endphp
+                        @for ($i = count($chapters); $i >= count($chapters) - 2; $i--)
+                            @isset($chapters[$i])
+                                <div class="cap-p">
+                                    <div class="link">
+                                        <x-buttom.cap
+                                            route="{{ route('chapter.show', ['id' => $novel->id, 'chapter_id' => $chapters[$i]->id]) }}">
+                                            {{ substr($chapters[$i]->title, 0, 3) . '. ' . filter_var($chapters[$i]->title, FILTER_SANITIZE_NUMBER_INT) }}
+                                        </x-buttom.cap>
+                                    </div>
+                                    @if (date('d/m/y', strtotime($chapters[$i]->created_at)) == date('d/m/y'))
+                                        <div class="new">
+                                            <img src="{{ asset('img/new-1.png') }}" alt="">
+                                        </div>
+                                    @else
+                                        <div class="new">
+                                            <span>{{ date('d/m/Y', strtotime($chapters[$i]->created_at)) }}</span>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endisset
+                        @endfor
                     </div>
                 </div>
             @endforeach
