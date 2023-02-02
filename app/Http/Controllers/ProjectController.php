@@ -229,4 +229,11 @@ class ProjectController extends Controller
         return view('admin.project.indexByGenre', compact('genre'));
     }
 
+    public function indexByReleased($released){
+        if(!$projects = Project::where('released', $released)->get()){
+            return redirect()->back()->with('notFound', 'Nenhum projeto encontrado.');
+        }
+
+        return view('admin.project.indexByReleased', compact('projects', 'released'));
+    }
 }

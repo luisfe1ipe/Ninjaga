@@ -62,7 +62,8 @@ Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.s
 Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
 Route::put('/project/edit/{id}', [ProjectController::class, 'update'])->name('project.update');
 Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
-Route::get('/project/list/genres/{genre?}',[ProjectController::class, 'indexByGenre'])->name('project.indexByGenre');
+Route::get('/project/list/genres/{genre}', [ProjectController::class, 'indexByGenre'])->name('project.indexByGenre');
+Route::get('/projects/list/releaseds/{released}', [ProjectController::class, 'indexByReleased'])->name('project.indexByReleased');
 
 // SAVE
 Route::post('/save', [SaveController::class, 'store'])->name('save.store');
