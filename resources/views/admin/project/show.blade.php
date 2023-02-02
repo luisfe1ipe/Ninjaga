@@ -19,7 +19,7 @@
                             class="config" type="button">
                             <i class="material-icons text-3xl">settings</i>
                         </button>
-                        <div class="title">
+                        <div class="titleProject">
                             <h1>{{ $project->title }}</h1>
                             <p>{{ $project->author->name }}</p>
                         </div>

@@ -35,7 +35,7 @@
                 </svg>
                 <p>Clique para fazer upload</p>
             </div>
-            <img id="photo" src="{{ asset('') }}" alt="">
+            <img id="photo" src="{{ $image }}" alt="">
         </div>
     </label>
     <input type="file" name="{{$name}}" id="{{$name}}" class="hidden">

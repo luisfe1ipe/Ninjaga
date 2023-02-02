@@ -6,12 +6,13 @@
     <section class="s-create">
         <div class="container-p">
             <h1>Editar - {{ $project->title }}</h1>
-            <x-form action="{{ route('project.edit', ['id' => $project->id]) }}">
+            <x-form action="{{ route('project.edit', ['id' => $project->id]) }}" method="PUT">
                 <div class="form">
-                    <x-preview.banner name="banner" />
+                    <x-preview.banner name="banner" image='{{asset("projects/$project->formated_title/banner/$project->banner")}}' />
                     <div class="right">
                         <div class="titleProject">
                             <label for="title">Titulo</label>
+                            <input type="hidden" name="oldTitle" value="{{ $project->title }}">
                             <input type="text" name="title" id="title" placeholder="Digite aqui..."
                                 class="input focus:ring-[#C4C4CC]" value="{{ $project->title }}">
                             <input type="hidden" name="formated_title">
@@ -26,8 +27,7 @@
                                 <label for="type" class="">Tipo</label>
                                 <select id="type" name="type"
                                     class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
-                                    <option value="{{ $project->type }}" selected disabled hidden>{{ $project->type }}
-                                    </option>
+                                    <option value="{{ $project->type }}" selected disabled hidden>{{ $project->type }}</option>
                                     <option value="Manga">Manga</option>
                                     <option value="Manwha">Manwha</option>
                                     <option value="Novel">Novel</option>
@@ -37,8 +37,7 @@
                                 <label for="status" class="">Status</label>
                                 <select id="status" name="status"
                                     class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
-                                    <option value="{{ $project->status }}" selected disabled hidden>{{ $project->status }}
-                                    </option>
+                                    <option value="{{ $project->status }}" selected disabled hidden>{{ $project->status }}</option>
                                     <option value="Lançamento">Lançamento</option>
                                     <option value="Completo">Completo</option>
                                     <option value="Hiato">Hiato</option>
@@ -62,7 +61,6 @@
                                         <ul class="teste h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
                                             aria-labelledby="dropdownSearchButton">
                                             @foreach ($genres as $genre)
-
                                                 <li class="">
                                                     <div class="flex items-center mt-2 p-2 rounded hover:bg-[#000000]">
                                                         <input id="checkbox={{ $genre->id }}" type="checkbox"
@@ -96,7 +94,7 @@
                             <div class="select">
                                 <label for="released" class="">Lançado em</label>
                                 <input type="number" name="released" id="released" placeholder="Digite aqui..."
-                                    class="input focus:ring-[#C4C4CC]">
+                                    class="input focus:ring-[#C4C4CC]" value="{{ $project->released }}">
                             </div>
                         </div>
 
@@ -106,7 +104,7 @@
                                     <label for="author" class="">Autor</label>
                                     <select id="author" name="author_id"
                                         class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
-                                        <option selected></option>
+                                        <option value="{{ $project->author->id }}" selected disabled hidden>{{ $project->author->name }}</option>
                                         @foreach ($authors as $author)
                                             <option value="{{ $author->id }}">{{ $author->name }}</option>
                                         @endforeach
@@ -122,7 +120,7 @@
                                     <label for="studio" class="">Estudio</label>
                                     <select id="studio" name="studio_id"
                                         class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
-                                        <option selected></option>
+                                        <option value="{{ $project->studio->id }}" selected disabled hidden>{{ $project->studio->name }}</option>
                                         @foreach ($studios as $studio)
                                             <option value="{{ $studio->id }}">{{ $studio->name }}</option>
                                         @endforeach
@@ -158,10 +156,11 @@
         </div>
     </section>
 
-    <x-modal.default id="author-modal" title="Adicionar Ator">
-        <x-form action="{{ route('author.store') }}">
+    <x-modal.default id="author-modal" title="Adicionar Autor">
+        <x-form action="{{ route('author.store', ['modal' => true]) }}">
             <label for="name">Nome</label>
             <input type="text" name="name" id="name" class="input focus:ring-[#C4C4CC] mb-5">
+            <input type="hidden" name="author_modal" value="1">
             <div class="flex  space-x-6">
                 <button data-modal-hide="author-modal" type="reset" class="btn-s">Cancelar</button>
                 <button data-modal-hide="author-modal" type="submit" class="btn-p">Cadastrar</button>
@@ -171,9 +170,10 @@
     </x-modal.default>
 
     <x-modal.default id="studio-modal" title="Adicionar Estúdio">
-        <x-form action="{{ route('author.store') }}">
+        <x-form action="{{ route('studio.store', ['modal' => true]) }}">
             <label for="name">Nome</label>
             <input type="text" name="name" id="name" class="input focus:ring-[#C4C4CC] mb-5">
+            <input type="hidden" name="studio_modal" value="1">
             <div class="flex  space-x-6">
                 <button data-modal-hide="studio-modal" type="button" class="btn-s">Cancelar</button>
                 <button data-modal-hide="studio-modal" type="submit" class="btn-p">Cadastrar</button>
@@ -182,7 +182,7 @@
     </x-modal.default>
 
     <x-modal.default id="genre-modal" title="Adicionar Genêro">
-        <x-form action="">
+        <x-form action="{{ route('genre.store', ['modal' => true]) }}">
             <label for="name">Nome</label>
             <input type="text" name="name" id="name" class="input focus:ring-[#C4C4CC] mb-5">
             <div class="flex  space-x-6">

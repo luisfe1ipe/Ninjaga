@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('formated_title')->nullable();
             $table->longText('image_chapter');
             $table->json('img');
-            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
+            $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
             $table->timestamps();
         });
     }

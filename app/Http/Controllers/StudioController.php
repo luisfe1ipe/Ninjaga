@@ -35,8 +35,12 @@ class StudioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $modal = null)
     {
+        if ($modal == true) {
+            Studio::create($request->all());
+            return back();
+        }
         $studio = Studio::create($request->all());
         $nameStudio = $studio->name;
 

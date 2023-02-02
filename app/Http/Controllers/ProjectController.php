@@ -110,7 +110,7 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        if (!$project = Project::find($id)) {
+        if (!$project = Project::where('id',$id)->with(['author', 'studio'])->first()) {
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
@@ -141,7 +141,6 @@ class ProjectController extends Controller
         $oldTitle = $data['oldTitle'];
 
 
-
         //Edita a foto e o titulo da obra
         if (isset($data['banner']) && $data['title']) {
             if ($data['title'] === $oldTitle) {
@@ -160,15 +159,17 @@ class ProjectController extends Controller
                 $request->banner->move(public_path("projects/".  $data['formated_title'] . "/banner"), $bannerName);
                 $data['banner'] = $bannerName;
             }
-        } elseif ($data['title']) {
+        } elseif ($data['title'] !== $oldTitle) {
             $formatedOldTitle = str_replace(" ", "-", $oldTitle);
             if (file_exists(public_path("projects/$formatedOldTitle"))) {
                 rename(public_path("projects/$formatedOldTitle"), public_path("projects/". $data['formated_title']));
-                dd('Apenas o titulo');
             }
-            $bannerName =  $data['formated_title'] . '.' . $request->banner->extension();
-            $request->banner->move(public_path("projects/" . $data['formated_title'] . "/banner"), $bannerName);
-            $data['banner'] = $bannerName;
+            if(isset($data['banner'])){
+                $bannerName =  $data['formated_title'] . '.' . $request->banner->extension();
+                $request->banner->move(public_path("projects/" . $data['formated_title'] . "/banner"), $bannerName);
+                $data['banner'] = $bannerName;
+
+            }
         }
 
         $project->genres()->detach();
@@ -177,8 +178,6 @@ class ProjectController extends Controller
             $project->genres()->attach($genre);
         }
 
-        $project->author()->update($data['author']);
-        $project->studio()->update($data['studio']);
         $project->update($data);
 
         return redirect()->route('project.show', ['id' => $project->id ]);
@@ -229,4 +228,5 @@ class ProjectController extends Controller
 
         return view('admin.project.indexByGenre', compact('genre'));
     }
+
 }

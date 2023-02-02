@@ -35,8 +35,12 @@ class AuthorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $modal = null)
     {
+        if($modal == true){
+            Author::create($request->all());
+            return back();
+        }
         $author = Author::create($request->all());
         $nameAuthor = $author->name;
 
