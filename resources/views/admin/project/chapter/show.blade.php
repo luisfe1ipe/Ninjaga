@@ -16,22 +16,28 @@
     <style>
         .scale-manwha {
             width: 720px;
+            max-width: 100%;
         }
 
         .scale-manga {
-            min-width: 720px;
             max-width: 100%;
+        }
+
+        @media (max-width: 560px){
+            .scale-manga{
+                
+            }
         }
     </style>
 
     <section class="s-view-chapter" id="start">
         <div class="header">
             <div class="title">
-                <h1><a href="{{ route('project.show', ['id' => $chapter->project->id]) }}">{{ $chapter->project->title }}</a> - </h1>
+                <h1><a href="{{ route('project.show', ['id' => $chapter->project->id]) }}">{{ $chapter->project->title }}</a></h1>
                 <p> {{ $chapter->title }} </p>
             </div>
             <div class="sub">
-                <div class="flex bg-[#121212] nav" aria-label="Breadcrumb">
+                <div class="flex bg-[#121212] nav" aria-label="Breadcrumb" id="mini-nav">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center">
                             <a href="{{ route('project.index') }}"
@@ -75,16 +81,12 @@
                 <div class="container-btns">
                     <div class="btns">
 
-
-
                         <a href="">
                             <span class="material-symbols-outlined">
                                 keyboard_backspace
                             </span>
                             Anterior
                         </a>
-
-
 
                         <select onchange='location.href=this.value' name="" id=""
                             class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">

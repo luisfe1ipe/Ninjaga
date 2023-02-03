@@ -655,6 +655,26 @@
 .s-view-chapter {
   margin-top: 4.375rem;
 
+  @media (max-width: 560px){
+    .sub{
+      flex-direction: column;
+      #mini-nav{
+        max-width: 100% !important; 
+        font-size: 12px !important;
+        ol{
+          li{
+            a{
+              font-size: 12px;
+            }
+          }
+        }
+      }
+
+      .container-btns{
+        margin-top: 24px;
+      }
+    }
+  }
   .header {
     margin-bottom: 48px;
 
@@ -662,7 +682,8 @@
       display: flex;
       font-size: 1.75rem;
       justify-content: center;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 8px;
 
       a {
         &:hover {
