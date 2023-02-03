@@ -214,13 +214,103 @@
   border-top: 1px solid #4b5563;
 }
 
+ @media (max-width: 560px) {
+  .views{
+    display: none !important;
+  }
+}
+
 
 .s-hero {
   position: relative;
   overflow: hidden;
+  @media (max-width: 560px) {
+    overflow: visible;
+    .container-p{
+      justify-content: center;
+      .container-content{
+        width: 345px;
+        flex-direction: column;
+        align-items: center;
+        .content{
+          margin-top: 24px;
+          margin-left: 0px !important;
+
+          .header-content{
+            margin-top: 24px;
+            flex-direction: column;
+            align-items: center;
+            .titleProject{
+              margin-top: 24px;
+              h1{
+                font-size: 24px !important;
+              }
+              p{
+                display: none;
+              }
+            }
+          }
+
+          .body-content{
+            .synopsis{
+              height: auto !important;
+              order: 3;
+              margin-top: 32px !important;
+              span{
+                display: block;
+                font-size: 16px;
+                font-weight: 700;
+                margin-bottom: 12px;
+              }
+            }
+            .categories{
+              order: 2;
+              margin-top: 24px !important;
+            }
+            .info{
+              gap: 0;
+              justify-content: space-between;
+              order: 1;
+              .info-text{
+                flex-direction: column;
+                align-items: center !important;
+                font-size: 12px;
+              }
+            }
+          }
+        }
+        .s-chapters{
+          display: block;
+          .header{
+            .title{
+              h1{
+                font-size: 18px !important;
+              }
+              i{
+                font-size: 26px;
+              }
+            }
+          }
+          .container-btns{
+            .btns{
+              width: 100%;
+            }
+          }
+
+          .container-chapters{
+            .card-chapter{
+              height: 80px;
+              .content{
+                margin-top: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
   .bg-image {
-    background-size: 700px;
     filter: blur(10px) brightness(20%);
     -webkit-filter: blur(10px) brightness(20%);
     min-height: 500px;
@@ -228,15 +318,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
+    z-index: -1;
   }
 
-  .container {
-    width: 69.75rem;
-    margin: 0 auto;
-
+  .container-p {
     .container-content {
       position: absolute;
-      z-index: 1;
+      z-index: 50;
       top: 30px;
       display: flex;
 
@@ -270,6 +358,12 @@
             margin-right: 8px;
             cursor: pointer;
 
+            @media (max-width: 560px){
+              max-width: 270px;
+              margin: 0;
+              border-radius: 20px;
+            }
+
             &:hover {
               background-color: #7C2F2F;
             }
@@ -295,7 +389,8 @@
         }
 
         .body-content {
-
+          display: flex;
+          flex-direction: column;
           .synopsis {
             width: 100%;
             max-width: 790px;
@@ -304,8 +399,9 @@
             line-height: 17px;
             margin-top: 1.125rem;
             height: 11.75rem;
-
           }
+
+
 
           .categories {
             display: flex;
@@ -364,7 +460,9 @@
   width: 100%;
   max-width: 69.75rem;
   margin: 3.125rem auto;
-
+  @media (max-width: 560px){
+    display: none;
+  }
   .header {
     display: flex;
     align-items: center;

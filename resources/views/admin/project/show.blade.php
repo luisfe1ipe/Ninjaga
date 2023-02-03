@@ -8,7 +8,7 @@
 @section('item-view')
     <section class="s-hero">
         <div class="bg-image bg-[url('{{ asset("projects/$project->formated_title/banner/$project->banner") }}')]"></div>
-        <div class="container">
+        <div class="container-p">
             <div class="container-content">
                 <div class="image">
                     <img src="{{ asset("projects/$project->formated_title/banner/$project->banner") }}" alt="">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="body-content">
                         <div class="synopsis">
-                            {{ $project->synopsis }}
+                            <span class="hidden">Sinopse</span>{{ $project->synopsis }}
                         </div>
                         <div class="categories">
                             @foreach ($project->genres as $genre)
@@ -39,25 +39,25 @@
                         </div>
 
                         <div class="info">
-                            <div class="info-text">
+                            <div class="info-text views">
                                 <i class="material-symbols-outlined text-[#A93F3F]">
                                     bar_chart
                                 </i>
                                 <p>453.789 Visualizações</p>
                             </div>
-                            <div class="info-text">
+                            <div class="info-text chapters-count">
                                 <i class="material-symbols-outlined text-[#A93F3F]">
                                     menu_book
                                 </i>
-                                <p>{{$project->chapters->count()}} Capítulos</p>
+                                <p>{{ $project->chapters->count() }} Capítulos</p>
                             </div>
-                            <div class="info-text">
+                            <div class="info-text" id="fav">
                                 <i class="material-symbols-outlined text-[#A93F3F]">
                                     favorite
                                 </i>
                                 <p>{{ $project->favorite()->count() }} Favoritos</p>
                             </div>
-                            <div class="info-text">
+                            <div class="info-text more-info">
                                 <i class="material-symbols-outlined text-[#A93F3F]">
                                     info
                                 </i>
@@ -66,6 +66,79 @@
                         </div>
                     </div>
                 </div>
+                <section class="s-chapters hidden">
+                    <div class="header">
+                        <div class="title">
+                            <i class="material-symbols-outlined">
+                                view_list
+                            </i>
+                            <h1>Capítulos - {{ $project->chapters->count() }}</h1>
+                        </div>
+                        <div class="search">
+                            <a href="{{ route('chapter.create', ['id' => $project->id]) }}"
+                                data-tooltip-target="create-chapter">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
+                                <div id="create-chapter" role="tooltip"
+                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-[#28282e] rounded-lg shadow-sm opacity-0 tooltip">
+                                    Adicionar capítulo
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                            </a>
+                            <x-input.search />
+                        </div>
+                    </div>
+
+                    <div class="container-btns">
+                        <div class="btns">
+                            @if (count($project->chapters) > 0)
+                                <a
+                                    href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $project->chapters->first()->id]) }}">
+                                    Ler o primeiro
+                                </a>
+                                <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $project->chapters->last()->id]) }}"
+                                    style="width: 105px;">
+                                    Ler o ultimo
+                                </a>
+                            @endif
+
+                        </div>
+                    </div>
+                    <div class="container-chapters">
+                        @foreach ($project->chapters->sortByDesc('created_at') as $chapter)
+                            <div class="card-chapter">
+                                <div class="img">
+                                    <img src="{{ asset("projects/$project->formated_title/chapters/$chapter->formated_title/image-chapter/$chapter->image_chapter") }}"
+                                        alt="">
+                                </div>
+                                <a href="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapter->id]) }}"
+                                    onclick="check()" class="content">
+                                    <div class="content">
+                                        <p>{{ $chapter->title }}</p>
+                                        <span>
+                                            {{ date('d/m/y', strtotime($chapter->created_at)) === date('d/m/y') ? 'Hoje' : date('d/m/Y', strtotime($chapter->created_at)) }}
+                                        </span>
+                                    </div>
+                                </a>
+
+                                <div class="delete">
+                                    <form
+                                        action="{{ route('chapter.destroy', ['id' => $project->id, 'chapter_id' => $chapter->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button>
+                                            <i class="material-symbols-outlined">
+                                                delete
+                                            </i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </section>
             </div>
         </div>
     </section>
@@ -76,7 +149,7 @@
                 <i class="material-symbols-outlined">
                     view_list
                 </i>
-                <h1>Capítulos - {{$project->chapters->count()}}</h1>
+                <h1>Capítulos - {{ $project->chapters->count() }}</h1>
             </div>
             <div class="search">
                 <a href="{{ route('chapter.create', ['id' => $project->id]) }}" data-tooltip-target="create-chapter">
@@ -126,8 +199,7 @@
                     </a>
 
                     <div class="delete">
-                        <form
-                            action="{{ route('chapter.destroy', ['id' => $project->id, 'chapter_id' => $chapter->id]) }}"
+                        <form action="{{ route('chapter.destroy', ['id' => $project->id, 'chapter_id' => $chapter->id]) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
@@ -142,6 +214,8 @@
             @endforeach
         </div>
     </section>
+
+
 
     <!-- Dropdown menu -->
     <div id="dropdownRight"
