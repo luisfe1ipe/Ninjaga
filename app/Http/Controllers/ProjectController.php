@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjectStoreUpdateRequest;
 use App\Models\Author;
 use App\Models\Chapter;
 use App\Models\Completed;
@@ -39,7 +40,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -58,7 +58,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectStoreUpdateRequest $request)
     {
 
         $data = $request->all();
@@ -217,6 +217,7 @@ class ProjectController extends Controller
             $project->stop()->delete();
         }
         $project->delete();
+
 
         return redirect()->route('project.index')->with('deleted', 'Projeto deletado com sucesso.');
     }

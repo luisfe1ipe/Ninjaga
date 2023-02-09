@@ -1,4 +1,5 @@
 @extends('components.app')
+@section('title', 'Cadastrar obra')
 @section('navbar')
     <x-navbar view="" />
 @endsection
@@ -8,62 +9,91 @@
             <h1>Cadastrar Obra</h1>
             <x-form action="{{ route('project.create') }}">
                 <div class="form">
-                    <x-preview.banner name="banner" image=""/>
+                    <x-preview.banner name="banner" image="" />
                     <div class="right">
-                        <div class="titleProject">
-                            <label for="title">Titulo</label>
-                            <input type="text" name="title" id="title" placeholder="Digite aqui..."
-                                class="input focus:ring-[#C4C4CC]">
+                        <div class="titleProject relative">
+                            <label for="title" class="error">Titulo</label>
+                            <input type="text" name="title" value="{{old('title')}}" id="title" placeholder="Digite aqui..."
+                                class="input focus:ring-[#C4C4CC] @if ($errors->has('title')) error-input @endif">
+                            @if ($errors->has('title'))
+                                <span class="message-error">
+                                    @foreach ($errors->get('title') as $error)
+                                        {{ $error }}
+                                    @endforeach
+                                </span>
+                            @endif
                             <input type="hidden" name="formated_title">
                         </div>
-                        <div class="synopsis">
+                        <div class="synopsis relative">
                             <label for="synopsis">Sinopse</label>
-                            <textarea name="synopsis" id="synopsis" placeholder="Digite aqui..." class="focus:ring-[#C4C4CC]"></textarea>
+                            <textarea name="synopsis" id="synopsis" placeholder="Digite aqui..." 
+                                class="focus:ring-[#C4C4CC]
+                            @if ($errors->has('synopsis')) error-input @endif">{{old('synopsis')}}</textarea>
+                            @if ($errors->has('synopsis'))
+                                <span class="message-error">
+                                    @foreach ($errors->get('synopsis') as $error)
+                                        {{ $error }}
+                                    @endforeach
+                                </span>
+                            @endif
                         </div>
-
                         <div class="selects">
-                            <div class="select">
+                            <div class="select relative">
                                 <label for="type" class="">Tipo</label>
                                 <select id="type" name="type"
-                                    class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
-                                    <option disable selected hidden>Escolha aqui</option>
+                                    class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC] @if ($errors->has('type')) error-input @endif">
+                                    <option value="" disable selected hidden></option>
                                     <option value="Manga">Manga</option>
                                     <option value="Manwha">Manwha</option>
                                     <option value="Novel">Novel</option>
                                 </select>
+                                @if ($errors->has('type'))
+                                    <span class="message-error">
+                                        @foreach ($errors->get('type') as $error)
+                                            {{ $error }}
+                                        @endforeach
+                                    </span>
+                                @endif
                             </div>
-                            <div class="select">
+                            <div class="select relative">
                                 <label for="status" class="">Status</label>
                                 <select id="status" name="status"
-                                    class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
-                                    <option disable selected hidden>Escolha aqui</option>
+                                    class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC] @if ($errors->has('status')) error-input @endif">
+                                    <option value="" disable selected hidden></option>
                                     <option value="Lançamento">Lançamento</option>
                                     <option value="Completo">Completo</option>
                                     <option value="Hiato">Hiato</option>
                                 </select>
+                                @if ($errors->has('status'))
+                                    <span class="message-error">
+                                        @foreach ($errors->get('status') as $error)
+                                            {{ $error }}
+                                        @endforeach
+                                    </span>
+                                @endif
                             </div>
-                            <div class="select">
+                            <div class="select relative">
                                 <label for="genres" class="">
                                     Gêneros
                                 </label>
                                 <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch"
-                                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-[#C4C4CC] rounded-lg focus:ring-1 focus:outline-none focus:ring-[#C4C4CC]"
+                                    class="inline-flex justify-end items-center px-4 py-2 text-sm font-medium text-center text-[#C4C4CC] rounded-lg focus:ring-1 focus:outline-none focus:ring-[#C4C4CC] @if ($errors->has('genres')) error-input @endif"
                                     type="button">
-                                    Escolha aqui
-                                    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg style="color:#68707D !important;" class="w-4 h-4 ml-2" aria-hidden="true"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                     <div id="dropdownSearch"
                                         class="z-50 hidden divide-y divide-gray-600 rounded shadow w-48 bg-[#28282E]">
                                         <ul class="teste h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownSearchButton"> 
+                                            aria-labelledby="dropdownSearchButton">
                                             @foreach ($genres as $genre)
                                                 <li class="">
-                                                    <div class="flex items-center mt-2 p-2 rounded hover:bg-[#000000]">
+                                                    <div class="flex items-center mt-2 p-2 rounded hover:bg-[#000000] ">
                                                         <input id="checkbox={{ $genre->id }}" type="checkbox"
-                                                            name="genres[]" value="{{ $genre->id }}"
+                                                            name="genres[]" value="{{ $genre->id }}" onclick="robson()"
                                                             class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                         <label for="checkbox={{ $genre->id }}"
                                                             class="cursor-pointer ml-2 text-sm font-medium">{{ $genre->name }}</label>
@@ -81,44 +111,71 @@
                                     </div>
 
                                 </button>
-
+                                @if ($errors->has('genres'))
+                                    <span class="message-error">
+                                        @foreach ($errors->get('genres') as $error)
+                                            {{ $error }}
+                                        @endforeach
+                                    </span>
+                                @endif
 
                             </div>
-                            <div class="select">
+                            <div class="select relative">
                                 <label for="released" class="">Lançado em</label>
-                                <input type="number" name="released" id="released" placeholder="Digite aqui..."
-                                    class="input focus:ring-[#C4C4CC]">
+                                <input type="number" name="released" value="{{old('released')}}" id="released" placeholder="Digite aqui..."
+                                    class="input focus:ring-[#C4C4CC] @if ($errors->has('released')) error-input @endif">
+                                @if ($errors->has('released'))
+                                    <span class="message-error">
+                                        @foreach ($errors->get('released') as $error)
+                                            {{ $error }}
+                                        @endforeach
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
                         <div class="author-studio">
-                            <div class="author">
+                            <div class="author relative">
                                 <div>
                                     <label for="author" class="">Autor</label>
                                     <select id="author" name="author_id"
-                                        class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
-                                        <option selected></option>
+                                        class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC] @if ($errors->has('author_id')) error-input @endif">
+                                        <option value="" disable selected hidden></option>
                                         @foreach ($authors as $author)
                                             <option value="{{ $author->id }}">{{ $author->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                 @if ($errors->has('author_id'))
+                                    <span class="message-error">
+                                        @foreach ($errors->get('author_id') as $error)
+                                            {{ $error }}
+                                        @endforeach
+                                    </span>
+                                @endif
                                 <button data-modal-target="author-modal" data-modal-toggle="author-modal" class=""
                                     type="button">
                                     <img src="/img/svg/plus.svg" alt="">
                                 </button>
                             </div>
-                            <div class="studio">
+                            <div class="studio relative">
                                 <div>
                                     <label for="studio" class="">Estudio</label>
                                     <select id="studio" name="studio_id"
-                                        class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC]">
-                                        <option selected></option>
+                                        class="bg-[#202024] text-[#C4C4CC] text-sm rounded-lg block w-full p-2.5 focus:ring-[#C4C4CC] @if ($errors->has('studio_id')) error-input @endif">
+                                        <option value="" disable selected hidden></option>
                                         @foreach ($studios as $studio)
                                             <option value="{{ $studio->id }}">{{ $studio->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                 @if ($errors->has('studio_id'))
+                                    <span class="message-error">
+                                        @foreach ($errors->get('studio_id') as $error)
+                                            {{ $error }}
+                                        @endforeach
+                                    </span>
+                                @endif
                                 <div class="more">
                                     <button data-modal-target="studio-modal" data-modal-toggle="studio-modal"
                                         class="" type="button">
@@ -184,4 +241,5 @@
     </x-modal.default>
 
     <!-- Dropdown menu -->
+
 @endsection

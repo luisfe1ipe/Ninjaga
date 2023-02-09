@@ -1,7 +1,7 @@
 @section('scriptBanner')
     <script>
         let photo = document.getElementById('photo')
-        let file = document.getElementById("{{$name}}")
+        let file = document.getElementById("{{ $name }}")
         let icon = document.getElementById('icon')
 
         photo.addEventListener('click', () => {
@@ -22,10 +22,10 @@
     </script>
 @endsection
 
-<div class="image-container">
-    <label for="{{$name}}">
+<div class="image-container relative">
+    <label for="{{ $name }}">
         Escolha uma imagem
-        <div class="content">
+        <div class="content @if ($errors->has('banner')) error-input @endif"">
             <div class="icon" id="icon">
                 <svg aria-hidden="true" class="w-10 h-10 mb-3 " fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -38,5 +38,12 @@
             <img id="photo" src="{{ $image }}" alt="">
         </div>
     </label>
-    <input type="file" name="{{$name}}" id="{{$name}}" class="hidden">
+    <input type="file" name="{{ $name }}" id="{{ $name }}" class="hidden">
+    @if ($errors->has('banner'))
+        <span class="message-error">
+            @foreach ($errors->get('banner') as $error)
+                {{ $error }}
+            @endforeach
+        </span>
+    @endif
 </div>
