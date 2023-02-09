@@ -162,6 +162,18 @@ nav {
   }
 }
 
+.error-input{
+  border: 1px solid #A93F3F !important;
+}
+
+.message-error{
+  font-size: 14px;
+  position: absolute;
+  left: 0;
+  bottom: -20px;
+  color: #A93F3F;
+}
+
 .btn-p {
   font-weight: 600;
   font-size: 14px;

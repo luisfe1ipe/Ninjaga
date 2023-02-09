@@ -1,4 +1,6 @@
 @extends('components.app')
+@section('title', "{$chapter->project->title} - {$chapter->title}")
+
 @section('navbar')
     <x-navbar view="" />
 @endsection
