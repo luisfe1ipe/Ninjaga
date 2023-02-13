@@ -196,10 +196,11 @@ class ProjectController extends Controller
         }
 
         if($project->banner){
-            if (file_exists(public_path("projects/" . $project->title_formated . "/banner/$project->banner"))) {
-                unlink(public_path("projects/" . $$project->title_formated . "/banner/$project->banner"));
-                rmdir(public_path("projects/". $project->title_formated . "/banner"));
-                rmdir(public_path("projects/". $project->title_formated));
+            if (file_exists(public_path("projects/" . $project->formated_title . "/banner/$project->banner"))) {
+                dd('to aqui');
+                unlink(public_path("projects/" . $$project->formated_title . "/banner/$project->banner"));
+                rmdir(public_path("projects/". $project->formated_title . "/banner"));
+                rmdir(public_path("projects/". $project->formated_title));
             }
         }
 
