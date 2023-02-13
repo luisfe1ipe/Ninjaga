@@ -48,6 +48,7 @@
     @yield('scriptBanner')
     @yield('scriptUser')
     @yield('scriptChapterCreate')
+    @yield('scriptPreviewBannerChapter')
 </body>
 
 
