@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Completed;
 use App\Models\Favorite;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class UserController extends Controller
         }
 
         $favorites = Favorite::where('user_id', Auth::user()->id)->with(['project'])->orderBy('updated_at', 'desc')->limit(10)->get();
+        $completeds = Completed::where('user_id', Auth::user()->id)->with(['project'])->orderBy('updated_at', 'desc')->limit(10)->get();
 
-        return view('users.profile', compact('user', 'favorites'));
+        return view('users.profile', compact('user', 'favorites', 'completeds'));
     }
 }
