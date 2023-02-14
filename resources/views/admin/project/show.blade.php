@@ -39,12 +39,6 @@
                         </div>
 
                         <div class="info">
-                            <div class="info-text views">
-                                <i class="material-symbols-outlined text-[#A93F3F]">
-                                    bar_chart
-                                </i>
-                                <p>453.789 Visualizações</p>
-                            </div>
                             <div class="info-text chapters-count">
                                 <i class="material-symbols-outlined text-[#A93F3F]">
                                     menu_book
@@ -335,3 +329,9 @@
         </div>
     </x-modal.default>
 @endsection
+
+<style>
+    footer{
+        display: none
+    }
+</style>

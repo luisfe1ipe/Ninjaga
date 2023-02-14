@@ -247,13 +247,23 @@
 
     </section>
 
-    
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 5.5,
             spaceBetween: 0,
-
+            freemode: true,
+            breakpoints: {
+                320: {
+                    slidesPerView: 2.1,
+                    spaceBetween: 0,
+                },
+                991: {
+                    slidesPerView: 5.5,
+                    spaceBetween: 0,
+                }
+            }
         });
     </script>
 @endsection
