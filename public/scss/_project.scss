@@ -660,7 +660,7 @@
 .container-manga {
   display: flex;
   flex-wrap: wrap;
-  gap: 4.4375rem;
+  gap: 24px 71px;
 
   @media (max-width: 560px) {
     gap: 32px;

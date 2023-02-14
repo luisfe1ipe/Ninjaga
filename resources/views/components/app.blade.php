@@ -32,6 +32,8 @@
             drawer.classList.remove('hidden')
         }
     </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -44,6 +46,7 @@
     <script src="https://unpkg.com/flowbite@1.6.0/dist/flowbite.min.js"></script>
 
     <script src="{{ asset('js/photo-preview.js') }}"></script>
+
 
     @yield('scriptBanner')
     @yield('scriptUser')

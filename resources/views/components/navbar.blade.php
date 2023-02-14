@@ -58,7 +58,7 @@
                 <!-- Dropdown menu -->
                 <div id="userDropdown" class="z-10 hidden divide-y divide-gray-600 rounded shadow w-44 bg-[#28282E]">
                     <div class="py-1 text-[#F2F2F2]">
-                        <a href="#"
+                        <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}"
                             class="flex items-center gap-1.5 block px-4 py-2 text-base hover:bg-[#000000] text-white"><i
                                 class="material-icons text-lg">person</i> Perfil</a>
                     </div>

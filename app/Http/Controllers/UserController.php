@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function show($id){
-        $user = User::find($id);
-        
-        return view('users.profile', compact('user'));
+    public function show($id)
+    {
+        if (!$user = User::with(['favorites', 'completeds', 'reads', 'stops'])->first()) {
+            return redirect()->back();
+        }
+
+        $favorites = Favorite::where('user_id', Auth::user()->id)->with(['project'])->orderBy('updated_at', 'desc')->limit(10)->get();
+
+        return view('users.profile', compact('user', 'favorites'));
     }
 }
