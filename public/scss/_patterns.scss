@@ -110,8 +110,16 @@ nav {
         .logo-mobile {
           width: 100%;
           display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
           align-items: center;
           justify-content: center;
+
+          .photoProfile{
+            width: 85px;
+            height: 85px;
+            border-radius: 100%;
+          }
         }
 
         .nav-mobile {
@@ -129,7 +137,7 @@ nav {
 
               a {
                 font-weight: 700;
-                font-size: 14px;
+                font-size: 16px;
                 color: #F2F2F2;
                 font-family: 'Montserrat';
 

@@ -134,11 +134,20 @@
                 </div>
                 <div class="sidebar-content">
                     <div class="logo-mobile">
-                        <img src="{{ asset('img/logo-col.png') }}" alt="">
+                        @guest
+                            <img src="{{ asset('img/logo-col.png') }}" alt="">
+                        @endguest
+                        @auth
+                            <img src="{{ asset('img/default.png') }}" alt="" class="photoProfile">
+                            <p>{{ Auth::user()->user }}</p>
+                        @endauth
                     </div>
 
                     <div class="nav-mobile">
                         <ul class="nav-ul">
+                            <li>
+                                <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}">Perfil</a>
+                            </li>
                             <li> <a href="{{ route('project.index') }}"
                                     class="@if ($view == 'inicio') active @endif">Início</a> </li>
                             <li>
@@ -176,9 +185,17 @@
                         </ul>
                     </div>
 
-                    <div class="btn">
-                        <button>Entrar / Registrar</button>
-                    </div>
+                    @guest
+                        <div class="btn">
+                            <button>Entrar / Registrar</button>
+                        </div>
+                    @endguest
+
+                    @auth
+                        <div class="btn">
+                            <button>Logout</button>
+                        </div>
+                    @endauth
                 </div>
             </div>
 
