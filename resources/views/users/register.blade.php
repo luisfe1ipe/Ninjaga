@@ -32,3 +32,8 @@
     </form>
 </div>
 
+<style>
+    footer{
+        display: none
+    }
+</style>

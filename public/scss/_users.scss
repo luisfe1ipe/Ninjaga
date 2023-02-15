@@ -1,11 +1,15 @@
 .container-form {
   width: 100%;
-  max-width: 69.75rem;
-  margin: 3.125rem auto;
+  max-width: 69.75rem !important;
+  margin: 50px auto !important;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  @media (max-width: 560px) {
+    max-width: 345px !important;
+  }
 
   .header {
     width: 100%;
@@ -189,6 +193,7 @@
 
       .info {
         padding: 0 6px;
+
         img {
           width: 74px;
           height: 74px;
@@ -211,6 +216,7 @@
             position: absolute;
             left: 24px;
             bottom: 65px;
+
             ul {
               li {
                 a {
@@ -230,12 +236,13 @@
         }
       }
 
-      .btns{
+      .btns {
         flex-direction: row;
         width: 100%;
         margin-bottom: 8px;
         padding: 0 6px;
-        a{
+
+        a {
           width: 120px;
         }
       }

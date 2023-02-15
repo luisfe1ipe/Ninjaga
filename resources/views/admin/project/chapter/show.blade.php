@@ -15,7 +15,7 @@
 </div>
 
 @section('content')
-    <style>
+    {{-- <style>
         .scale-manwha {
             width: 720px;
         }
@@ -24,7 +24,7 @@
             min-width: 720px;
             max-width: 100%;
         }
-    </style>
+    </style> --}}
 
     <section class="s-view-chapter" id="start">
         <div class="header">
@@ -33,7 +33,7 @@
                 <p> {{ $chapter->title }} </p>
             </div>
             <div class="sub">
-                <div class="flex bg-[#121212] nav" aria-label="Breadcrumb">
+                <div class="flex bg-[#121212] nav" id="mini-nav" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center">
                             <a href="{{ route('project.index') }}"

@@ -56,7 +56,7 @@
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Navegar</h2>
+                    <h2 class="mb-6 text-sm font-semibold  uppercase dark:text-white">Navegar</h2>
                     <ul class="text-gray-600 dark:text-gray-400">
                         <li class="mb-4">
                             <a href="{{ route('project.index') }}" class="hover:underline">Início</a>
@@ -76,7 +76,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Termos</h2>
+                    <h2 class="mb-6 text-sm font-semibold  uppercase dark:text-white">Termos</h2>
                     <ul class="text-gray-600 dark:text-gray-400">
                         <li class="mb-4">
                             <a href="#" class="hover:underline">Política de Privacidade</a>

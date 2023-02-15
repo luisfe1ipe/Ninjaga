@@ -220,6 +220,16 @@
   }
 }
 
+#dropdownRight {
+  top: 110px !important;
+  left: -1px !important;
+
+  @media (max-width: 560px) {
+    top: -130px !important;
+    left: -180px !important;
+  }
+
+}
 
 .s-hero {
   position: relative;
@@ -609,7 +619,7 @@
 
       .delete {
         position: absolute;
-        bottom: 0px;
+        bottom: 4px;
         right: 6px;
         color: #A93F3F;
 
@@ -660,7 +670,7 @@
 .container-manga {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px 71px;
+  gap: 32px 71px;
 
   @media (max-width: 560px) {
     gap: 32px;
@@ -674,6 +684,11 @@
   margin-top: 4.375rem;
 
   @media (max-width: 560px) {
+    .header{
+      .title {
+        flex-direction: column;
+      }
+    }
     .sub {
       flex-direction: column;
 
@@ -800,9 +815,6 @@
 }
 
 form {
-  margin-top: 32px;
-  margin-bottom: 60px;
-
 
   .images {
     margin-top: 24px;
@@ -813,6 +825,7 @@ form {
         align-items: center;
         justify-content: space-between;
         margin-top: 12px;
+
         .card-chapter {
           width: 100%;
           max-width: 21.5625rem;
@@ -892,39 +905,47 @@ form {
       }
     }
 
-    .header{
+    .header {
       margin-top: 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      p{
+
+      p {
         font-weight: 500;
         font-size: 18px;
       }
-      .btn{
+
+      .btn {
         display: flex;
         align-items: center;
         gap: 32px;
-        a{
+
+        a {
           display: flex;
           align-items: center;
           gap: 8px;
           cursor: pointer;
           padding: 6px;
           border-radius: 5px;
-          i{
+
+          i {
             font-size: 22px;
           }
         }
-        #add{
+
+        #add {
           background-color: #1F2937;
-          &:hover{
+
+          &:hover {
             background-color: #131922;
           }
         }
-        #remove{
+
+        #remove {
           background-color: #a93f3f;
-          &:hover{
+
+          &:hover {
             background-color: #8a2d2d;
           }
         }

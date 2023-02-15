@@ -22,3 +22,9 @@
     </form>
     <a href="{{ route('user.create') }}">Não tem uma conta ? clique aqui !</a>
 </div>
+
+<style>
+    footer{
+        display: none
+    }
+</style>
