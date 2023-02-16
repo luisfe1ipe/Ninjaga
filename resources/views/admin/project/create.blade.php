@@ -206,6 +206,11 @@
         </div>
     </section>
 
+    <section class="s-unavailable">
+        <img src="{{ asset('img/page-unavailable.png') }}" alt="">
+        <p>Página dísponivel apenas para computadores.</p>
+        <a href="{{ url()->previous() }}" class="btn-p mt-6">Voltar</a>
+    </section>
     <x-modal.default id="author-modal" title="Adicionar Ator">
         <x-form action="{{ route('author.store') }}">
             <label for="name">Nome</label>

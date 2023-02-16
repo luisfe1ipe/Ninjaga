@@ -77,6 +77,8 @@
                 </div>
             @endforeach
         </div>
+
+        {{$projects->links()}}
     @endisset
 
     @isset($mangas)

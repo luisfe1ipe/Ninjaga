@@ -203,6 +203,36 @@
   }
 }
 
+.s-unavailable{
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .s-create{
+    display: none;
+  }
+
+  .s-unavailable{
+    margin-top: 60px;
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: 300px;
+
+    img{
+      width: 9.375rem;
+    }
+
+    p{
+      margin-top: 24px;
+      font-size: 18px;
+    }
+  }
+}
 
 
 
