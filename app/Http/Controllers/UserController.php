@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function show($id)
     {
-        if (!$user = User::with(['favorites', 'completeds', 'reads', 'stops'])->first()) {
+        if (!$user = User::where('id', Auth::user()->id)->with(['favorites', 'completeds', 'reads', 'stops'])->first()) {
             return redirect()->back();
         }
 
@@ -22,8 +22,7 @@ class UserController extends Controller
         $completeds = Completed::where('user_id', Auth::user()->id)->with(['project'])->orderBy('updated_at', 'desc')->limit(10)->get();
         $reads = Read::where('user_id', Auth::user()->id)->with(['project'])->orderBy('updated_at', 'desc')->limit(10)->get();
         $stops = Stop::where('user_id', Auth::user()->id)->with(['project'])->orderBy('updated_at', 'desc')->limit(10)->get();
-
-
+        
         return view('users.profile', compact('user', 'favorites', 'completeds', 'reads', 'stops'));
     }
 }
