@@ -60,4 +60,10 @@ class Project extends Model
     {
         return $this->hasOne(Stop::class);
     }
+
+    public static  function search($searchKey)
+    {
+        return self::where('title', 'LIKE', '%' . $searchKey . '%');
+    }
+
 }
