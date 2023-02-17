@@ -318,6 +318,7 @@
             <div class="flex flex-col items-center">
                 <img class="w-[150px]" src="{{ asset('img/http-503.svg') }}" alt="">
                 <p class="mt-2">Para realizar está ação você deve estar logado.</p>
+                <a href="{{ route('user.login') }}" class="mt-6 btn-p flex items-center justify-center w-[85px] h-[35px]">Entrar</a>
             </div>
         </x-modal.default>
     @endguest

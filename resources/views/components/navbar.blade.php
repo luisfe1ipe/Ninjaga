@@ -49,7 +49,7 @@
 
         <div class="search-profile">
             <div class="search">
-                <x-input.search />
+                <livewire:search />
             </div>
             @auth
                 <div class="profile">
@@ -114,8 +114,8 @@
             @endauth
             @guest
                 <div class="login-register flex items-center gap-6">
-                    <a href="{{ route('user.register') }}" class="btn-s">Cadastrar</a>
-                    <a href="{{ route('user.login') }}" class="btn-p">Entrar</a>
+                    <a href="{{ route('user.register') }}" class="btn-s flex items-center justify-center w-[85px] h-[35px]">Cadastrar</a>
+                    <a href="{{ route('user.login') }}" class="btn-p flex items-center justify-center w-[85px] h-[35px]">Entrar</a>
                 </div>
             @endguest
         </div>
@@ -209,7 +209,9 @@
                     @endauth
                 </div>
             </div>
-
         </div>
     </div>
+
 </nav>
+
+

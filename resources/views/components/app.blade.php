@@ -34,6 +34,9 @@
     </script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+    @livewireStyles
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body style="overflow-x: hidden">
@@ -133,8 +136,7 @@
     @yield('scriptChapterCreate')
     @yield('scriptPreviewBannerChapter')
 
-
+    @livewireScripts
 </body>
-
 
 </html>
