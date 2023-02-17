@@ -12,7 +12,7 @@ class LogoutController extends Controller
     {
         if (Auth::check()) {
             Auth::logout();
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Deslogado com sucesso.');
 
         }
     }

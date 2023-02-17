@@ -1,48 +1,50 @@
 @props(['view' => null])
 <nav>
     <div class="nav-container">
-        <div class="logo">
-            <a href="{{ route('project.index') }}">
-                <img src="{{ asset('img/logo.png') }}" alt="">
-            </a>
-        </div>
+        <div class="flex items-center gap-8 logo-nav">
+            <div class="logo">
+                <a href="{{ route('project.index') }}">
+                    <img src="{{ asset('img/logo.png') }}" alt="">
+                </a>
+            </div>
 
-        <div class="nav">
-            <ul class="nav-ul">
-                <li> <a href="{{ route('project.index') }}"
-                        class="@if ($view == 'inicio') active @endif">Início</a> </li>
-                <li>
-                    <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                        class="@if ($view == 'obras') active @endif flex items-center justify-between font-bold rounded hover:text-[#A93F3F]">Obras
-                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg></button>
-                    <!-- Dropdown menu -->
-                    <div id="dropdownNavbar"
-                        class="z-10 border-2 border-[#121212] hidden font-normal bg-[#000000] divide-y divide-gray-100 rounded-lg  ">
-                        <ul class="pt-2 flex-col text-center" aria-labelledby="dropdownLargeButton">
-                            <li class="w-full pb-2">
-                                <a href="{{ route('project.index', ['type' => 'manga']) }}"
-                                    class="block px-4 py-2">Manga</a>
-                            </li>
-                            <li class="w-full pb-2">
-                                <a href="{{ route('project.index', ['type' => 'manwha']) }}"
-                                    class="block px-4 py-2">Manwha</a>
-                            </li>
-                            <li class="w-full pb-2">
-                                <a href="{{ route('project.index', ['type' => 'novel']) }}"
-                                    class="block px-4 py-2">Novel</a>
-                            </li>
-                            <li class="w-full pb-2" style="border-top: 1px solid rgb(107 114 128)">
-                                <a href="{{ route('project.create') }}" class="block px-4 py-2">Adicionar obra</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
+            <div class="nav">
+                <ul class="nav-ul">
+                    <li> <a href="{{ route('project.index') }}"
+                            class="@if ($view == 'inicio') active @endif">Início</a> </li>
+                    <li>
+                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
+                            class="@if ($view == 'obras') active @endif flex items-center justify-between font-bold rounded hover:text-[#A93F3F]">Obras
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg></button>
+                        <!-- Dropdown menu -->
+                        <div id="dropdownNavbar"
+                            class="z-10 border-2 border-[#121212] hidden font-normal bg-[#000000] divide-y divide-gray-100 rounded-lg  ">
+                            <ul class="pt-2 flex-col text-center" aria-labelledby="dropdownLargeButton">
+                                <li class="w-full pb-2">
+                                    <a href="{{ route('project.index', ['type' => 'manga']) }}"
+                                        class="block px-4 py-2">Manga</a>
+                                </li>
+                                <li class="w-full pb-2">
+                                    <a href="{{ route('project.index', ['type' => 'manwha']) }}"
+                                        class="block px-4 py-2">Manwha</a>
+                                </li>
+                                <li class="w-full pb-2">
+                                    <a href="{{ route('project.index', ['type' => 'novel']) }}"
+                                        class="block px-4 py-2">Novel</a>
+                                </li>
+                                <li class="w-full pb-2" style="border-top: 1px solid rgb(107 114 128)">
+                                    <a href="{{ route('project.create') }}" class="block px-4 py-2">Adicionar obra</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="search-profile">
@@ -110,6 +112,12 @@
                     </div>
                 </div>
             @endauth
+            @guest
+                <div class="login-register flex items-center gap-6">
+                    <a href="{{ route('user.register') }}" class="btn-s">Cadastrar</a>
+                    <a href="{{ route('user.login') }}" class="btn-p">Entrar</a>
+                </div>
+            @endguest
         </div>
 
         <div class="mobile-menu">
@@ -190,15 +198,14 @@
                     </div>
 
                     @guest
-                        <div class="btn">
-                            <button>Entrar / Registrar</button>
+                        <div class="login-register flex flex-col items-center gap-2 mt-10">
+                            <a href="{{ route('user.register') }}" class="btn-s w-full text-center">Cadastrar</a>
+                            <a href="{{ route('user.login') }}" class="btn-p w-full text-center">Entrar</a>
                         </div>
                     @endguest
 
                     @auth
-                        <div class="btn">
-                            <button>Logout</button>
-                        </div>
+                        <a href="{{ route('user.logout') }}" class="mt-10 btn-p w-full text-center" style="display: block !important;">Logout</a>
                     @endauth
                 </div>
             </div>
