@@ -94,12 +94,16 @@ class ProjectController extends Controller
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
-        $fav = Favorite::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
-        $completed = Completed::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
-        $read = Read::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
-        $stop = Stop::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
+        if(Auth::check()){
+            $fav = Favorite::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
+            $completed = Completed::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
+            $read = Read::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
+            $stop = Stop::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
 
-        return view('admin.project.show', compact('project','fav', 'completed', 'read', 'stop'));
+            return view('admin.project.show', compact('project', 'fav', 'completed', 'read', 'stop'));
+        }
+
+        return view('admin.project.show', compact('project'));
     }
 
     /**

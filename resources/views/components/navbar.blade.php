@@ -49,65 +49,67 @@
             <div class="search">
                 <x-input.search />
             </div>
-            <div class="profile">
-                <p>Olá, {{ Auth::user()->user }}</p>
-                <img id="avatarButton" type="button" src="{{ asset('img/default.png') }}" alt="User dropdown"
-                    data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
-                    class="w-10 h-10 rounded-full cursor-pointer">
+            @auth
+                <div class="profile">
+                    <p>Olá, {{ Auth::user()->user }}</p>
+                    <img id="avatarButton" type="button" src="{{ asset('img/default.png') }}" alt="User dropdown"
+                        data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
+                        class="w-10 h-10 rounded-full cursor-pointer">
 
-                <!-- Dropdown menu -->
-                <div id="userDropdown" class="z-10 hidden divide-y divide-gray-600 rounded shadow w-44 bg-[#28282E]">
-                    <div class="py-1 text-[#F2F2F2]">
-                        <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}"
-                            class="flex items-center gap-1.5 block px-4 py-2 text-base hover:bg-[#000000] text-white"><i
-                                class="material-icons text-lg">person</i> Perfil</a>
-                    </div>
-                    <ul class="py-1 cursor-pointer" aria-labelledby="avatarButton">
-                        <li>
-                            <a href="{{ route('save.index', ['type' => 'favorites']) }}" value
-                                class="block hover:text-red-500 px-4 py-2 text-sm hover:bg-[#000000] text-white flex items-center gap-1.5">
-                                <i class="material-symbols-outlined text-lg">
-                                    favorite
-                                </i>
-                                Favoritos
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('save.index', ['type' => 'completeds']) }}" value
-                                class="block hover:text-green-500 px-4 py-2 text-sm hover:bg-[#000000] text-white flex items-center gap-1.5">
-                                <i class="material-symbols-outlined text-lg">
-                                    check
-                                </i>
-                                Lidos
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('save.index', ['type' => 'reads']) }}" value
-                                class="block hover:text-orange-500 px-4 py-2 text-sm hover:bg-[#000000] text-white flex items-center gap-1.5">
-                                <i class="material-symbols-outlined text-lg">
-                                    bookmark
-                                </i>
-                                Lerei
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('save.index', ['type' => 'stops']) }}" value
-                                class="block hover:text-slate-500 px-4 py-2 text-sm hover:bg-[#000000] text-white flex items-center gap-1.5">
-                                <i class="material-symbols-outlined text-lg">
-                                    lock
-                                </i>
-                                Parei
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="py-1">
-                        <a href="#"
-                            class="flex items-center gap-1.5 block px-4 py-2 text-base hover:bg-[#000000] text-white"><i
-                                class="material-icons text-lg">exit_to_app </i> Logout</a>
+                    <!-- Dropdown menu -->
+                    <div id="userDropdown" class="z-10 hidden divide-y divide-gray-600 rounded shadow w-44 bg-[#28282E]">
+                        <div class="py-1 text-[#F2F2F2]">
+                            <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}"
+                                class="flex items-center gap-1.5 block px-4 py-2 text-base hover:bg-[#000000] text-white"><i
+                                    class="material-icons text-lg">person</i> Perfil</a>
+                        </div>
+                        <ul class="py-1 cursor-pointer" aria-labelledby="avatarButton">
+                            <li>
+                                <a href="{{ route('save.index', ['type' => 'favorites']) }}" value
+                                    class="block hover:text-red-500 px-4 py-2 text-sm hover:bg-[#000000] text-white flex items-center gap-1.5">
+                                    <i class="material-symbols-outlined text-lg">
+                                        favorite
+                                    </i>
+                                    Favoritos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('save.index', ['type' => 'completeds']) }}" value
+                                    class="block hover:text-green-500 px-4 py-2 text-sm hover:bg-[#000000] text-white flex items-center gap-1.5">
+                                    <i class="material-symbols-outlined text-lg">
+                                        check
+                                    </i>
+                                    Lidos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('save.index', ['type' => 'reads']) }}" value
+                                    class="block hover:text-orange-500 px-4 py-2 text-sm hover:bg-[#000000] text-white flex items-center gap-1.5">
+                                    <i class="material-symbols-outlined text-lg">
+                                        bookmark
+                                    </i>
+                                    Lerei
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('save.index', ['type' => 'stops']) }}" value
+                                    class="block hover:text-slate-500 px-4 py-2 text-sm hover:bg-[#000000] text-white flex items-center gap-1.5">
+                                    <i class="material-symbols-outlined text-lg">
+                                        lock
+                                    </i>
+                                    Parei
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="py-1">
+                            <a href="{{ route('user.logout') }}"
+                                class="flex items-center gap-1.5 block px-4 py-2 text-base hover:bg-[#000000] text-white"><i
+                                    class="material-icons text-lg">exit_to_app </i> Logout</a>
 
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endauth
         </div>
 
         <div class="mobile-menu">
@@ -145,9 +147,11 @@
 
                     <div class="nav-mobile">
                         <ul class="nav-ul">
-                            <li>
-                                <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}">Perfil</a>
-                            </li>
+                            @auth
+                                <li>
+                                    <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}">Perfil</a>
+                                </li>
+                            @endauth
                             <li> <a href="{{ route('project.index') }}"
                                     class="@if ($view == 'inicio') active @endif">Início</a> </li>
                             <li>

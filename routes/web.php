@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\GenreController;
@@ -30,6 +31,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('user.login');
 Route::post('/login', [LoginController::class, 'auth'])->name('user.auth');
 Route::get('/register', [RegisterController::class, 'create'])->name('user.create');
 Route::post('/register', [RegisterController::class, 'register'])->name('user.register');
+Route::get('/logout', [LogoutController::class, 'logout'])->name('user.logout');
 
 Route::get('/profile/{id}', [UserController::class, 'show'])->name('user.show');
 
