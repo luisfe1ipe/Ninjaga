@@ -25,18 +25,41 @@ class ProjectController extends Controller
      */
     public function index($type = null)
     {
-        if($type == 'manga'){
+        if ($type == 'manga') {
             $mangas = Project::where('type', 'Manga')->orderBy('updated_at', 'asc')->get();
             return view('admin.project.index', compact('mangas'));
-        }else if($type == 'manwha'){
+        } else if ($type == 'manwha') {
             $manwhas = Project::where('type', 'Manwha')->orderBy('updated_at', 'asc')->get();
             return view('admin.project.index', compact('manwhas'));
-        }else if($type == 'novel'){
+        } else if ($type == 'novel') {
             $novels = Project::where('type', 'Novel')->orderBy('updated_at', 'asc')->get();
             return view('admin.project.index', compact('novels'));
         }
-        $projects = Project::orderBy('updated_at', 'desc')->paginate(25);
-        return view('admin.project.index', compact('projects'));
+
+
+        $projects = DB::table('projects')
+            ->leftJoin('chapters', function($join) {
+                $join->on('projects.id', '=', 'chapters.project_id')
+                     ->whereRaw('chapters.updated_at = (SELECT MAX(created_at) FROM chapters WHERE project_id = projects.id)');
+            })
+            ->select('projects.*', 'chapters.id as chapter_id', 'chapters.title as chapter_title', 'chapters.updated_at as chapter_updated_at')
+            ->orderByDesc('chapters.created_at')
+            ->get();
+
+        // Agrupar os capítulos por projeto
+        $groupedProjects = collect($projects)->groupBy('id');
+
+
+        // Montar o array de retorno
+        $result = [];
+        foreach ($groupedProjects as $projectId => $group) {
+            $project = $group->first();
+            $project->chapters = $group->pluck('chapter_id', 'chapter_title')->toArray();
+            $result[] = $project;
+        }
+
+
+        return view('admin.project.index', compact('result'));
     }
 
     /**
@@ -94,7 +117,7 @@ class ProjectController extends Controller
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
-        if(Auth::check()){
+        if (Auth::check()) {
             $fav = Favorite::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
             $completed = Completed::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
             $read = Read::where('project_id', $project->id)->where('user_id', Auth::user()->id)->exists();
@@ -114,7 +137,7 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        if (!$project = Project::where('id',$id)->with(['author', 'studio'])->first()) {
+        if (!$project = Project::where('id', $id)->with(['author', 'studio'])->first()) {
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
@@ -148,8 +171,8 @@ class ProjectController extends Controller
         //Edita a foto e o titulo da obra
         if (isset($data['banner']) && $data['title']) {
             if ($data['title'] === $oldTitle) {
-                if (file_exists(public_path("projects/". $data['formated_title'] ."/banner/$project->banner"))) {
-                    unlink(public_path("projects/". $data['formated_title'] ."/banner/$project->banner"));
+                if (file_exists(public_path("projects/" . $data['formated_title'] . "/banner/$project->banner"))) {
+                    unlink(public_path("projects/" . $data['formated_title'] . "/banner/$project->banner"));
                 }
                 $bannerName =  $data['formated_title'] . '.' . $request->banner->extension();
                 $request->banner->move(public_path("projects/" . $data['formated_title'] . "/banner"), $bannerName);
@@ -160,19 +183,18 @@ class ProjectController extends Controller
                     rename(public_path("projects/$formatedOldTitle"), public_path("projects/" . $data['formated_title']));
                 }
                 $bannerName =  $data['formated_title'] . '.' . $request->banner->extension();
-                $request->banner->move(public_path("projects/".  $data['formated_title'] . "/banner"), $bannerName);
+                $request->banner->move(public_path("projects/" .  $data['formated_title'] . "/banner"), $bannerName);
                 $data['banner'] = $bannerName;
             }
         } elseif ($data['title'] !== $oldTitle) {
             $formatedOldTitle = str_replace(" ", "-", $oldTitle);
             if (file_exists(public_path("projects/$formatedOldTitle"))) {
-                rename(public_path("projects/$formatedOldTitle"), public_path("projects/". $data['formated_title']));
+                rename(public_path("projects/$formatedOldTitle"), public_path("projects/" . $data['formated_title']));
             }
-            if(isset($data['banner'])){
+            if (isset($data['banner'])) {
                 $bannerName =  $data['formated_title'] . '.' . $request->banner->extension();
                 $request->banner->move(public_path("projects/" . $data['formated_title'] . "/banner"), $bannerName);
                 $data['banner'] = $bannerName;
-
             }
         }
 
@@ -184,7 +206,7 @@ class ProjectController extends Controller
 
         $project->update($data);
 
-        return redirect()->route('project.show', ['id' => $project->id ]);
+        return redirect()->route('project.show', ['id' => $project->id]);
     }
 
     /**
@@ -199,26 +221,26 @@ class ProjectController extends Controller
             return redirect()->back()->with('notFound', 'Projeto não encontrado');
         }
 
-        if($project->banner){
+        if ($project->banner) {
             if (file_exists(public_path("projects/" . $project->formated_title . "/banner/$project->banner"))) {
                 dd('to aqui');
                 unlink(public_path("projects/" . $$project->formated_title . "/banner/$project->banner"));
-                rmdir(public_path("projects/". $project->formated_title . "/banner"));
-                rmdir(public_path("projects/". $project->formated_title));
+                rmdir(public_path("projects/" . $project->formated_title . "/banner"));
+                rmdir(public_path("projects/" . $project->formated_title));
             }
         }
 
         $project->genres()->detach(); //N:M
-        if($project->favorite){
+        if ($project->favorite) {
             $project->favorite()->delete();
         }
-        if($project->completed){
+        if ($project->completed) {
             $project->completed()->delete();
         }
-        if($project->read){
+        if ($project->read) {
             $project->read()->delete();
         }
-        if($project->stop){
+        if ($project->stop) {
             $project->stop()->delete();
         }
         $project->delete();
@@ -227,16 +249,18 @@ class ProjectController extends Controller
         return redirect()->route('project.index')->with('deleted', 'Projeto deletado com sucesso.');
     }
 
-    public function indexByGenre($genre){
-        if(!$genre = Genre::where('id', $genre)->with('projects')->first()){
+    public function indexByGenre($genre)
+    {
+        if (!$genre = Genre::where('id', $genre)->with('projects')->first()) {
             return redirect()->back()->with('notFound', "Projeto não encontrado.");
         }
 
         return view('admin.project.indexByGenre', compact('genre'));
     }
 
-    public function indexByReleased($released){
-        if(!$projects = Project::where('released', $released)->get()){
+    public function indexByReleased($released)
+    {
+        if (!$projects = Project::where('released', $released)->get()) {
             return redirect()->back()->with('notFound', 'Nenhum projeto encontrado.');
         }
 
