@@ -244,7 +244,7 @@
   border-top: 1px solid #4b5563;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 560px) {
   .views {
     display: none !important;
   }
@@ -254,7 +254,7 @@
   top: 110px !important;
   left: -1px !important;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 560px) {
     top: -130px !important;
     left: -180px !important;
   }
@@ -265,7 +265,7 @@
   position: relative;
   overflow: hidden;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 560px) {
     overflow: visible;
 
     .container-p {
@@ -413,7 +413,7 @@
             margin-right: 8px;
             cursor: pointer;
 
-            @media (max-width: 1000px) {
+            @media (max-width: 560px) {
               max-width: 270px;
               margin: 0;
               border-radius: 20px;
@@ -517,7 +517,7 @@
   max-width: 69.75rem;
   margin: 3.125rem auto;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 560px) {
     display: none;
   }
 
@@ -702,7 +702,7 @@
   flex-wrap: wrap;
   gap: 32px 71px;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 560px) {
     gap: 32px;
   }
 }
@@ -713,7 +713,7 @@
 .s-view-chapter {
   margin-top: 4.375rem;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 560px) {
     .header{
       .title {
         flex-direction: column;

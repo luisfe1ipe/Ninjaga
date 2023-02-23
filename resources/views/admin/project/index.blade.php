@@ -5,13 +5,8 @@
 @endsection
 @section('content')
 
-    {{-- @foreach ($result as $project) 
-        {{$project->title}}
-        @foreach ($project->chapters as $chapterTitle) 
-            {{$chapterTitle}}
-        @endforeach
-    @endforeach --}}
-    @isset($result)
+
+    @isset($projects)
         <div class="container-title mt-[80px]">
             <div class="title">
                 <span class="material-symbols-outlined text-[#A93F3F]">
@@ -29,7 +24,7 @@
         </div>
 
         <div class="container-manga">
-            @foreach ($result as $project)
+            @foreach ($projects as $project)
                 <div class="hidden">{{ $title = str_replace(' ', '-', $project->title) }}</div>
                 <div class="card-manga">
                     <div class="img">
@@ -53,36 +48,37 @@
                         <p>{{ $project->title }}</p>
                     </div>
                     <div class="caps">
-                        @foreach ($project->chapters as $chapterTitle => $chapterId)
-                            <div class="cap-p">
-                                @if ($chapterTitle)
+
+                        @php
+                            $chapters = $project->chapters->sortByDesc('created_at');
+                        @endphp
+                        @for ($i = count($chapters); $i >= count($chapters) - 2; $i--)
+                            @isset($chapters[$i])
+                                <div class="cap-p">
                                     <div class="link">
-                                        <x-buttom.cap route="{{route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapterId])}}">
-                                            {{ substr($chapterTitle, 0, 3) . '. ' . filter_var($chapterTitle, FILTER_SANITIZE_NUMBER_INT) }}
+                                        <x-buttom.cap
+                                            route="{{ route('chapter.show', ['id' => $project->id, 'chapter_id' => $chapters[$i]->id]) }}">
+                                            {{ substr($chapters[$i]->title, 0, 3) . '. ' . filter_var($chapters[$i]->title, FILTER_SANITIZE_NUMBER_INT) }}
                                         </x-buttom.cap>
                                     </div>
-                                    @if (date('d/m/y', strtotime($project->chapter_updated_at)) == date('d/m/y'))
+                                    @if (date('d/m/y', strtotime($chapters[$i]->created_at)) == date('d/m/y'))
                                         <div class="new">
-                                            <img src="{{ asset('img/svg/new.svg') }}" alt="">
+                                            <img src="{{ asset('img/new-1.png') }}" alt="">
                                         </div>
                                     @else
                                         <div class="new">
-                                            <span>{{ date('d/m/Y', strtotime($project->chapter_updated_at)) }}</span>
+                                            <span>{{ date('d/m/Y', strtotime($chapters[$i]->created_at)) }}</span>
                                         </div>
                                     @endif
-                                @else
-                                    <div class="link">
-                                        <p class="text-xs text-[#8b8b9b] text text-center">Não há capitulos por enquanto</p>
-                                    </div>
-                                @endif
-                            </div>
-                        @endforeach
+                                </div>
+                            @endisset
+                        @endfor
                     </div>
                 </div>
             @endforeach
         </div>
 
-        {{-- {{ $result->links() }} --}}
+        {{$projects->links()}}
     @endisset
 
     @isset($mangas)

@@ -68,6 +68,7 @@ Route::get('/project/list/genres/{genre}', [ProjectController::class, 'indexByGe
 Route::get('/projects/list/releaseds/{released}', [ProjectController::class, 'indexByReleased'])->name('project.indexByReleased');
 
 // SAVE
+Route::post('/save', [SaveController::class, 'store'])->name('save.store');
 Route::get('/projects/save/{type}', [SaveController::class, 'index'])->name('save.index');
 
 // CHAPTER
