@@ -6,6 +6,7 @@
 @endsection
 
 @section('item-view')
+
     <section class="s-hero">
         <div class="bg-image bg-[url('{{ asset("projects/$project->formated_title/banner/$project->banner") }}')]"></div>
         <div class="container-p">
@@ -15,8 +16,9 @@
                 </div>
                 <div class="content">
                     <div class="header-content">
-                        <button id="dropdownRightButton"  @auth data-dropdown-toggle="dropdownRight" @endauth @guest data-modal-toggle="not-auth"  @endguest  data-dropdown-placement="right"
-                            class="config" type="button">
+                        <button id="dropdownRightButton" @auth data-dropdown-toggle="dropdownRight" @endauth
+                            @guest data-modal-toggle="not-auth" @endguest data-dropdown-placement="right" class="config"
+                            type="button">
                             <i class="material-icons text-3xl">settings</i>
                         </button>
                         <div class="titleProject">
@@ -217,80 +219,16 @@
             class="hidden z-10 h-auto w-40 bg-[#121212] rounded divide-y divide-gray-100 shadow dropdown-container">
             <ul class="py-1 text-gray-700  dropdown-menu" aria-labelledby="dropdownRightButton">
                 <li class="">
-                    <form action="{{ route('save.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="save" value="favorite">
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="project_id" value="{{ $project->id }}">
-                        <div
-                            class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-red-500 text-white gap-1.5
-                        @if ($fav == true) text-red-500 @endif
-                    ">
-                            <button type="submit" class="flex items-center gap-1.5">
-                                <i class="material-icons text-lg">
-                                    favorite
-                                </i>
-                                Favoritos
-                            </button>
-                        </div>
-                    </form>
+                    <livewire:save-project.favorite :projectId="$project->id"/>
                 </li>
                 <li>
-                    <form action="{{ route('save.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="save" value="completed">
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="project_id" value="{{ $project->id }}">
-                        <div
-                            class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-green-500 text-white flex items-center gap-1.5
-                        @if ($completed == true) text-green-500 @endif
-                    ">
-                            <button type="submit" class="flex items-center gap-1.5">
-                                <i class="material-icons text-lg">
-                                    check
-                                </i>
-                                Lido
-                            </button>
-                        </div>
-                    </form>
+                    <livewire:save-project.completed :projectId="$project->id"/>
                 </li>
-                <li route="" icon="bookmark" class="hover:text-yellow-500">
-                    <form action="{{ route('save.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="save" value="read">
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="project_id" value="{{ $project->id }}">
-                        <div
-                            class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-orange-500 text-white flex items-center gap-1.5
-                        @if ($read == true) text-orange-500 @endif
-                    ">
-                            <button type="submit" class="flex items-center gap-1.5">
-                                <i class="material-icons text-lg">
-                                    bookmark
-                                </i>
-                                Lerei
-                            </button>
-                        </div>
-                    </form>
+                <li>
+                    <livewire:save-project.read :projectId="$project->id"/>
                 </li>
-                <li route="" icon="block" class="hover:text-gray-500">
-                    <form action="{{ route('save.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="save" value="stop">
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="project_id" value="{{ $project->id }}">
-                        <div
-                            class=" px-4 py-2 text-sm hover:bg-[#000000] hover:text-slate-500 text-white flex items-center gap-1.5
-                    @if ($stop == true) text-slate-500 @endif
-                ">
-                            <button type="submit" class="flex items-center gap-1.5">
-                                <i class="material-icons text-lg">
-                                    lock
-                                </i>
-                                Parei
-                            </button>
-                        </div>
-                    </form>
+                <li>
+                    <livewire:save-project.stop :projectId="$project->id"/>
                 </li>
 
                 <div class="adminConfig text-sm">
@@ -318,6 +256,8 @@
             <div class="flex flex-col items-center">
                 <img class="w-[150px]" src="{{ asset('img/http-503.svg') }}" alt="">
                 <p class="mt-2">Para realizar está ação você deve estar logado.</p>
+                <a href="{{ route('user.login') }}"
+                    class="mt-6 btn-p flex items-center justify-center w-[85px] h-[35px]">Entrar</a>
             </div>
         </x-modal.default>
     @endguest
@@ -339,6 +279,7 @@
             </div>
         </div>
     </x-modal.default>
+
 @endsection
 
 <style>
