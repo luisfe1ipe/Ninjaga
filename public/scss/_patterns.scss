@@ -4,39 +4,14 @@
   max-width: 1116px;
   margin: 0 auto;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 560px) {
     max-width: 345px;
   }
 }
 
-#toast-success {
-  @media (max-width: 1000px) {
+#toast-success{
+  @media (max-width: 560px) {
     width: 85%;
-  }
-}
-
-#icon-search {
-  @media (max-width: 1000px) {
-    display: none;
-  }
-}
-
-#search-navbar {
-  @media (max-width: 1000px) {
-    height: 30px;
-    padding-left: 8px;
-    margin: -12px;
-  }
-}
-
-#autocomplet-search {
-  @media (max-width: 1000px) {
-    left: -190px;
-    top: 43px;
-    width: 345px;
-    button{
-      margin: 0 !important;
-    }
   }
 }
 
@@ -56,7 +31,7 @@ nav {
     max-width: 69.75rem;
     margin: 0 auto;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 560px) {
       max-width: 21.5625rem;
       justify-content: space-between;
     }
@@ -66,11 +41,10 @@ nav {
         // width: 100% !important;
         // max-width: 142px !important;
         margin-right: 1.5rem !important;
-
+        
         img {
           width: 8.5rem;
-
-          @media (max-width: 1000px) {
+          @media (max-width: 560px) {
             max-width: 8.25rem !important;
           }
         }
@@ -82,7 +56,7 @@ nav {
           align-items: center;
           gap: 1.5rem;
 
-          @media (max-width: 1000px) {
+          @media (max-width: 560px) {
             display: none;
           }
 
@@ -108,15 +82,15 @@ nav {
       gap: 3.125rem;
       justify-content: space-between;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 560px) {
         gap: 0;
         margin-left: 0;
 
-        button {
+        button{
           margin-left: 85px;
         }
 
-        .login-register {
+        .login-register{
           display: none;
         }
       }
@@ -131,7 +105,7 @@ nav {
         gap: 0.5rem;
         font-size: 0.875rem;
 
-        @media (max-width: 1000px) {
+        @media (max-width: 560px) {
           display: none;
         }
       }
@@ -140,7 +114,7 @@ nav {
     .mobile-menu {
       display: none;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 560px) {
         display: block;
       }
 
@@ -266,7 +240,7 @@ nav {
   flex-direction: column;
   gap: 0.625rem;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 560px) {
     max-width: 155px;
 
     .img {
@@ -334,7 +308,7 @@ nav {
   font-weight: 600;
   font-size: 0.875rem;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 560px) {
     font-size: 0.75rem;
     padding: 0.375rem 1.125rem;
   }
@@ -358,7 +332,7 @@ nav {
       font-size: 0.75rem;
       color: #C4C4CC;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 560px) {
         font-size: 11px;
       }
     }
@@ -382,7 +356,7 @@ nav {
       font-weight: 700;
       font-family: 'Montserrat' !important;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 560px) {
         font-size: 1.125rem;
       }
     }
