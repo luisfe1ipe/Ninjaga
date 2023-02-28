@@ -219,16 +219,16 @@
             class="hidden z-10 h-auto w-40 bg-[#121212] rounded divide-y divide-gray-100 shadow dropdown-container">
             <ul class="py-1 text-gray-700  dropdown-menu" aria-labelledby="dropdownRightButton">
                 <li class="">
-                    <livewire:save-project.favorite :projectId="$project->id"/>
+                    <livewire:project.save.favorite :projectId="$project->id"/>
                 </li>
                 <li>
-                    <livewire:save-project.completed :projectId="$project->id"/>
+                    <livewire:project.save.completed :projectId="$project->id"/>
                 </li>
                 <li>
-                    <livewire:save-project.read :projectId="$project->id"/>
+                    <livewire:project.save.read :projectId="$project->id"/>
                 </li>
                 <li>
-                    <livewire:save-project.stop :projectId="$project->id"/>
+                    <livewire:project.save.stop :projectId="$project->id"/>
                 </li>
 
                 <div class="adminConfig text-sm">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\SaveProject;
+namespace App\Http\Livewire\Project\Save;
 
 use App\Models\Completed as ModelsCompleted;
 use App\Models\Favorite;
@@ -24,7 +24,7 @@ class Completed extends Component
     {
         $comp = ModelsCompleted::with('projects')->where('user_id', auth()->user()->id);
 
-        return view('livewire.save-project.completed', [
+        return view('livewire.project.save.completed', [
             'comp' => $comp
         ]);
     }

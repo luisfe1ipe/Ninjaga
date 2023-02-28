@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\SaveProject;
+namespace App\Http\Livewire\Project\Save;
 
 use App\Models\Completed;
 use App\Models\Favorite as ModelsFavorite;
@@ -25,7 +25,7 @@ class Favorite extends Component
         $fav = ModelsFavorite::with('projects')->where('user_id', auth()->user()->id);
 
         return view(
-            'livewire.save-project.favorite',
+            'livewire.project.save.favorite',
             [
                 'fav' => $fav
             ]

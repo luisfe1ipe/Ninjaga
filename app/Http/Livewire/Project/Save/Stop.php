@@ -1,45 +1,48 @@
 <?php
 
-namespace App\Http\Livewire\SaveProject;
+namespace App\Http\Livewire\Project\Save;
 
 use App\Models\Completed;
 use App\Models\Favorite;
 use App\Models\Project;
-use App\Models\Read as ModelsRead;
-use App\Models\Stop;
+use App\Models\Read;
+use App\Models\Stop as ModelsStop;
 use Livewire\Component;
 
-class Read extends Component
+class Stop extends Component
 {
+    
     public $projectId;
 
     public function __construct($projectId)
-    {
+    {  
         $this->projectId = $projectId;
     }
 
     public function render()
     {
-        $read = ModelsRead::with('projects')->where('user_id', auth()->user()->id);
+        $stop = ModelsStop::with('projects')->where('user_id', auth()->user()->id);
 
-        return view('livewire.save-project.read', [
-            'read' => $read
+        return view('livewire.project.save.stop', [
+            'stop' => $stop
         ]);
     }
 
-    public function read($projectId){
+    public function stop($projectId){
+
         $project = Project::find($projectId);
+        
 
         $projectFav = Favorite::where('project_id', $project->id)->where('user_id', auth()->user()->id)->exists();
         $projectComp = Completed::where('project_id', $project->id)->where('user_id', auth()->user()->id)->exists();
-        $projectStop = Stop::where('project_id', $project->id)->where('user_id', auth()->user()->id)->exists();
+        $projectRead = Read::where('project_id', $project->id)->where('user_id', auth()->user()->id)->exists();
 
         if ($projectFav) {
             Favorite::where('project_id', $project->id)->where('user_id', auth()->user()->id)->delete();
         }elseif($projectComp) {
             Completed::where('project_id', $project->id)->where('user_id', auth()->user()->id)->delete();
-        }elseif($projectStop) {
-            Stop::where('project_id', $project->id)->where('user_id', auth()->user()->id)->delete();
+        }elseif($projectRead) {
+            Read::where('project_id', $project->id)->where('user_id', auth()->user()->id)->delete();
         }
 
         $data = [
@@ -47,10 +50,10 @@ class Read extends Component
             'user_id' => auth()->user()->id
         ];
 
-        if(ModelsRead::where('project_id', $project->id)->where('user_id', auth()->user()->id)->exists()){
-            ModelsRead::where('project_id', $project->id)->where('user_id', auth()->user()->id)->delete();
+        if(ModelsStop::where('project_id', $project->id)->where('user_id', auth()->user()->id)->exists()){
+            ModelsStop::where('project_id', $project->id)->where('user_id', auth()->user()->id)->delete();
         }else{
-            $project->read()->create($data);
+            $project->stop()->create($data);
         }
     }
 }
