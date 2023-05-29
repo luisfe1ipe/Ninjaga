@@ -88,6 +88,7 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('banner'),
                 Tables\Columns\TextColumn::make('title')
                     ->limit(15)
                     ->searchable(),
@@ -108,6 +109,11 @@ class ProjectResource extends Resource
                     ->sortable(),
             ])
             ->filters([
+                SelectFilter::make('genres')
+                    ->relationship('genres', 'name')
+                    ->searchable()
+                    ->multiple()
+                    ->columnSpan(2),
                 SelectFilter::make('author')
                     ->relationship('author', 'name')
                     ->searchable()
@@ -124,11 +130,6 @@ class ProjectResource extends Resource
                     ->relationship('status', 'name')
                     ->searchable()
                     ->multiple(),
-                SelectFilter::make('genres')
-                    ->relationship('genres', 'name')
-                    ->searchable()
-                    ->multiple()
-                    ->columnSpan(2),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
