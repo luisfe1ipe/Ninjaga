@@ -12,6 +12,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\SelectFilter;
@@ -20,7 +21,7 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
 
     public static function form(Form $form): Form
     {
@@ -98,10 +99,13 @@ class ProjectResource extends Resource
                     ->limit(15),
                 Tables\Columns\TextColumn::make('studio.name')
                     ->limit(15),
-                Tables\Columns\TextColumn::make('type.name')
-                    ->limit(15),
-                Tables\Columns\TextColumn::make('status.name')
-                    ->limit(15),
+                BadgeColumn::make('type.name'),
+                BadgeColumn::make('status.name')
+                    ->colors([
+                        'success' => 'Lançamento',
+                        'warning' => 'Hiato',
+                        'danger' => 'Dropado',
+                    ])->limit(8),
                 Tables\Columns\TextColumn::make('genres_count')
                     ->counts('genres')
                     ->sortable(),
