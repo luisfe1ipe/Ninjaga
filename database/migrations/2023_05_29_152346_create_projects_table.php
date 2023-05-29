@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('released_year');
             $table->longText('banner');
             $table->foreignId('author_id')->constrained('authors');
+            $table->foreignId('studio_id')->constrained('studios');
             $table->timestamps();
         });
     }

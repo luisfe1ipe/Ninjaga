@@ -37,8 +37,11 @@ class StudioResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('projects_count')
+                    ->sortable()
+                    ->counts('projects'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('d/m/Y H:i:s'),
+                    ->dateTime('d/m/Y H:i:s')->since(),
 
             ])
             ->filters([

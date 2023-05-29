@@ -7,6 +7,7 @@ use App\Filament\Resources\ProjectResource\RelationManagers;
 use App\Models\Author;
 use App\Models\Project;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -35,11 +36,19 @@ class ProjectResource extends Resource
                 Forms\Components\TextInput::make('released_year')
                     ->required()
                     ->numeric(),
-                Forms\Components\Select::make('author_id')
-                    ->relationship('author', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->required(),
+                Grid::make(3)
+                    ->schema([
+                        Forms\Components\Select::make('author_id')
+                            ->relationship('author', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        Forms\Components\Select::make('studio_id')
+                            ->relationship('studio', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                    ]),
                 Forms\Components\MarkdownEditor::make('synopsis')
                     ->required()
                     ->maxLength(65535)
@@ -53,19 +62,28 @@ class ProjectResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('banner'),
                 Tables\Columns\TextColumn::make('title')
-                    ->limit(25),
+                    ->limit(15)
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('synopsis')
-                    ->limit(45),
+                    ->limit(20),
                 Tables\Columns\TextColumn::make('released_year'),
                 Tables\Columns\TextColumn::make('author.name')
-                    ->sortable(),
+                    ->limit(20),
+                Tables\Columns\TextColumn::make('studio.name')
+                    ->limit(20),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y')->since(),
             ])
             ->filters([
                 SelectFilter::make('author')
                     ->relationship('author', 'name')
-                    ->searchable(),
+                    ->searchable()
+                    ->multiple(),
+                SelectFilter::make('studio')
+                    ->relationship('studio', 'name')
+                    ->searchable()
+                    ->multiple(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

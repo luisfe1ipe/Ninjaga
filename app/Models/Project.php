@@ -15,11 +15,17 @@ class Project extends Model
         'synopsis',
         'released_year',
         'banner',
-        'author_id'
+        'author_id',
+        'studio_id',
     ];
 
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);
+    }
+
+    public function studio(): BelongsTo
+    {
+        return $this->belongsTo(Studio::class);
     }
 }
