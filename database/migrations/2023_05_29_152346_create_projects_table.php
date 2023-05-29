@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('banner');
             $table->foreignId('author_id')->constrained('authors');
             $table->foreignId('studio_id')->constrained('studios');
+            $table->foreignId('type_id')->constrained('types');
             $table->timestamps();
         });
     }

@@ -16,4 +16,9 @@ class ListProjects extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getTableFiltersFormColumns(): int
+    {
+        return 2;
+    }
 }

@@ -30,13 +30,21 @@ class ProjectResource extends Resource
                     ->required()
                     ->columnSpan(2)
                     ->imagePreviewHeight('250'),
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('released_year')
-                    ->required()
-                    ->numeric(),
-                Grid::make(3)
+                Grid::make([
+                    'default' => 1,
+                    'lg' => 2,
+                ])->schema([
+                    Forms\Components\TextInput::make('title')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('released_year')
+                        ->required()
+                        ->numeric(),
+                ])->columnSpan(2),
+                Grid::make([
+                    'default' => 1,
+                    'lg' => 3,
+                ])
                     ->schema([
                         Forms\Components\Select::make('author_id')
                             ->relationship('author', 'name')
@@ -48,7 +56,12 @@ class ProjectResource extends Resource
                             ->searchable()
                             ->preload()
                             ->required(),
-                    ]),
+                        Forms\Components\Select::make('type_id')
+                            ->relationship('type', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                    ])->columnSpan(2),
                 Forms\Components\MarkdownEditor::make('synopsis')
                     ->required()
                     ->maxLength(65535)
@@ -72,6 +85,8 @@ class ProjectResource extends Resource
                     ->limit(20),
                 Tables\Columns\TextColumn::make('studio.name')
                     ->limit(20),
+                Tables\Columns\TextColumn::make('type.name')
+                    ->limit(20),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y')->since(),
             ])
@@ -84,6 +99,10 @@ class ProjectResource extends Resource
                     ->relationship('studio', 'name')
                     ->searchable()
                     ->multiple(),
+            SelectFilter::make('type')
+                ->relationship('type', 'name')
+                ->searchable()
+                ->multiple(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -99,6 +118,8 @@ class ProjectResource extends Resource
             //
         ];
     }
+
+
 
     public static function getPages(): array
     {
