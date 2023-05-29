@@ -30,17 +30,26 @@ class ProjectResource extends Resource
                     ->required()
                     ->columnSpan(2)
                     ->imagePreviewHeight('250'),
+                Forms\Components\TextInput::make('title')
+                    ->required()
+                    ->maxLength(255)
+                    ->columnSpan(2),
                 Grid::make([
                     'default' => 1,
-                    'lg' => 2,
-                ])->schema([
-                    Forms\Components\TextInput::make('title')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('released_year')
-                        ->required()
-                        ->numeric(),
-                ])->columnSpan(2),
+                    'md' => 2,
+
+                ])
+                    ->schema([
+                        Forms\Components\TextInput::make('released_year')
+                            ->required()
+                            ->numeric(),
+                        Forms\Components\Select::make('genre_id')
+                            ->relationship('genres', 'name')
+                            ->multiple()
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                    ])->columnSpan(2),
                 Grid::make([
                     'default' => 1,
                     'md' => 2,
@@ -92,6 +101,9 @@ class ProjectResource extends Resource
                     ->limit(15),
                 Tables\Columns\TextColumn::make('status.name')
                     ->limit(15),
+                Tables\Columns\TextColumn::make('genres_count')
+                    ->counts('genres')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('released_year')
                     ->sortable(),
             ])
@@ -112,6 +124,11 @@ class ProjectResource extends Resource
                     ->relationship('status', 'name')
                     ->searchable()
                     ->multiple(),
+                SelectFilter::make('genres')
+                    ->relationship('genres', 'name')
+                    ->searchable()
+                    ->multiple()
+                    ->columnSpan(2),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
