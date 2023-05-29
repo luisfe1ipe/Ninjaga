@@ -17,7 +17,7 @@ class StudioResource extends Resource
 {
     protected static ?string $model = Studio::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox';
 
     public static function form(Form $form): Form
     {
