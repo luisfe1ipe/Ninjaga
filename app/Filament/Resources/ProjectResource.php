@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
+use App\Models\Author;
 use App\Models\Project;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -12,6 +13,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\SelectFilter;
 
 class ProjectResource extends Resource
 {
@@ -33,6 +35,11 @@ class ProjectResource extends Resource
                 Forms\Components\TextInput::make('released_year')
                     ->required()
                     ->numeric(),
+                Forms\Components\Select::make('author_id')
+                    ->relationship('author', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Forms\Components\MarkdownEditor::make('synopsis')
                     ->required()
                     ->maxLength(65535)
@@ -50,13 +57,15 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('synopsis')
                     ->limit(45),
                 Tables\Columns\TextColumn::make('released_year'),
+                Tables\Columns\TextColumn::make('author.name')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('d/m/Y')->since(),
-                Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime('d/m/Y')->since(),
             ])
             ->filters([
-                //
+                SelectFilter::make('author')
+                    ->relationship('author', 'name')
+                    ->searchable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

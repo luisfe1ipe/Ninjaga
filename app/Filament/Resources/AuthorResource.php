@@ -38,6 +38,8 @@ class AuthorResource extends Resource
                     ->label('Nome')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('projects_count')
+                    ->counts('projects'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Criado em')
                     ->dateTime('d/m/Y H:i:s'),
