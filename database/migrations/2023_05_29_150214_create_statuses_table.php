@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,16 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Status::create([
+            'name' => 'Lançamento'
+        ]);
+        Status::create([
+            'name' => 'Hiato'
+        ]);
+        Status::create([
+            'name' => 'Dropado'
+        ]);
     }
 
     /**
