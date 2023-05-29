@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('author_id')->constrained('authors');
             $table->foreignId('studio_id')->constrained('studios');
             $table->foreignId('type_id')->constrained('types');
+            $table->foreignId('status_id')->constrained('statuses');
             $table->timestamps();
         });
     }

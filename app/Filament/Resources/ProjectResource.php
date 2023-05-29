@@ -43,7 +43,8 @@ class ProjectResource extends Resource
                 ])->columnSpan(2),
                 Grid::make([
                     'default' => 1,
-                    'lg' => 3,
+                    'md' => 2,
+                    'lg' => 4,
                 ])
                     ->schema([
                         Forms\Components\Select::make('author_id')
@@ -61,6 +62,11 @@ class ProjectResource extends Resource
                             ->searchable()
                             ->preload()
                             ->required(),
+                        Forms\Components\Select::make('status_id')
+                            ->relationship('status', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
                     ])->columnSpan(2),
                 Forms\Components\MarkdownEditor::make('synopsis')
                     ->required()
@@ -73,22 +79,21 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('banner'),
                 Tables\Columns\TextColumn::make('title')
                     ->limit(15)
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('synopsis')
-                    ->limit(20),
-                Tables\Columns\TextColumn::make('released_year'),
+                    ->limit(15),
                 Tables\Columns\TextColumn::make('author.name')
-                    ->limit(20),
+                    ->limit(15),
                 Tables\Columns\TextColumn::make('studio.name')
-                    ->limit(20),
+                    ->limit(15),
                 Tables\Columns\TextColumn::make('type.name')
-                    ->limit(20),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('d/m/Y')->since(),
+                    ->limit(15),
+                Tables\Columns\TextColumn::make('status.name')
+                    ->limit(15),
+                Tables\Columns\TextColumn::make('released_year')
+                    ->sortable(),
             ])
             ->filters([
                 SelectFilter::make('author')
@@ -99,10 +104,14 @@ class ProjectResource extends Resource
                     ->relationship('studio', 'name')
                     ->searchable()
                     ->multiple(),
-            SelectFilter::make('type')
-                ->relationship('type', 'name')
-                ->searchable()
-                ->multiple(),
+                SelectFilter::make('type')
+                    ->relationship('type', 'name')
+                    ->searchable()
+                    ->multiple(),
+                SelectFilter::make('status')
+                    ->relationship('status', 'name')
+                    ->searchable()
+                    ->multiple(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -18,6 +18,7 @@ class Project extends Model
         'author_id',
         'studio_id',
         'type_id',
+        'status_id',
     ];
 
     public function author(): BelongsTo
@@ -33,5 +34,10 @@ class Project extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class);
+    }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
     }
 }
