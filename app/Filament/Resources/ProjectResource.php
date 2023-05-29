@@ -28,9 +28,11 @@ class ProjectResource extends Resource
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('banner')
+                    ->image()
                     ->required()
                     ->columnSpan(2)
-                    ->imagePreviewHeight('250'),
+                    ->imagePreviewHeight('250')
+                    ->directory('projects'),
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255)
