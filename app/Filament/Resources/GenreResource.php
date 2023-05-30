@@ -19,6 +19,12 @@ class GenreResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    protected static ?string $navigationLabel = 'Gêneros';
+
+    protected static ?string $navigationGroup = 'Projetos';
+
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form

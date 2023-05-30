@@ -19,6 +19,12 @@ class TypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
+    protected static ?string $navigationLabel = 'Tipos';
+
+    protected static ?string $navigationGroup = 'Projetos';
+
+    protected static ?int $navigationSort = 6;
+
     public static function form(Form $form): Form
     {
         return $form

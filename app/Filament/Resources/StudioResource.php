@@ -19,6 +19,12 @@ class StudioResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-inbox';
 
+    protected static ?string $navigationLabel = 'Estúdios';
+
+    protected static ?string $navigationGroup = 'Projetos';
+
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form

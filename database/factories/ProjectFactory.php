@@ -28,6 +28,7 @@ class ProjectFactory extends Factory
             'studio_id' => fake()->numberBetween(1, 50),
             'type_id' => fake()->numberBetween(1, 5),
             'status_id' => fake()->numberBetween(1, 3),
+            'created_at' => fake()->date(),
         ];
 
     }
