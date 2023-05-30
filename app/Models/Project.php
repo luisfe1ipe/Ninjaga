@@ -16,10 +16,15 @@ class Project extends Model
         'synopsis',
         'released_year',
         'banner',
+        'visible',
         'author_id',
         'studio_id',
         'type_id',
         'status_id',
+    ];
+
+    protected $casts = [
+        'visible' => 'boolean',
     ];
 
     public function author(): BelongsTo

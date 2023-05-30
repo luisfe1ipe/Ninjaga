@@ -23,6 +23,7 @@ class ProjectFactory extends Factory
             'synopsis' => fake()->text(),
             'released_year' => fake()->numberBetween(2015, 2023),
             'banner' => fake()->imageUrl(360, 360, 'animals', true, 'dogs', true, 'jpg'),
+            'visible' => fake()->numberBetween(0,1),
             'author_id' => fake()->numberBetween(1, 50),
             'studio_id' => fake()->numberBetween(1, 50),
             'type_id' => fake()->numberBetween(1, 5),

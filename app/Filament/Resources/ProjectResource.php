@@ -84,6 +84,9 @@ class ProjectResource extends Resource
                     ->required()
                     ->maxLength(65535)
                     ->columnSpan(2),
+                Forms\Components\Toggle::make('visible')
+                    ->inline(false)
+                    ->required(),
             ]);
     }
 
@@ -91,16 +94,25 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('banner'),
+                Tables\Columns\TextColumn::make('id')
+                    ->sortable()
+                    ->toggleable(),
+                Tables\Columns\ImageColumn::make('banner')
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('title')
-                    ->limit(15)
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(15),
                 Tables\Columns\TextColumn::make('synopsis')
                     ->limit(15),
+                Tables\Columns\ToggleColumn::make('visible')
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('author.name')
-                    ->limit(15),
+                    ->limit(15)
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('studio.name')
-                    ->limit(15),
+                    ->limit(15)
+                    ->toggleable(),
                 BadgeColumn::make('type.name'),
                 BadgeColumn::make('status.name')
                     ->colors([
@@ -110,9 +122,19 @@ class ProjectResource extends Resource
                     ])->limit(8),
                 Tables\Columns\TextColumn::make('genres_count')
                     ->counts('genres')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('released_year')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->sortable()
+                    ->toggleable()
+                    ->since(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->sortable()
+                    ->toggleable()
+                    ->since(),
             ])
             ->filters([
                 SelectFilter::make('genres')
