@@ -51,4 +51,10 @@ class Project extends Model
     {
         return $this->belongsToMany(Genre::class, 'genre_project');
     }
+
+    public function getBannerAttribute($banner)
+    {
+        if ($banner) return asset("storage/$banner");
+        else return null;
+    }
 }

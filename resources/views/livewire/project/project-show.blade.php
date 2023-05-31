@@ -1,14 +1,14 @@
 <div>
     <div class="relative h-auto overflow-hidden">
         <div
-            class="h-full w-full absolute blur-[2px] brightness-[12%] z-0 inset-0 bg-cover bg-center bg-[url('http://localhost:8000/img/project-testing.jpg')]">
+            class="h-full w-full absolute blur-[2px] brightness-[12%] z-0 inset-0 bg-cover bg-center" style="background-image: url({{$project->banner}})">
         </div>
         <div class="py-8 z-10 relative">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="p-6 text-gray-100 dark:text-white">
                     <div class="flex justify-between gap-8">
                         <div>
-                            <img class="w-64 h-auto rounded-md" src="{{ asset('img/project-testing.jpg') }}"
+                            <img class="w-64 h-auto rounded-md" src="{{ $project->banner }}"
                                 alt="">
                         </div>
                         <div class="w-full flex flex-col justify-between">
@@ -25,8 +25,10 @@
                                         <p class="text-gray-300 text-sm">{{ $project->author->name }}</p>
                                     </div>
                                 </div>
-                                <div class="max-h-32 overflow-x-scroll">
-                                    <p class="text-gray-200 dark:text-white text-sm">{{ $project->synopsis }}</p>
+                                <div class="max-h-32 overflow-y-scroll">
+                                    <p class="text-gray-200 dark:text-white text-sm mr-1">
+                                        {!!$project->synopsis !!}
+                                    </p>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-3">
@@ -187,7 +189,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

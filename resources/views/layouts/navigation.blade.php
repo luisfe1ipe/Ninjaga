@@ -57,6 +57,14 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('filament.pages.dashboard')">
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined">
+                                    dashboard
+                                </span>
+                                Dashboard
+                            </div>
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('profile.edit')">
                             <div class="flex items-center gap-1">
                                 <span class="material-symbols-outlined">
@@ -115,7 +123,7 @@
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4 flex items-center gap-2">
                 <div>
-                    <img class="w-10 h-10 rounded-full" src="{{asset('img/profile.jpg')}}" alt="">
+                    <img class="w-10 h-10 rounded-full" src="{{ asset('img/profile.jpg') }}" alt="">
                 </div>
                 <div>
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
