@@ -2,7 +2,7 @@
     <span class="material-symbols-outlined {{ $colorIcon }} {{ $sizeIcon }}">
         {{ $icon }}
     </span>
-    <h1 class="font-bold text-2xl">
+    <h1 class="font-bold text-gray-900 dark:text-white text-2xl">
         {{ $text }}
     </h1>
 </div>
