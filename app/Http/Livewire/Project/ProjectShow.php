@@ -20,4 +20,8 @@ class ProjectShow extends Component
         $this->project = Project::find($id);
         $this->chapters = Chapter::where('project_id', '=', $this->project->id)->get();
     }
+
+    public function viewChapter($id){
+        return redirect()->route('chapter.show', ['id' => $this->project->id, 'chapterId' => $id]);
+    }
 }

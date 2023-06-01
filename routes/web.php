@@ -5,6 +5,9 @@ use App\Http\Livewire\Home;
 use App\Http\Livewire\Project\{
     ProjectShow,
 };
+use App\Http\Livewire\Chapter\{
+    ChapterShow,
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 Route::get('/project/{id}', ProjectShow::class)->name('project.show');
+Route::get('/project/{id}/chapter/{chapterId}', ChapterShow::class)->name('chapter.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

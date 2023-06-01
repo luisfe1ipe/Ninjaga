@@ -158,18 +158,18 @@
                 <div class="w-full flex justify-center mt-8">
                     <div class="w-3/4 h-[350px] overflow-x-scroll grid grid-cols-3 gap-6 p-2">
                         @foreach($chapters as $chapter)
-                            <div
-                                class="group h-16 bg-white hover:bg-gray-100 border border-gray-200 dark:border-none dark:bg-[#222222] dark:hover:bg-[#0B0B0B] rounded-md w-full flex flex-col gap-1 p-2 text-center transition ease-in cursor-pointer">
+                            <div wire:click="viewChapter({{$chapter->id}})}}"
+                                 class="group h-16 bg-white hover:bg-gray-100 border border-gray-200 dark:border-none dark:bg-[#222222] dark:hover:bg-[#0B0B0B] rounded-md w-full flex flex-col gap-1 p-2 text-center transition ease-in cursor-pointer">
                                 <p class="text-gray-700 dark:text-white group-hover:text-red-500 text-md font-bold">
                                     Capítulo {{$chapter->number}}</p>
                                 <span class="text-sm text-gray-500">
                                 <?php
-                                        if(date('M') == \Carbon\Carbon::parse($chapter->created_at)->format('M')){
-                                           echo  \Carbon\Carbon::parse($chapter->created_at)->diffForHumans();
-                                        }else{
+                                        if (date('M') == \Carbon\Carbon::parse($chapter->created_at)->format('M')) {
+                                            echo \Carbon\Carbon::parse($chapter->created_at)->diffForHumans();
+                                        } else {
                                             echo \Carbon\Carbon::parse($chapter->created_at)->isoFormat('d MMMM, Y');
                                         }
-                                ?>
+                                        ?>
                             </span>
                             </div>
 
