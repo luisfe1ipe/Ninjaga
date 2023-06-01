@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Project;
 
+use App\Models\Chapter;
 use App\Models\Project;
 use Livewire\Component;
 
 class ProjectShow extends Component
 {
     public $project;
+    public $chapters;
 
     public function render()
     {
@@ -16,5 +18,6 @@ class ProjectShow extends Component
 
     public function mount($id){
         $this->project = Project::find($id);
+        $this->chapters = Chapter::where('project_id', '=', $this->project->id)->get();
     }
 }
