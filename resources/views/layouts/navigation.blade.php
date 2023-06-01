@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white sticky top-0 z-20 dark:bg-black border-b border-gray-100 dark:border-none">
+<nav x-data="{ open: false }" class="bg-white sticky top-0 z-10 dark:bg-black border-b border-gray-100 dark:border-none">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -36,7 +36,7 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-dropdown align="right" width="48">
+                <x-dropdown align="right" width="48" customClasses="bg-white border dark:border-[#121212] dark:bg-[#0B0B0B]">
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-black hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none transition ease-in-out duration-150">
