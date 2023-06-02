@@ -12,9 +12,13 @@ class ChapterShow extends Component
     public $project;
     public $allChapters;
     public $idProject;
+    public $existNextChapter;
+    public $existPreviousChapter;
 
     public function render()
     {
+        $this->existNextChapter = Chapter::where('project_id', '=', $this->idProject)->where('id', '>', $this->chapter->id)->exists();
+        $this->existPreviousChapter = Chapter::where('project_id', '=', $this->idProject)->where('id', '<', $this->chapter->id)->exists();
         return view('livewire.chapter.chapter-show');
     }
 
@@ -27,13 +31,13 @@ class ChapterShow extends Component
 
     public function previousChapter()
     {
-        $previousChapter = Chapter::where('id', '<', $this->chapter->id)->first();
+        $previousChapter = Chapter::where('project_id', '=', $this->idProject)->where('id', '<', $this->chapter->id)->orderBy('id', 'desc')->first();
         return redirect()->route('chapter.show', ['id' => $this->idProject, 'chapterId' => $previousChapter->id]);
     }
 
     public function nextChapter()
     {
-        $nextChapter = Chapter::where('id', '>', $this->chapter->id)->first();
-        return redirect()->route('chapter.show', ['id' => $this->idProject, 'chapterId' => $nextChapter]);
+        $nextChapter = Chapter::where('project_id', '=', $this->idProject)->where('id', '>', $this->chapter->id)->first();
+        return redirect()->route('chapter.show', ['id' => $this->idProject, 'chapterId' => $nextChapter->id]);
     }
 }

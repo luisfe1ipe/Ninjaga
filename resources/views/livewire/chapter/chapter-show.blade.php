@@ -50,20 +50,24 @@
                         </ol>
                     </div>
                     <div class="flex items-center gap-5">
-                        <button wire:click="previousChapter"
-                            class="inline-flex items-center px-2 py-1 bg-red-500   border border-transparent rounded-md font-semibold text-sm text-white tracking-widest hover:bg-red-700 focus:bg-red-700 dark:focus:bg-red-700 active:bg-red-900 dark:active:bg-red-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-red-800 transition ease-in-out duration-150">
-                            <span class="material-symbols-outlined rotate-180">
+                        @if($existPreviousChapter)
+                            <button wire:click="previousChapter"
+                                    class="inline-flex items-center px-2 py-1 bg-red-500   border border-transparent rounded-md font-semibold text-sm text-white tracking-widest hover:bg-red-700 focus:bg-red-700 dark:focus:bg-red-700 active:bg-red-900 dark:active:bg-red-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-red-800 transition ease-in-out duration-150">
+                                <span class="material-symbols-outlined rotate-180">
+                                    keyboard_double_arrow_right
+                                 </span>
+                                Anterior
+                            </button>
+                        @endif
+                        @if($existNextChapter)
+                            <button wire:click="nextChapter"
+                                    class="inline-flex items-center px-2 py-1 bg-blue-500   border border-transparent rounded-md font-semibold text-sm text-white tracking-widest hover:bg-red-700 focus:bg-red-700 dark:focus:bg-red-700 active:bg-red-900 dark:active:bg-red-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-red-800 transition ease-in-out duration-150">
+                                Próximo
+                                <span class="material-symbols-outlined">
                                 keyboard_double_arrow_right
                              </span>
-                            Anterior
-                        </button>
-                        <button wire:click="nextChapter"
-                            class="inline-flex items-center px-2 py-1 bg-red-500   border border-transparent rounded-md font-semibold text-sm text-white tracking-widest hover:bg-red-700 focus:bg-red-700 dark:focus:bg-red-700 active:bg-red-900 dark:active:bg-red-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-red-800 transition ease-in-out duration-150">
-                            Próximo
-                            <span class="material-symbols-outlined">
-                                keyboard_double_arrow_right
-                             </span>
-                        </button>
+                            </button>
+                        @endif
                     </div>
                 </div>
                 <div class="w-full flex flex-col justify-center mt-20">
