@@ -146,10 +146,10 @@
                 </div>
                 <div class="w-full flex justify-center mt-10">
                     <div class="flex items-center justify-between w-1/3">
-                        <x-primary-button>
+                        <x-primary-button wire:click="readFirstChapter">
                             Ler o primeiro
                         </x-primary-button>
-                        <x-primary-button>
+                        <x-primary-button wire:click="readLastChapter">
                             Ler o último
                         </x-primary-button>
 
