@@ -24,7 +24,7 @@ class ProjectShow extends Component
     public function mount($id)
     {
         $this->project = Project::find($id);
-        $this->chapters = Chapter::select('number', 'created_at')->where('project_id', '=', $this->project->id)->get();
+        $this->chapters = Chapter::select('id','number', 'created_at')->where('project_id', '=', $this->project->id)->get();
     }
 
     public function viewChapter($id)

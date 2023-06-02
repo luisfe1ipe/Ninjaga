@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 
 <head>
     <meta charset="utf-8">
@@ -51,7 +51,7 @@
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-            background: #888;
+            background: #EF4444;
         }
 
         /* Handle on hover */

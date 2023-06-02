@@ -9,7 +9,8 @@ class Home extends Component
 {
     public function render()
     {
-        $mostFavoritesProjects = Project::with(['type'])->take(8)->get();
+        $mostFavoritesProjects = Project::select('id','title', 'banner')->where('visible', '=', 1)->with(['type'])->take(5)->get();
+//        dd($mostFavoritesProjects);
 
         return view('livewire.home', [
             'mostFavoritesProjects' => $mostFavoritesProjects
