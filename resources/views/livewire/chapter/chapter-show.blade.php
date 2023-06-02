@@ -57,7 +57,7 @@
                              </span>
                             Anterior
                         </button>
-                        <button
+                        <button wire:click="nextChapter"
                             class="inline-flex items-center px-2 py-1 bg-red-500   border border-transparent rounded-md font-semibold text-sm text-white tracking-widest hover:bg-red-700 focus:bg-red-700 dark:focus:bg-red-700 active:bg-red-900 dark:active:bg-red-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-red-800 transition ease-in-out duration-150">
                             Próximo
                             <span class="material-symbols-outlined">

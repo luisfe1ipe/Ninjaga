@@ -30,4 +30,10 @@ class ChapterShow extends Component
         $previousChapter = Chapter::where('id', '<', $this->chapter->id)->first();
         return redirect()->route('chapter.show', ['id' => $this->idProject, 'chapterId' => $previousChapter->id]);
     }
+
+    public function nextChapter()
+    {
+        $nextChapter = Chapter::where('id', '>', $this->chapter->id)->first();
+        return redirect()->route('chapter.show', ['id' => $this->idProject, 'chapterId' => $nextChapter]);
+    }
 }
