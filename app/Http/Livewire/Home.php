@@ -2,18 +2,32 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Chapter;
 use App\Models\Project;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Home extends Component
 {
     public function render()
     {
-        $mostFavoritesProjects = Project::select('id','title', 'banner')->where('visible', '=', 1)->with(['type'])->take(5)->get();
-//        dd($mostFavoritesProjects);
+        $mostFavoritesProjects = Project::where('visible', '=', 1)
+            ->with('type')
+            ->take(10)
+            ->get();
+
+        $recentProjects = Project::with(['type', 'chapters'])
+            ->leftJoinSub(function ($query) {
+                $query->select('project_id', DB::raw('MAX(created_at) as latest_chapter_created_at'))
+                    ->from('chapters')
+                    ->groupBy('project_id');
+            }, 'latest_chapters', 'projects.id', '=', 'latest_chapters.project_id')
+            ->orderByDesc('latest_chapters.latest_chapter_created_at')
+            ->paginate(15);
 
         return view('livewire.home', [
-            'mostFavoritesProjects' => $mostFavoritesProjects
+            'mostFavoritesProjects' => $mostFavoritesProjects,
+            'recentProjects' => $recentProjects,
         ]);
     }
 }
