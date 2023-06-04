@@ -32,17 +32,27 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'avatar' => ['required'],
         ]);
+
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'avatar' => 'users/profile/'. $request->avatar . '.png',
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $fileName = time() . '.' . $avatar->getClientOriginalExtension(); // Nome do arquivo com base no timestamp atual
+            $avatar->move('users/profile', $fileName); // Move o arquivo para o diretório desejado
+
+            $user->avatar = 'users/profile/' . $fileName; // Define o nome do arquivo no atributo 'avatar'
+        }
+
+        $user->save();
 
         event(new Registered($user));
 
