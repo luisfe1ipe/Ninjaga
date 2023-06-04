@@ -50,7 +50,7 @@ class Project extends Model
 
     public function chapters(): HasMany
     {
-        return $this->hasMany(Chapters::class);
+        return $this->hasMany(Chapter::class);
     }
 
     public function genres():BelongsToMany
