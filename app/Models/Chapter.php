@@ -25,15 +25,15 @@ class Chapter extends Model
         return $this->belongsTo(Project::class);
     }
 
-    // public function getImagesAttribute($images)
-    // {
-    //     $images = json_decode($images, true);
+    public function getImagesAttribute($images)
+    {
+        $images = json_decode($images, true);
 
-    //     $formattedImages = [];
-    //     foreach ($images as $img) {
-    //         $formattedImages[] = asset("storage/$img");
-    //     }
+        $formattedImages = [];
+        foreach ($images as $img) {
+            $formattedImages[] = asset("storage/$img");
+        }
 
-    //     return $formattedImages;
-    // }
+        return $formattedImages;
+    }
 }

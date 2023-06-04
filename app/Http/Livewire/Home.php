@@ -30,4 +30,14 @@ class Home extends Component
             'recentProjects' => $recentProjects,
         ]);
     }
+
+    public function openProject($id)
+    {
+        redirect()->route('project.show', ['id' => $id]);
+    }
+
+    public function openChapter($projectId, $chapterId)
+    {
+        redirect()->route('chapter.show', ['id' => $projectId, 'chapterId' => $chapterId]);
+    }
 }
