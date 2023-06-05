@@ -27,11 +27,12 @@ class Chapter extends Model
 
     public function getImagesAttribute($images)
     {
-        $images = json_decode($images, true);
-
         $formattedImages = [];
-        foreach ($images as $img) {
-            $formattedImages[] = asset("storage/$img");
+
+        if (is_array($images)) {
+            foreach ($images as $img) {
+                $formattedImages[] = asset("storage/$img");
+            }
         }
 
         return $formattedImages;

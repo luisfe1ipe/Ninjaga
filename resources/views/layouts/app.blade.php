@@ -62,7 +62,7 @@
 
 </head>
 
-<body class="font-sans antialiased ">
+<body class="font-sans ">
     <div class="min-h-screen bg-gray-100 dark:bg-[#121212]">
         @include('layouts.navigation')
 

@@ -16,10 +16,22 @@ class ChapterFactory extends Factory
      */
     public function definition(): array
     {
+        $images = [
+            'battle-god.jpg',
+            'o-comeco-depois-do-fim.jpg',
+            'omniscient.jpg',
+            'return-of-the-frozen-player.jpg',
+            'solo-leveling.jpg',
+            'the-player-who-cant-level-up.jpg',
+            'world-after-end.jpg',
+        ];
+
+        shuffle($images);
+
         return [
             'number' => fake()->randomNumber(3, false),
-            'images' => fake()->imageUrl(360, 360, 'animals', true, 'dogs', true),
-            'project_id' => fake()->numberBetween(1, 300)
+            'images' => 'projects/chapters/' . array_shift($images),
+            'project_id' => fake()->numberBetween(1, 150)
         ];
     }
 }

@@ -18,11 +18,23 @@ class ProjectFactory extends Factory
      */
     public function definition(): array
     {
+        $images = [
+            'battle-god.jpg',
+            'o-comeco-depois-do-fim.jpg',
+            'omniscient.jpg',
+            'return-of-the-frozen-player.jpg',
+            'solo-leveling.jpg',
+            'the-player-who-cant-level-up.jpg',
+            'world-after-end.jpg',
+        ];
+
+        shuffle($images);
+
         return [
             'title' => fake()->sentence(3),
             'synopsis' => fake()->text(),
             'released_year' => fake()->numberBetween(2015, 2023),
-            'banner' => fake()->imageUrl(360, 360, 'animals', true, 'dogs', true, 'jpg'),
+            'banner' => 'projects/' . array_shift($images),
             'visible' => fake()->numberBetween(0,1),
             'author_id' => fake()->numberBetween(1, 50),
             'studio_id' => fake()->numberBetween(1, 50),
